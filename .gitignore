@@ -1,0 +1,17 @@
+PixiePerfect_path.cls
+*.aux
+*.pdf
+*.gz
+*.log
+*.sty~
+*.cls~
+*.gz(busy)
+*.toc
+*.fls
+*.dvi
+*.tex~
+*latexmk
+*.DS_Store
+LaTeX/PixiePerfect_path.cls.tex
+LaTeX/PixiePerfect.cls
+
