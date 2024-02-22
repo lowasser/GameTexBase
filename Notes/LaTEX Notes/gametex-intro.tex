@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{soul}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
+\title{Introduction to Game\TeX{}}
+\author{Louis Wasserman}
+\begin{document}
+\maketitle{}
+
+The Stanford computer science professor Donald Knuth, dissatisfied with the technology of 1977 for typesetting his series \textit{The Art of Computer Programming}, built a programming language called TeX,
+pronounced ``tech'' and sometimes stylized \TeX{}, for generating clean, readable versions of content that can include equations, programs, and more. 
+Leslie Lamport, in 1984, built an additional system atop \TeX{}, now called LaTeX (pronounced ``lah-tech" and sometimes stylized \LaTeX{}), that formalized what amounts to a standard for how these documents are written.  LaTeX has become overwhelmingly the standard for publishing research in many fields, including math, computer science, physics, statistics, engineering, and other fields.
+
+Notably, many students in these fields have studied at MIT, where the MIT Assassins' Guild has run secrets-and-powers LARPs for decades.  MIT graduates experienced in those traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society; graduates of Stanford formed the Luminary Roleplay Society; and finally, that tradition has now reached you.
+
+These MIT students took advantage of the fact that LaTeX is not \textit{simply} for writing technical papers, but is essentially a programming language for text.  Text can be formatted in certain special ways; you can define a name in one place and then later update it everywhere it is used; cross-references can be automatically generated -- and all of these tools are spectacularly useful for, well, LARP.  To pick some examples:
+\begin{itemize}
+    \item When a game is run multiple times for different groups of people, character names and pronouns can need to be changed.  (When nonbinary pronouns like them are involved, the conjugation of other words can also need to be updated: ``he was'' versus ``they were.'')
+    \item During the writing process of a game, names of all sorts of things can change.
+    \item Secrets can be printed in such a way that, when folded on dotted lines and stapled, you can get an envelope that describes the conditions when the player should open it, with the revealed information inside.
+    \item Cross-references can ensure that the players know all the sheets and envelopes they should be provided with, and GMs can have the same index cross-referenced the other way, with all secrets revealed.
+\end{itemize}
+
+This is an introduction to how to use the fruits of these MIT students' labor, most notably Ken Clary, who released GameTeX 1.0 at the end of 2008.
+
+\begin{section}{Conventions}
+GameTeX uses certain conventions of the MIT Assassins' Guild for terminology around the various things that go into a game.  Here are some important ones to know, that are not remotely universal.
+\begin{itemize}
+    \item A \textit{bluesheet} -- traditionally printed on blue paper -- contains in-universe lore.  Not all players get all bluesheets, but, for example, characters in a given faction are often given a bluesheet describing the history, priorities, and politics of that faction.
+    \item A \textit{greensheet} -- traditionally printed on green paper -- describes particular mechanics from an out-of-game perspective.  For example, if only certain characters know how to pick locks, and there is some mechanic for picking locks to make it take a certain amount of time, those characters would get a greensheet describing that mechanic.
+    \item A \textit{whitesheet} is an \emph{in-universe} item, document, or the like.  For example, a whitesheet might have space for a treaty between factions -- with spaces for representatives of each faction to sign, showing that it won't be valid without a signature from each.  Alternately, a whitesheet might contain the contents of a book found in the library -- which can be removed from the library and hidden away, if someone doesn't want that information escaping.
+    \item A \textit{mempacket} is some secret information, in or out of character, that is only opened under certain conditions.  For example, you might have a set of mempackets for apples, labeled ``Open if you eat the apple,'' with insides saying ``It's tasty'' -- except for one, which says ``You have been poisoned!  You will die in 15 minutes unless someone casts healing magic on you.''
+    \item A \textit{notebook} is like a chain of mempackets: it generally has multiple pages, and often says things like ``At the beginning of the game, open the first page,'' with the first page revealing ``You feel that tonight you will find who slew your father!  Look around until you find a six-fingered man, and then open the second page,'' and so on.  
+    The pages need not be strictly sequential: you can have a ``choose your own adventure'' style sequence involving branches, telling players to open page X under some circumstances, or page Y under other circumstances, and so on.
+\end{itemize}
+
+Each of these, of course, has special features in GameTeX to support it.  Here are some other special sorts of things GameTeX provides support for:
+
+\begin{itemize}
+    \item An \textit{ability} can have one side for the user, and another side for the target.  This can be convenient when, for example, the effect is ``You believe I am telling the truth'' -- where the user's side can say ``You can use this only if you really are telling the truth'' or ``You can use this once per hour, for any single sentence.''
+    \item A \textit{place} can simply be a location in the game's world -- or it can be a location in the game \textit{space}.  Places can be assigned signs, items, and other goodies.  Your signs, when printed, will be cross-referenced to show the place they belong; if the kitchen is assigned ten copies of of the ``apple'' item and the dining room is assigned three, then thirteen will print, each showing its correct location.
+\end{itemize}
+\end{section}
+\begin{section}{Basic writing in GameTeX}
+A typical line in a GameTeX character sheet might look like:
+\begin{verbatim}
+Your father was killed by a six-fingered \cSixFinger{\person}.  
+You have sworn vengeance on \cSixFinger{\them}.
+\end{verbatim}
+
+Here, \lstinline{\cSixFinger} is a reference to a character, the six-fingered individual.  \lstinline{\person} is a special command that is programmed into GameTeX, which will automatically substitute the appropriate variant of ``person'' depending on the pronouns assigned to the six-fingered character: man, woman, or person.  Similarly, \lstinline{\them} will substitute the appropriate pronoun.  So if \lstinline{\cSixFinger} is assigned female, this will read, ``Your father was killed by a six-fingered woman.  You have sworn vengeance on her.''  You could also use the same procedure for the parent who had been killed, who may or may not be secretly alive with their own character sheet: you might use \lstinline{Your \cMissingParent{\parent} was murdered}, which would be appropriately substituted with ``father'', ``mother,'' or ``parent''.
+
+English has many gendered words of this sort, each of which GameTeX has to know about.  You can add your own, if you need to, but many common ones are built in, including family relationships (niblings, parents, children, siblings, aunts/uncles), royalty (prince, king, emperor), and more.
+\end{section}
+\end{document}
