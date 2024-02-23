@@ -12,9 +12,9 @@
 %%
 %%
 %%
-%% \MYsex is set to either \male, \female, \neuter, or \ambiguous, as
+%% \MYCharpronouns is set to either \hehim, \sheher, \neuter, or \ambiguous, as
 %% correct for the character.  \mfn{<masculine>}{<feminine>}{<neuter>}
-%% will produce the correct form based on the current value of \MYsex
+%% will produce the correct form based on the current value of \MYCharpronouns
 %% (\ambiguous will lead to <masculine>/<feminine>).  \mfn should only
 %% be used within the scope of a Char macro.  \mf{<masc>}{<fem>} works
 %% just like \mfn with the <neut> arg left blank.
@@ -71,9 +71,8 @@
 	\newstat\MYcr	{Combat Rating}{CR}{2} %% for DarkWater-style combat
 	\newstat\MYcourt	{Pixie Court}{PC}{} % Courts: Structure, F&F, Elements, M&M
 
-  \FD\MYsex	{\male} %% \male, \female, \neuter, \ambiguous
-  \FD\MYCharpronouns	{} %% \male, \female, \neuter, \ambiguous
-  \FD\MYPlaypronouns	{} %% \male, \female, \neuter, \ambiguous
+  \FD\MYCharpronouns	{} %% \hehim, \sheher, \neuter, \ambiguous
+  \FD\MYPlaypronouns	{} %% \hehim, \sheher, \neuter, \ambiguous
 	\FD\MYrole	{} %% playerlist role
   \FD\MYgroupstr{} %% playerlist groupstring
   \FD\MYfile	{} %% character sheet filename (including .tex)
@@ -91,34 +90,36 @@
 %%%%%
 %% pronouns and similar gender-based macros
 %%
-%% \male, \female, \neuter, \ambiguous
+%% \hehim, \sheher, \neuter, \ambiguous
 %% \mfn{<masculine>}{<feminine>}{<neuter>}
 %% \mf{<masculine>}{<feminine>}
 %% \pronoun{<command>}{<masculine>}{<feminine>}{<neuter>}
-\def\male{0}\def\female{1}\def\nonbinary{2}\def\ambiguous{3}
-\newcommand{\mfn}[3]{\ifcase\MYsex#1\or#2\or#3\else#1/#2\fi}
+\def\hehim{0}\def\sheher{1}\def\theythem{2}\def\zezir{3}\def\faefaer{4}
+\newcommand{\mfnzf}[5]{\ifcase\MYCharpronouns#1\or#2\or#3\or#4\else#5\fi}
+\newcommand{\mfnz}[4]{\mfnz{#1}{#2}{#3}{#4}{#3}}
+\newcommand{\mfn}[3]{\mfnz{#1}{#2}{#3}{#3}}
 \newcommand{\mf}[2]{\mfn{#1}{#2}{}}
+\newcommand{\pronounzf}[6]{\def#1{\mfnzf{#2}{#3}{#4}{#5}{#6}}}
+\newcommand{\pronounz}[5]{\def#1{\mfnz{#2}{#3}{#4}{#5}}}
 \newcommand{\pronoun}[4]{\def#1{\mfn{#2}{#3}{#4}}}
 
-\pronoun{\they}		{he}{she}{they}
-\pronoun{\They}		{He}{She}{They}
-\pronoun{\them}		{him}{her}{them}
-\pronoun{\Them}		{Him}{Her}{Them}
-\pronoun{\their}	{his}{her}{their}
-\pronoun{\Their}	{His}{Her}{Their}
-\pronoun{\theirs}	{his}{hers}{theirs}
-\pronoun{\Theirs}	{His}{Hers}{Theirs}
-\pronoun{\themself}	{himself}{herself}{themself}
-\pronoun{\Themself}	{Himself}{Herself}{Themself}
-\pronoun{\theyare} 	{he is}{she is}{they are}
-\pronoun{\Theyare} 	{He is}{She is}{They are}
+\pronounzf{\they}		{he}{she}{they}{ze}{fae}
+\pronounzf{\They}		{He}{She}{They}{Ze}{Fae}
+\pronounzf{\them}		{him}{her}{them}{zir}{faer}
+\pronounzf{\their}	{his}{her}{their}{zir}{faer}
+\pronounzf{\Their}	{His}{Her}{Their}{Zir}{Faer}
+\pronounzf{\theirs}	{his}{hers}{theirs}{zirs}{faers}
+\pronounzf{\themself}	{himself}{herself}{themself}{zirself}{faerself}
+\pronounzf{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}
+\newcommand{\theyare}{\they \are}
+\newcommand{\Theyare}{\They \are}
 
-\pronoun{\plural}	{s}{s}{}
-\pronoun{\pluralc}	{es}{es}{}
-\pronoun{\pluraly}	{ies}{ies}{y}
+\pronoun{\verbs}	{s}{s}{}
+\pronoun{\verbes}	{es}{es}{}
+\pronoun{\verby}	{ies}{ies}{y}
 \pronoun{\are}	{is}{is}{are}
 \pronoun{\re}	{'s}{'s}{'re}
-\pronoun{\does}	{does}{does}{do}
+\newcommand{\does}{do\verbes}
 \pronoun{\have}	{has}{has}{have}
 \pronoun{\were}	{was}{was}{were}
 
@@ -146,7 +147,7 @@
 \pronoun{\Person}	{Man}{Woman}{Person}
 \pronoun{\sex}		{male}{female}{nonbinary}
 \pronoun{\Sex}		{Male}{Female}{Nonbinary}
-\pronoun{\God}		{God}{Goddess}{Diety}
+\pronoun{\God}		{God}{Goddess}{Deity}
 \pronoun{\Deity}		{God}{Goddess}{Deity}
 \pronoun{\Majesty}		{King}{Queen}{Majesty}
 \pronoun{\Heir}		{Prince}{Princess}{Heir}
@@ -154,8 +155,6 @@
 \pronoun{\cleric}		{Priest}{Priestess}{Cleric}
 \pronoun{\clergy}		{Priest}{Priestess}{Cleric}
 \pronoun{\partner}	{boyfriend}{girlfriend}{partner}
-
-
 
 %%%%%
 %% PC is a subtype of Char, for regular PCs.

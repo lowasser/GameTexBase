@@ -6,7 +6,7 @@
 \author{Louis Wasserman}
 \begin{document}
 \maketitle{}
-\newcommand{\gametex}{Game\TeX{}}
+\newcommand{\gametex}{GameTeX}
 
 \begin{section}{Background}
 The Stanford computer science professor Donald Knuth, dissatisfied with the technology of 1977 for typesetting his book series \textit{The Art of Computer Programming}, built a programming language called TeX,
@@ -23,7 +23,7 @@ MIT students writing LARPs took advantage of the fact that LaTeX is not \textit{
     \item Cross-references can ensure players have up-to-date indexes of the characters and players they know before game, as well as all the items and documents they should have access to.  GMs can have the same index cross-referenced the other way, with all secrets revealed.  Both of these help everyone make sure that nobody is missing something they need, or in possession of secrets they shouldn't have.
 \end{itemize}
 
-The product of their work is called GameTeX, unsurprisingly pronounced ``game-tech." At the time I write this, \gametex{} is in its teens, with version 1.0 being released by Ken Clary at the end of 2008.  \gametex{} reflects the experience of LARP authors that goes back even further.  While it's not always intuitive to pick up and use, especially for game authors who don't have any experience with programming languages, it can offer the above benefits and more.  \gametex{} is unlikely to be worth it for, say, a small parlor LARP, but tends to pay for itself more when used for games that:
+The product of their work is called GameTeX, unsurprisingly pronounced ``game-tech." As I write this, \gametex{} is in its teens, with version 1.0 being released by Ken Clary at the end of 2008.  \gametex{} reflects the experience of LARP authors that goes back even further.  While it's not always intuitive to pick up and use, especially for game authors who don't have any experience with programming languages, it can offer the above benefits and more.  \gametex{} is unlikely to be worth it for, say, a small parlor LARP, but tends to pay for itself more when used for games that:
 \begin{itemize}
 \item run multiple times, even if they are partially rewritten or expanded
 \item involve significant mechanics, such as secrets or powers
@@ -31,24 +31,22 @@ The product of their work is called GameTeX, unsurprisingly pronounced ``game-te
 \item are large or written over a long period
 \end{itemize}
 
-If one or more of these describes the game you want to write, then \gametex{} may be for you.
+If one or more of these describes the game you want to write, then \gametex{} may be for you.  For me, either of the first two conditions would be enough by themselves even for a small game, but I am biased: I was enough of a nerd to start using \LaTeX{} in high school.
 \end{section}
 \begin{section}{Setting up the technology}
 \begin{subsection}{Setting up \LaTeX{}}
 This section will describe how to set up \LaTeX{} on most computers.
-\end{subsection}
-\begin{subsection}{Setting up your \gametex{} folder}
 \end{subsection}
 \begin{subsection}{Git and version control}
 In this section, we will discuss an overview of version control as applied to games.  Excellent tutorials for the Git software exist elsewhere, and we will defer to those to actually teach you how to use Git.
 
 Version control is a technology that exists in the space between the ``version2\_final\_edited\_definitely\_final.doc'' common to the early 2000s, emailing versions of a document back and forth as edits and updates go in, and a technology like Google Docs that keeps documents instantly synchronized even with multiple people typing in the same document at the same time.
 
-It is quite possible to use \gametex{} without using version control.  If you are writing a game on your own, it is almost completely unnecessary.  However, you may be aware that tools like Google Docs only work for the fancy word processor documents, and Sheets for spreadsheets, but there isn't, for example, Google Video Editor that lets you collaborate on a video together – the synchronization technology is only built for the specific sorts of files managed in those apps.  You can dump your \gametex{} files in Google Docs and edit them there – I am writing this sentence right now in a Google Doc – but you, and I, will have to copy them back into a \texttt{.tex} file on our computers, and compile them to first make sure they work, and then to produce a document others can read.
+It is quite possible to use \gametex{} without using version control.  If you are writing a game on your own, it is almost completely unnecessary.  However, you may be aware that the synchronization technology in Google Docs and related apps only work for the specific kinds of files they're designed for.  You can dump your \gametex{} files in Google Docs and edit them there, and many LARP authors who use \gametex{} do this at some point in the process.  I am writing this sentence right now in a Google Doc, in fact.  However, you, and I, will have to copy them back into a \texttt{.tex} file on our computers, and compile them to first make sure they work, and then to produce a document others can read, all of which can be inconvenient and can run into all the usual problems with managing two versions of something that aren't automatically synchronized.
 
-We've already discussed that \TeX{} is a programming language, however, and programmers have developed many solutions to synchronizing work between multiple people working on software projects.  The subtleties in the differences between the solutions are not especially relevant to LARPs, so most LARP projects simply use what is by far the most popular solution, in use by 95\% of programmers according to Wikipedia: Git.
+We've already discussed that \TeX{} is a programming language, however, and programmers have developed many solutions to synchronizing work between multiple people working on software projects.  Most \gametex{} projects (in my experience) simply use what is by far the most popular version control software, in use by 95\% of programmers according to Wikipedia: Git.
 
-Once you have set Git up, the usual workflow looks like this:
+Once you have set Git up -- which will be explained in the Git tutorial and in the following section -- the usual workflow looks like this:
 \begin{enumerate}
 \item Each game writer has a copy of the game in progress on their computer.
 \item They edit it on their computer.
@@ -59,11 +57,14 @@ Once you have set Git up, the usual workflow looks like this:
 \item The writer uploads the combined changes to the master version, in what is called a \textit{push}.
 \end{enumerate}
 
-It's worth at least mentioning a feature of Git that is very important to software engineers, although it's much less useful to LARP authors: the ability to track the exact history of something, when it was added and by who, and the ability to return to the earlier version.  In software, going back to the last version that wasn't buggy can be critical; in LARP writing, not so much – unless you deleted something, in which case Git can recover it for you from a previous commit.
+It's worth at least mentioning a feature of Git that is very important to software engineers, although it's rarely useful to LARP authors: the ability to track the exact history of something, when it was added and by who, and the ability to return to the earlier version.  In software, going back to the last version that wasn't buggy can be critical; in LARP writing, not so much, with one major exception.  If you deleted something you shouldn't have, Git can recover it as of the last commit.  Commit often!
 
 \end{subsection}
+\begin{subsection}{Setting up your \gametex{} folder}
+TODO: how to fork this repository into a directory with your game's name
+\end{subsection}
 \end{section}
-\begin{section}{Writing game content}
+\begin{section}{Your game's content}
 Now, we'll get to the good stuff: actually writing your game.  This is, of course, supposed to be the fun part, and is certainly what most GMs spend the most time on.
 
 \begin{subsection}{Terminology and conventions}
@@ -90,7 +91,7 @@ Here are some \gametex{} features with more universal terminology:
 \item  Items can be marked as associated with props.
 \item   Items can be marked as \textit{$n$-hands bulky}, a special term meaning at least $n$ players' hands must openly hold it to move it easily.  For example, a glass of water might be one hand bulky, since it cannot be stored, but a corpse is often three hands bulky.  Usually, $n-1$ hands can drag an $n$-hands bulky item slowly.
 \end{itemize}
-  \item A \textit{stat} is a number or bit of text associated with characters and displayed on their character sheet in a convenient table.  Each stat is given a name, which may be straightforward ("combat rating," "faerie court," or may be obscure (\lstinline{$\alpha$}, which compiles to $\alpha$).  Obscure stats can be used to hide things from the player, or from an ability.  For example, an $\alpha$ score may indicate whether a character has magical potential that could be unlocked, that the character may not know about.  Alternatively, a vampire character's bite ability may ask for the victim's $\beta$ score, and not provide any nutritive value if the $\beta$ score is zero – but the vampire may not realize that it's because a $\beta$ score of zero means the target is a werewolf.
+  \item A \textit{stat} is a number or bit of text associated with characters and displayed on their character sheet in a convenient table.  Each stat is given a name, which may be straightforward (e.g. ``combat rating," ``faerie court") or may be obscure (\lstinline{$\alpha$}, which compiles to $\alpha$).  Obscure stats can be used to hide things from the player, or from an ability.  For example, an $\alpha$ score may indicate whether a character has magical potential that could be unlocked, that the character may not know about.  Alternatively, a vampire character's bite ability may ask for the victim's $\beta$ score, and not provide any nutritive value if the $\beta$ score is zero – but the vampire may not realize that it's because a $\beta$ score of zero means the target is a werewolf.
 \begin{itemize}
 \item Stats are sometimes encoded in an item or badge number, for characters that can recognize their meaning on sight.  For example, games might have the first digit of a badge number represent the tens digit of the character's age, or have a ones digit of 5 represent an undercover werewolf, or have a character instantly recognize the voice of the character with badge number 263 as their father's murderer.  This is most often used when a GM doesn't want to hint where to find someone or something, only to allow it to be recognized on sight.
 \end{itemize}
@@ -115,23 +116,33 @@ Every resident is given a \iBirthCertificate{} at birth.
 Check your \bNationPolitics{} sheet for details.
 \end{verbatim}
 
-Players don't get to see these commands, so you can name things whatever is most memorable for you as an author, even if it involves spoilers: feel free to create \lstinline|\cAssassin|, who is known to most characters as the team mom who makes tea for everyone, or for \lstinline{\cRapunzel} to represent the character with magical hair.
+Players don't get to see these commands (unless you have a typo), so you can name things whatever is most memorable for you as an author, even if it involves spoilers: feel free to create \lstinline|\cAssassin|, who is known to most characters as the team mom who makes tea for everyone, or for \lstinline{\cRapunzel} to represent the character with magical hair.  If you accidentally wrote \lstinline{cRapunzel} instead of \lstinline{\cRapunzel}, however, the players would see that -- so check your generated sheets!
 
 Next, \lstinline{\person} is a special command that is programmed into \gametex{}, which will automatically substitute the appropriate variant of ``person'' depending on the pronouns assigned to the six-fingered character: man, woman, or person.  Similarly, \lstinline{\them} will substitute the appropriate pronoun.  So if \lstinline{\cSixFinger} is assigned female, this will read, ``Your father was killed by a six-fingered woman.  You have sworn vengeance on her.''  We will discuss more about pronouns and gendered words in the next subsection.
 
-Note that characters, items, places, and more can be written in the game without actually having corresponding sheets.  This can be handy to manage things like NPCs, artifacts, and locations that are part of the lore.  For example, you might decide to write \lstinline|Your \cMissingParent{\parent} was murdered| instead of \lstinline|Your father was murdered|.  In general, this is a good idea if you think you might change things around later: which parent was murdered, what the phlebotinum is named, and so on.
+Note that characters, items, places, and more can be written in the game without actually having corresponding sheets.  This can be handy to manage things like NPCs, artifacts, and locations that are part of the lore.  For example, you might decide to write 
+\begin{verbatim}
+Your \cMissingParent{\parent} was murdered.
+\end{verbatim}
+instead of 
+\begin{verbatim}
+Your father was murdered.
+\end{verbatim}
+
+When is this worth it?  It's certainly worth it if the parent wasn't actually murdered and is a PC.  It may also be worthwhile if you think you might change things around later: which parent was murdered.  Similarly, you might use \lstinline|cold iron|, or you might decide to write \lstinline|\iFaeKryptonite{}| in case you want to name it something else later on, perhaps if you think you might replace the fae with Kryptonians.
 \end{subsection}
 \begin{subsection}{Genders, pronouns, and conjugation}
 English references gender in many common words, and they/them pronouns often require different conjugation.  All of this is handled the same way in \gametex{}, using commands that substitute different versions of text based on a character's gender.  This requires some care to get right – it's always a pain to find you've accidentally written ``He believe you're alive" or other grammatical errors – but it becomes more natural with practice, and can be a lifesaver when you have multiple runs of a game or have to recast someone.
 
 In TODO, there is an extensive list of commands that adjust appropriately to a character's gender, for example:
 \begin{verbatim}
-\pronoun{\they} {he}{she}{they}
+\pronoun{\they}   {he}{she}{they}
 \pronoun{\parent} {father}{mother}{parent}
-\pronoun{\are} {is}{is}{are}
+\pronoun{\are}    {is}{is}{are}
 \end{verbatim}
 
-As in the example from above, \lstinline|Your \cMissingParent{\parent} was murdered|, this defines the word to substitute when the character is male, female, or nonbinary respectively.  Here is a more extensive example using several gender-sensitive commands:
+As in \lstinline|Your \cMissingParent{\parent} was murdered|, this defines the word to substitute when the character is male, female, or uses they/them pronouns respectively.  Neopronouns like ze/zir are not currently supported, TODO: fix that.
+Here is a more extensive example using several gender-sensitive commands:
 
 \begin{verbatim}
 \cCharacter{} is your \cCharacter{\sibling}.

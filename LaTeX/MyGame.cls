@@ -24,7 +24,7 @@
 %%
 %% When you change this, make sure the name of this file and the name
 %% of the game's environment variable both match it.  See ../README.
-\def\gameclassname{PP}
+\def\gameclassname{MyGame}
 
 
 %%%%%
@@ -38,8 +38,8 @@
 %%
 %% Basic custom game information; gets used everywhere.  Don't put
 %% linebreaks in these and keep their lengths reasonable.
-\def\gamename{Pixie Perfect}
-\def\gamedate{Mar 2nd, 2024}
+\def\gamename{My Game Name}
+\def\gamedate{My Game Date}
 
 
 %%%%%

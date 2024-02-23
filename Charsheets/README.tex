@@ -15,7 +15,7 @@
 %%
 %%%%%
 
-\documentclass[char]{guildcamp4}
+\documentclass[char]{MyGame}
 \begin{document}
 
 \name{\cTest{}}
@@ -102,47 +102,5 @@ sure why; you think it's a fine name.
   \contact{\cNPC{}} This person you've never met.
   \contact{\cSomeGuy{}} Your friend from out of town.
 \end{contacts}
-
-
-%%%%%
-%% \starttag{<tag>} <elements> \endtag 
-%% Valid <tag> values are blues, greens, abils, combat, mems, items,
-%% whites, notebooks, cash, signs, ids.  These each correspond to a
-%% type of macro defined in Lists/.
-%%
-%% By using \starttag, you can give this character <elements> of the
-%% type corresponding to <tag>.
-%%
-%% Multiple uses of the same <tag> will simply add together.
-\starttag{mems}
-
-  \mTest{}
-
-  \memfold{``Rosebud''}{Rosebud!  That was the name of\ldots the name
-  of\ldots darn, you forget.}
-
-  \startmembook{Book of Mempackets}
-
-    \mempage{if you see something blue}{Hey, that's blue!  Oh, you
-    remember, blue is your favorite color.  You really like blue
-    things, especially blue tentacles.  You wonder why\ldots}
-
-    \mempage{``Octy''}{Octy!  You remember Octy now!  She was your pet
-    blue octopus when you were a young child living offshore.  Oh, the
-    fun times you had!
-
-    You used to go swimming and diving with Octy all the time.  This
-    was years ago.  What happened?  You still can't remember\ldots but
-    you know you haven't even thought of her since you were small.}
-
-  \endmembook
-
-\endtag
-
-\starttag{abils}
-  \ability{Amazing Powers}{You can do strange and amazing things.}{I
-  do something strange and amazing.}
-\endtag
-
 
 \end{document}
