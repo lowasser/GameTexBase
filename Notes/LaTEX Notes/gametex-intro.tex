@@ -1,12 +1,15 @@
 \documentclass{article}
 \usepackage{soul}
 \usepackage{listings}
+
+\newcommand{\gametex}{GameTeX}
+\newcommand{\pronounfile}{TODO}
+
 \lstset{basicstyle=\ttfamily}
 \title{Introduction to Game\TeX{}}
 \author{Louis Wasserman}
 \begin{document}
 \maketitle{}
-\newcommand{\gametex}{GameTeX}
 
 \begin{section}{Background}
 The Stanford computer science professor Donald Knuth, dissatisfied with the technology of 1977 for typesetting his book series \textit{The Art of Computer Programming}, built a programming language called TeX,
@@ -57,8 +60,9 @@ Once you have set Git up -- which will be explained in the Git tutorial and in t
 \item The writer uploads the combined changes to the master version, in what is called a \textit{push}.
 \end{enumerate}
 
-It's worth at least mentioning a feature of Git that is very important to software engineers, although it's rarely useful to LARP authors: the ability to track the exact history of something, when it was added and by who, and the ability to return to the earlier version.  In software, going back to the last version that wasn't buggy can be critical; in LARP writing, not so much, with one major exception.  If you deleted something you shouldn't have, Git can recover it as of the last commit.  Commit often!
+There are variations on this process -- it's often a good idea to pull frequently to address conflicts before they get too big, and you may not bother to push for several commits -- but it always looks more or less like this workflow.
 
+It's worth at least mentioning a feature of Git that is very important to software engineers, although it's rarely useful to LARP authors: the ability to track the exact history of something, when it was added and by who, and the ability to return to the earlier version.  In software, going back to the last version that wasn't buggy can be critical; in LARP writing, not so much, with one major exception.  If you deleted something you shouldn't have, even a whole file, Git can recover it as of the last commit.  Commit often!
 \end{subsection}
 \begin{subsection}{Setting up your \gametex{} folder}
 TODO: how to fork this repository into a directory with your game's name
@@ -134,14 +138,17 @@ When is this worth it?  It's certainly worth it if the parent wasn't actually mu
 \begin{subsection}{Genders, pronouns, and conjugation}
 English references gender in many common words, and they/them pronouns often require different conjugation.  All of this is handled the same way in \gametex{}, using commands that substitute different versions of text based on a character's gender.  This requires some care to get right – it's always a pain to find you've accidentally written ``He believe you're alive" or other grammatical errors – but it becomes more natural with practice, and can be a lifesaver when you have multiple runs of a game or have to recast someone.
 
-In TODO, there is an extensive list of commands that adjust appropriately to a character's gender, for example:
+In \pronounfile{}, there is an extensive list of commands that adjust appropriately to a character's gender, for example:
 \begin{verbatim}
-\pronoun{\they}   {he}{she}{they}
-\pronoun{\parent} {father}{mother}{parent}
-\pronoun{\are}    {is}{is}{are}
+\pronounzf{\they}		{he}{she}{they}{ze}{fae}
+\pronounz{\have}	{has}{has}{have}{has}
+\pronoun{\parent}		{father}{mother}{parent}
 \end{verbatim}
 
-As in \lstinline|Your \cMissingParent{\parent} was murdered|, this defines the word to substitute when the character is male, female, or uses they/them pronouns respectively.  Neopronouns like ze/zir are not currently supported, TODO: fix that.
+As in \lstinline|Your \cMissingParent{\parent} was murdered|, this defines the word to substitute when the character is male, female, or nonbinary, or to specialize for some sets of neopronouns: this repository (not all versions of \gametex{}) supports \lstinline{\hehim}, \lstinline{\sheher}, \lstinline{\theythem}, \lstinline{\zezir}, and \lstinline{\faefaer}.  (Fae/faer, while not necessarily the most common neopronouns for humans, seems unusually likely to be requested in fantasy LARPs, such as the pixie-themed one I am helping my partner write now.)  It's possible to add more neopronouns if you really want, by editing the patterns in \pronounfile{} in the pattern you can see there.
+
+We will discuss how to set those pronouns for a given character in section \ref{charlist}.
+
 Here is a more extensive example using several gender-sensitive commands:
 
 \begin{verbatim}
@@ -155,12 +162,10 @@ religion of the \cFireGod{\cDeity} \cFireGod{}, and hope to
 become \cFireGod{\their} \cCharacter{\cleric}.
 \end{verbatim}
 
-(Note that you can cheat by putting multiple commands, with spaces etc., in the same set of braces, as long as everything is referring to the same character.)
+Note that you can cheat by putting multiple commands, with spaces etc., in the same set of braces, as long as everything is referring to the same character; this pattern is used in \lstinline|\cCharacter{\They \have}|.
 
 Most actual game text isn't quite this dense with gendered words and conjugated verbs.  \gametex{} has a large number of gendered words common to LARPs built-in, and we won't go through them all.  We won't go through all the nouns, but verbs are common and important:
 
-
-TODO: update verbs
 \begin{itemize}
 \item he believes, they believe, \lstinline|\cCharacter\{\they\} believe\cCharacter{\verbs}|.
 \item he worries, they worry, \lstinline|\cCharacter{\they} worr\cCharacter{\verby}|.
@@ -172,6 +177,8 @@ TODO: update verbs
 \end{itemize}
 
 Remember that the name of the character isn't inserted into the text – just the appropriately gendered or conjugated word.  So, for example, if a character's sibling was believed dead but is actually in the game but undercover, you can mention \lstinline|\cCharacter{}'s lost \cUndercover{\sibling}| without risk of spoilers.
+
+%If you are really picky, this repository has support for picking the right a/an for an item: you can write \lstinline|\iIdentCard{\MYarticle} \iIdentCard{}|, and set the appropriate article in the item definition.
 
 Items do not currently have support for correctly generating a/an, so for example, if you wrote ``you have a \lstinline|\iBirthCertificate{}|'' and that item was later given the name ``identification card,'' you would end up with ``a identification card" instead of ``an identification card." Sorry!  I would fix this, if I knew how...
 \end{subsection}
@@ -214,10 +221,28 @@ and format looking like:
 
 Curly quotes are a little weird: you must use tildes for the left side, and it's conventional to use two single quotes for the right side, although you can use a double quote.  A standard version: \lstinline{``text in quotes''} produces ``text in quotes''.
 
+Some characters have special meaning in \LaTeX{}, and you need special commands to make them appear correctly:
+
+\begin{tabular}{c c}
+ \textbf{Symbol} & \textbf{Command} \\
+ \& & \lstinline|\&| \\
+ \$ & \lstinline|\$| \\
+ \{ & \lstinline|\{| \\
+ \} & \lstinline|\}| \\
+ \% & \lstinline|\%| \\
+ \# & \lstinline|\#| \\
+ \_ & \lstinline|\_| \\
+ \^{} & \lstinline|\^{}| \\
+ \textless & \lstinline|\textless| \\
+ \textgreater & \lstinline|\textgreater| \\
+ \textbackslash & \lstinline|\textbackslash|
+\end{tabular}
+
 \end{subsection}
 \begin{subsection}{Files and organization}
 The core setup of a game is in the files in the \lstinline{Lists} directory: \lstinline{char-LIST.tex} and so on.  These define all the things that exist in your game short of actual page-or-more-length documents.
 \begin{subsubsection}{Character list}
+\label{charlist}
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Character sheets}
