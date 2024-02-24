@@ -34,33 +34,76 @@
 
 %%%%%
 %% Gender
-\def\hehim{0}\def\sheher{1}\def\theythem{2}\def\zezir{3}\def\faefaer{4}\def\avoidpronouns{5}
-%% TODO: discuss
+%%
+%% The term 'gender' specifically in GameTeX is used to refer to the
+%% pronoun and gendered language used to actually refer to a character.
+%% To add a new neopronoun, add a new element to this list
+%% with the appropriate next number.
+\def\mascgender{0}
+\def\femmegender{1}
+\def\theygender{2}
+\def\zegender{3}
+\def\faegender{4}
+\def\avoidpronounsgender{5}
+\def\eygender{6}
+\def\itgender{7}
 
+%% Here, we define 'pronoun sets,' which have two components:
+%% which gender is used to always refer to that character in a sentence,
+%% and the text used when we introduce that character's pronouns.
+%% This does not cover all combinations, but it's easy to add more.
+\newcommand{\pronounset}[3]{
+	\newcommand{#1}{
+		\s\MYgender{#2}
+		\s\MYcharpronouns{#3}
+	}
+}
+
+\pronounset{\hehim}{\mascgender}{he/him}
+\pronounset{\hethey}{\mascgender}{he/they}
+\pronounset{\theyhe}{\theygender}{they/he}
+\pronounset{\heshe}{\mascgender}{he/she}
+\pronounset{\shehe}{\femmegender}{she/he}
+\pronounset{\sheher}{\femmegender}{she/her}
+\pronounset{\shethey}{\femmegender}{she/they}
+\pronounset{\theyshe}{\theygender}{they/she}
+\pronounset{\theythem}{\theygender}{they/them}
+\pronounset{\anypronouns}{\theygender}{any pronouns}
+\pronounset{\genderfluid}{\theygender}{any pronouns}
+\pronounset{\zezir}{\zegender}{ze/zir}
+\pronounset{\zethey}{\zegender}{ze/they}
+\pronounset{\theyze}{\theygender}{they/ze}
+\pronounset{\faefaer}{\faegender}{fae/faer}
+\pronounset{\eyem}{\eygender}{ey/em}
+\pronounset{\itits}{\itgender}{it/its}
+
+\pronounset{\avoidpronouns}{\avoidpronounsgender}{avoid pronouns}
+	% When referring to a character with this gender, we use \informal to e.g. use 'John' instead of 'John Smith'.
 
 %%%%%
-%% pronouns and similar gender-based macros
+%% Here, we define words and conjugations that are sensitive to a character's gender.
+%% If you add a new pronoun set, you will need to update all of these accordingly.
 
-% switch on gender
-\newcommand{\gendered}[6]{\ifcase\MYgender#1\or#2\or#3\or#4\or#5\else#6\fi}
+% Switch on gender, falling back to they/them if there's an error.
+\newcommand{\gendered}[8]{\ifcase\MYgender#1\or#2\or#3\or#4\or#5\or#6\or#7\or\8\else#3\fi}
 % define a new command that switches based on gender
-\newcommand{\foreachgender}[7]{\def#1{\gendered{#2}{#3}{#4}{#5}{#6}{#7}}}
-% define one version for he/she/ze, one version for they/fae
-\newcommand{\singularorplural}{3}{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}}
+\newcommand{\foreachgender}[9]{\def#1{\gendered{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}}
+% define one version for he/she/ze/it, one version for they/fae/ey
+\newcommand{\singularorplural}{3}{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}{#3}{#2}}
 % define one version for masc, one for femme, one for nonbinary
-\newcommand{\mfornb}{4}{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}}
+\newcommand{\mfornb}{4}{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}{#4}{#4}}
 
-\foreachgender{\they}		{he}{she}{they}{ze}{fae}{\informal}
-\foreachgender{\They}		{He}{She}{They}{Ze}{Fae}{\informal}
-\foreachgender{\them}		{him}{her}{them}{zir}{faer}{\informal}
-\foreachgender{\their}	{his}{her}{their}{zir}{faer}{\informal's}
-\foreachgender{\Their}	{His}{Her}{Their}{Zir}{Faer}{\informal's}
-\foreachgender{\theirs}	{his}{hers}{theirs}{zirs}{faers}{\informal's}
-\foreachgender{\themself}	{himself}{herself}{themself}{zirself}{faerself}{\informal}
-\foreachgender{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}{\informal}
-\newcommand{\theyare}{\they \are}
-\newcommand{\Theyare}{\They \are}
+%% Words that need a different version for every individual gender.
+\foreachgender{\they}		{he}{she}{they}{ze}{fae}{\informal}{ey}{it}
+\foreachgender{\They}		{He}{She}{They}{Ze}{Fae}{\informal}{Ey}{It}
+\foreachgender{\them}		{him}{her}{them}{zir}{faer}{\informal}{em}{it}
+\foreachgender{\their}	{his}{her}{their}{zir}{faer}{\informal's}{eir}{its}
+\foreachgender{\Their}	{His}{Her}{Their}{Zir}{Faer}{\informal's}{eir}{Its}
+\foreachgender{\theirs}	{his}{hers}{theirs}{zirs}{faers}{\informal's}{eirs}{its}
+\foreachgender{\themself}	{himself}{herself}{themself}{zirself}{faerself}{\informal}{emself}{itself}
+\foreachgender{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}{\informal}{emself}{Itself}
 
+%% Words that simply care about pluralization or not.
 \singularorplural{\verbs}		{s}{}  		% he believes, they believe
 \singularorplural{\verbes}	{es}{} 		% he does, they do
 \singularorplural{\verby}		{ies}{y} 	% he worries, they worry
@@ -69,6 +112,8 @@
 \def\does{do\verbes}
 \singularorplural{\have}		{has}{have} % he has, they have
 \singularorplural{\were}		{was}{were} % he was, they were
+
+%% Nouns that simply care about masculine, feminine, or 'other.'
 
 \mfornb{\spouse}	{husband}{wife}{spouse}
 \mfornb{\Spouse}	{Husband}{Wife}{Spouse}
@@ -92,16 +137,14 @@
 \mfornb{\Person}	{Man}{Woman}{Person}
 \mfornb{\sex}		{male}{female}{nonbinary}
 \mfornb{\Sex}		{Male}{Female}{Nonbinary}
-\mfornb{\God}		{God}{Goddess}{Deity}
 \mfornb{\Deity}		{God}{Goddess}{Deity}
+\def\God\Deity
 \mfornb{\Heir}		{Prince}{Princess}{Heir}
 \mfornb{\heir}		{prince}{princess}{heir}
-
 \mfornb{\Monarch}		{King}{Queen}{Monarch}
 \mfornb{\monarch}		{king}{queen}{monarch}
-\mfornb{\Emperor}		{Emperor}{Empress}{Emprex} % it's the best nonbinary term I found
+\mfornb{\Emperor}		{Emperor}{Empress}{Emprex}
 \mfornb{\emperor}		{emperor}{empress}{emprex}
-
 \mfornb{\cleric}		{Priest}{Priestess}{Cleric}
 \mfornb{\partner}	{boyfriend}{girlfriend}{partner}
 
@@ -110,6 +153,7 @@
 %% \NEW, even if it's blank.  If you want it to be optional, declare
 %% it with \FD<field> {<default>} here.
 %%
+%%%% Character stats
 %% Use \newstat to create stats (below, in \PRESETS{Char}).  The
 %% <default> value is used unless the given Char macro sets the field.
 %% For example:
@@ -176,7 +220,7 @@
 %  \s\MYdesc	{a test}						% a few words of description that can fit
 %																	% visibly on a badge
 %  \s\MYplayer	{Test Player}			% player name
-%  \s\MYgender{\theythem}					% pronouns
+%  \hethey												% configures pronouns
 %  \s\MYblues	{\bTest{}}					% assigned bluesheets
 %  \s\MYgreens	{\gTest{}\nGreenTest{}}			% assigned greensheets
 %  \s\MYabils	{\aTest{}						% assigned abilities -- demonstrates you can split lines in these lists
