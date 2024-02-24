@@ -19,7 +19,7 @@ commands.
 
 When writing sheets and other game text, you'll generally refer to
 characters with no argument, like \cJamesBond{}, or as a character
-introduction with \cJameBond{\intro}, which will usually print out a
+introduction with \cJamesBond{\intro}, which will usually print out a
 more full version of their name.  Leaving the argument empty is a
 shortcut for \cJamesBond{\usual}.  The majority of the rest of the
 namemapping system is devoted to intelligently controlling what \usual

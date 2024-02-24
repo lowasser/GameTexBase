@@ -11,7 +11,7 @@ if ((!$ARGV[1]) || ($ARGV[3])) {
     exit;
 }
 
-$gameclass = "guildcamp1";
+$gameclass = "game";
 
 if ($ARGV[2]) {
     $gameclass = $ARGV[2];
@@ -52,7 +52,7 @@ sub dvipdf {
 	"-sPAPERSIZE=letter -dPDFSETTINGS=/printer -sOutputFile=$outfile " .
 	"-dEmbedAllFonts=true -dSubsetFonts=true -dMaxSubsetPct=100 " .
 	"-dCompatibilityLevel=1.3 -dParseDSCCommentsForDocInfo=false " .
-	"-dParseDSCComments=false " .
+	"-dParseDSCComments=false -dUseCIEColor " .
 	"-c save pop -";
 }
 

@@ -15,7 +15,7 @@
 %%
 %%%%%
 
-\documentclass[char]{MyGame}
+\documentclass[char]{game}
 \begin{document}
 
 \name{\cTest{}}
@@ -24,7 +24,7 @@
 %% Extras/README-namemappings.
 \updatemacro{\cNPC}{
   \unknownplayer %% doesn't know what he looks like
-  }
+}
 
 %% quote examples
 \bigquote{``Use this macro for large quotes of prose and such.  It
@@ -62,12 +62,12 @@ you.
 %% For pronouns and other gender-dependent words, you can use the
 %% pronoun commands defined in Lists/char-LIST.tex to automatically
 %% control them based on the character's gender.  For example,
-%% \cTest{\They} will produce He, She, It, or He/She, based on
-%% \cTest's \MYsex field.  You can define your own pronouns in
+%% \cTest{\They} will produce He, She, Ey, It, or He/She, based on
+%% \cTest's \MYgender field.  You can define your own pronouns in
 %% Lists/char-LIST.tex, as well.
 \cSomeGuy{} is a pretty good friend.  \cSomeGuy{\They} used to be your
 college roommate.  When \cSomeGuy{\they} called you up, you were
-pleasently surprised to hear from \cSomeGuy{\them}.
+pleasantly surprised to hear from \cSomeGuy{\them}.
 
 %% \me{} produces whatever the argument to \name{...} is.  If, like
 %% usual, the argument was a char Macro, \me{} is an alias for that
@@ -102,5 +102,47 @@ sure why; you think it's a fine name.
   \contact{\cNPC{}} This person you've never met.
   \contact{\cSomeGuy{}} Your friend from out of town.
 \end{contacts}
+
+
+%%%%%
+%% \starttag{<tag>} <elements> \endtag 
+%% Valid <tag> values are blues, greens, abils, combat, mems, items,
+%% whites, notebooks, cash, signs, ids.  These each correspond to a
+%% type of macro defined in Lists/.
+%%
+%% By using \starttag, you can give this character <elements> of the
+%% type corresponding to <tag>.
+%%
+%% Multiple uses of the same <tag> will simply add together.
+\starttag{mems}
+
+  \mTest{}
+
+  \memfold{``Rosebud''}{Rosebud!  That was the name of\ldots the name
+  of\ldots darn, you forget.}
+
+  \startmembook{Book of Mempackets}
+
+    \mempage{if you see something blue}{Hey, that's blue!  Oh, you
+    remember, blue is your favorite color.  You really like blue
+    things, especially blue tentacles.  You wonder why\ldots}
+
+    \mempage{``Octy''}{Octy!  You remember Octy now!  She was your pet
+    blue octopus when you were a young child living offshore.  Oh, the
+    fun times you had!
+
+    You used to go swimming and diving with Octy all the time.  This
+    was years ago.  What happened?  You still can't remember\ldots but
+    you know you haven't even thought of her since you were small.}
+
+  \endmembook
+
+\endtag
+
+\starttag{abils}
+  \ability{Amazing Powers}{You can do strange and amazing things.}{I
+  do something strange and amazing.}
+\endtag
+
 
 \end{document}
