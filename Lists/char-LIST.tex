@@ -34,8 +34,75 @@
 
 %%%%%
 %% Gender
-\def\hehim{0}\def\sheher{1}\def\theythem{2}\def\zezir{3}\def\faefaer{4}
+\def\hehim{0}\def\sheher{1}\def\theythem{2}\def\zezir{3}\def\faefaer{4}\def\avoidpronouns{5}
 %% TODO: discuss
+
+
+%%%%%
+%% pronouns and similar gender-based macros
+
+% switch on gender
+\newcommand{\gendered}[6]{\ifcase\MYgender#1\or#2\or#3\or#4\or#5\else#6\fi}
+% define a new command that switches based on gender
+\newcommand{\foreachgender}[7]{\def#1{\gendered{#2}{#3}{#4}{#5}{#6}{#7}}}
+% define one version for he/she/ze, one version for they/fae
+\newcommand{\singularorplural}{3}{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}}
+% define one version for masc, one for femme, one for nonbinary
+\newcommand{\mfornb}{4}{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}}
+
+\foreachgender{\they}		{he}{she}{they}{ze}{fae}{\informal}
+\foreachgender{\They}		{He}{She}{They}{Ze}{Fae}{\informal}
+\foreachgender{\them}		{him}{her}{them}{zir}{faer}{\informal}
+\foreachgender{\their}	{his}{her}{their}{zir}{faer}{\informal's}
+\foreachgender{\Their}	{His}{Her}{Their}{Zir}{Faer}{\informal's}
+\foreachgender{\theirs}	{his}{hers}{theirs}{zirs}{faers}{\informal's}
+\foreachgender{\themself}	{himself}{herself}{themself}{zirself}{faerself}{\informal}
+\foreachgender{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}{\informal}
+\newcommand{\theyare}{\they \are}
+\newcommand{\Theyare}{\They \are}
+
+
+\singularorplural{\verbs}		{s}{}  		% he believes, they believe
+\singularorplural{\verbes}	{es}{} 		% he does, they do
+\singularorplural{\verby}		{ies}{y} 	% he worries, they worry
+\singularorplural{\are}			{is}{are} % he is, they are
+\singularorplural{\re}			{'s}{'re} % he's, they're
+\def\does{do\verbes}
+\singularorplural{\have}		{has}{have} % he has, they have
+\singularorplural{\were}		{was}{were} % he was, they were
+
+\mfornb{\spouse}	{husband}{wife}{spouse}
+\mfornb{\Spouse}	{Husband}{Wife}{Spouse}
+\mfornb{\child}	{son}{daughter}{child}
+\mfornb{\Child}	{Son}{Daughter}{Child}
+\mfornb{\kid}		{boy}{girl}{child}
+\mfornb{\Kid}		{Boy}{Girl}{Child}
+\mfornb{\stray}	{urchin}{waif}{stray}
+\mfornb{\Stray}	{Urchin}{Waif}{Stray}
+\mfornb{\pal}		{guy}{gal}{pal}
+\mfornb{\Pal}		{Guy}{Gal}{Pal}
+\mfornb{\sibling}	{brother}{sister}{sibling}
+\mfornb{\Sibling}	{Brother}{Sister}{Sibling}
+\mfornb{\parent}	{father}{mother}{parent}
+\mfornb{\Parent}	{Father}{Mother}{Parent}
+\mfornb{\auncle}	{uncle}{aunt}{auncle}
+\mfornb{\Auncle}	{Uncle}{Aunt}{Auncle}
+\mfornb{\nibling}	{nephew}{niece}{nibling}
+\mfornb{\Nibling}	{Nephew}{Niece}{Nibling}
+%% \def\aunt{\uncle}
+%% \def\Aunt{\Uncle}
+\mfornb{\person}	{man}{woman}{person} % I don't know if fae/faer folks would want to change this, but this seems like most GMs' preferred default.
+\mfornb{\Person}	{Man}{Woman}{Person}
+\mfornb{\sex}		{male}{female}{nonbinary}
+\mfornb{\Sex}		{Male}{Female}{Nonbinary}
+\mfornb{\God}		{God}{Goddess}{Deity}
+\mfornb{\Deity}		{God}{Goddess}{Deity}
+\mfornb{\Majesty}		{King}{Queen}{Majesty}
+\mfornb{\Heir}		{Prince}{Princess}{Heir}
+\mfornb{\heir}		{Prince}{Princess}{Heir}
+\mfornb{\cleric}		{Priest}{Priestess}{Cleric}
+\mfornb{\clergy}		{Priest}{Priestess}{Cleric}
+\mfornb{\partner}	{boyfriend}{girlfriend}{partner}
 
 %%%%%
 %% If a field is declared by \F, it must be given a value by \s inside
@@ -72,75 +139,6 @@
 \POSTSETS{Char}{
   \resolvestats
   }
-
-
-%%%%%
-%% pronouns and similar gender-based macros
-%%
-%% \hehim, \sheher, \neuter, \ambiguous
-%% \mfn{<masculine>}{<feminine>}{<neuter>}
-%% \mf{<masculine>}{<feminine>}
-%% \pronoun{<command>}{<masculine>}{<feminine>}{<neuter>}
-\newcommand{\mfnzf}[5]{\ifcase\MYgender#1\or#2\or#3\or#4\else#5\fi}
-\newcommand{\mfnz}[4]{\mfnz{#1}{#2}{#3}{#4}{#3}}
-\newcommand{\mfn}[3]{\mfnz{#1}{#2}{#3}{#3}}
-\newcommand{\mf}[2]{\mfn{#1}{#2}{}}
-\newcommand{\pronounzf}[6]{\def#1{\mfnzf{#2}{#3}{#4}{#5}{#6}}}
-\newcommand{\pronounz}[5]{\def#1{\mfnz{#2}{#3}{#4}{#5}}}
-\newcommand{\pronoun}[4]{\def#1{\mfn{#2}{#3}{#4}}}
-
-\pronounzf{\they}		{he}{she}{they}{ze}{fae}
-\pronounzf{\They}		{He}{She}{They}{Ze}{Fae}
-\pronounzf{\them}		{him}{her}{them}{zir}{faer}
-\pronounzf{\their}	{his}{her}{their}{zir}{faer}
-\pronounzf{\Their}	{His}{Her}{Their}{Zir}{Faer}
-\pronounzf{\theirs}	{his}{hers}{theirs}{zirs}{faers}
-\pronounzf{\themself}	{himself}{herself}{themself}{zirself}{faerself}
-\pronounzf{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}
-\newcommand{\theyare}{\they \are}
-\newcommand{\Theyare}{\They \are}
-
-\pronoun{\verbs}	{s}{s}{}
-\pronoun{\verbes}	{es}{es}{}
-\pronoun{\verby}	{ies}{ies}{y}
-\pronounz{\are}	{is}{is}{are}{is}
-\pronounz{\re}	{'s}{'s}{'re}{'s}
-\newcommand{\does}{do\verbes}
-\pronounz{\have}	{has}{has}{have}{has}
-\pronounz{\were}	{was}{was}{were}{was}
-
-\pronoun{\spouse}	{husband}{wife}{spouse}
-\pronoun{\Spouse}	{Husband}{Wife}{Spouse}
-\pronoun{\child}	{son}{daughter}{child}
-\pronoun{\Child}	{Son}{Daughter}{Child}
-\pronoun{\kid}		{boy}{girl}{child}
-\pronoun{\Kid}		{Boy}{Girl}{Child}
-\pronoun{\stray}	{urchin}{waif}{stray}
-\pronoun{\Stray}	{Urchin}{Waif}{Stray}
-\pronoun{\pal}		{guy}{gal}{pal}
-\pronoun{\Pal}		{Guy}{Gal}{Pal}
-\pronoun{\sibling}	{brother}{sister}{sibling}
-\pronoun{\Sibling}	{Brother}{Sister}{Sibling}
-\pronoun{\parent}	{father}{mother}{parent}
-\pronoun{\Parent}	{Father}{Mother}{Parent}
-\pronoun{\auncle}	{uncle}{aunt}{auncle}
-\pronoun{\Auncle}	{Uncle}{Aunt}{Auncle}
-\pronoun{\nibling}	{nephew}{niece}{nibling}
-\pronoun{\Nibling}	{Nephew}{Niece}{Nibling}
-%% \def\aunt{\uncle}
-%% \def\Aunt{\Uncle}
-\pronounzf{\person}	{man}{woman}{person}{person}{fae}
-\pronoun{\Person}	{Man}{Woman}{Person}
-\pronoun{\sex}		{male}{female}{nonbinary}
-\pronoun{\Sex}		{Male}{Female}{Nonbinary}
-\pronoun{\God}		{God}{Goddess}{Deity}
-\pronoun{\Deity}		{God}{Goddess}{Deity}
-\pronoun{\Majesty}		{King}{Queen}{Majesty}
-\pronoun{\Heir}		{Prince}{Princess}{Heir}
-\pronoun{\heir}		{Prince}{Princess}{Heir}
-\pronoun{\cleric}		{Priest}{Priestess}{Cleric}
-\pronoun{\clergy}		{Priest}{Priestess}{Cleric}
-\pronoun{\partner}	{boyfriend}{girlfriend}{partner}
 
 %%%%%
 %% PC is a subtype of Char, for regular PCs.
