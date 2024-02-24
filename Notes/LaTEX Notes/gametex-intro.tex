@@ -37,9 +37,10 @@ MIT graduates experienced in Assassin's Guild traditions went to Stanford for gr
 \begin{subsection}{Why use \gametex{}?}
 \gametex{} takes advantage of the fact that \LaTeX is not \textit{simply} for writing technical papers, but is essentially a programming language for text and formatting in ways that are highly useful to LARP authors.  To pick some examples:
 \begin{itemize}
-    \item During the writing process of a game, names of all sorts of things can change – not simply characters, but political entities, artifacts, magical powers, and more.  Keeping these all synchronized can be difficult.  (These names are defined in the list files explained in section \ref{lists}.)
-    \item When a game is run for different groups of people, not just character names but pronouns and gendered language can need to be changed.  A simple find/replace is often inadequate, especially when you run into conjugations like ``he was" versus ``they were."  (How to do this is explained in section \ref{gender}.)
-    \item Not all text should be immediately visible to the players holding the printed item.  \gametex{} can automatically print dotted lines for folding and stapling shut secrets, with text on the outside describing when to open it, as well as two-sided cards where different players see different sides of the cards.  (The most common pattern for this is described in section \ref{mems}.)
+    \item During the writing process of a game, names of all sorts of things can change – not simply characters, but political entities, artifacts, magical powers, and more.  Keeping these all synchronized can be difficult.  (Covered in \ref{lists}.)
+    \item When a game is run for different groups of people, not just character names but pronouns and gendered language can need to be changed.  A simple find/replace is often inadequate, especially when you run into conjugations like ``he was" versus ``they were."  (Covered in \ref{gender}.)
+		\item When characters have secret identities, like Spider-Man's identity as Peter Parker, it's important to make sure the right characters know that individual under the right name.  (Covered in \ref{identities}.)
+    \item Not all text should be immediately visible to the players holding the printed item.  \gametex{} can automatically print dotted lines for folding and stapling shut secrets, with text on the outside describing when to open it, as well as two-sided cards where different players see different sides of the cards.  (Covered in \ref{mems}.)
     \item Cross-references can ensure players have up-to-date indexes of the characters and players they know before game, as well as all the items and documents they should have access to.  GMs can have the same index cross-referenced the other way, with all secrets revealed.  Both of these help everyone make sure that nobody is missing something they need, or in possession of secrets they shouldn't have.  (\gametex{} does this automatically.)
 \end{itemize}
 \gametex{} has been used many times for games that are not especially in the ``MIT style,'' notably as it passed to the SGS and then the LRS to a tradition that reduced the emphasis on mechanics and combat.  While it's not always intuitive to pick up and use, especially for game authors who don't have any experience with programming languages, \gametex{} can offer the above benefits and more.  It is unlikely to be worth it for, say, a small parlor LARP.
@@ -354,6 +355,7 @@ To assign a character's number, use \lstinline|\s\MYnumber{123}| (or whatever nu
 To reference another character's number, as in ``my father's murderer'', use \lstinline|\cCharacter{\MYnumber}|.
 \end{subsubsection}
 \begin{subsubsection}{Identities}
+\label{identities}
 \gametex{} has extremely good support for characters with layered identities.  Some examples include:
 \begin{itemize}
 \item Thomas is known to his closest friends as Tommy, and their character sheets all refer to him as such.
