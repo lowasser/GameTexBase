@@ -61,7 +61,6 @@
 \newcommand{\theyare}{\they \are}
 \newcommand{\Theyare}{\They \are}
 
-
 \singularorplural{\verbs}		{s}{}  		% he believes, they believe
 \singularorplural{\verbes}	{es}{} 		% he does, they do
 \singularorplural{\verby}		{ies}{y} 	% he worries, they worry
@@ -73,10 +72,10 @@
 
 \mfornb{\spouse}	{husband}{wife}{spouse}
 \mfornb{\Spouse}	{Husband}{Wife}{Spouse}
-\mfornb{\child}	{son}{daughter}{child}
-\mfornb{\Child}	{Son}{Daughter}{Child}
-\mfornb{\kid}		{boy}{girl}{child}
-\mfornb{\Kid}		{Boy}{Girl}{Child}
+\mfornb{\offspring}	{son}{daughter}{child}
+\mfornb{\Offspring}	{Son}{Daughter}{Child}
+\mfornb{\child}		{boy}{girl}{child}
+\mfornb{\Child}		{Boy}{Girl}{Child}
 \mfornb{\stray}	{urchin}{waif}{stray}
 \mfornb{\Stray}	{Urchin}{Waif}{Stray}
 \mfornb{\pal}		{guy}{gal}{pal}
@@ -89,19 +88,21 @@
 \mfornb{\Auncle}	{Uncle}{Aunt}{Auncle}
 \mfornb{\nibling}	{nephew}{niece}{nibling}
 \mfornb{\Nibling}	{Nephew}{Niece}{Nibling}
-%% \def\aunt{\uncle}
-%% \def\Aunt{\Uncle}
 \mfornb{\person}	{man}{woman}{person} % I don't know if fae/faer folks would want to change this, but this seems like most GMs' preferred default.
 \mfornb{\Person}	{Man}{Woman}{Person}
 \mfornb{\sex}		{male}{female}{nonbinary}
 \mfornb{\Sex}		{Male}{Female}{Nonbinary}
 \mfornb{\God}		{God}{Goddess}{Deity}
 \mfornb{\Deity}		{God}{Goddess}{Deity}
-\mfornb{\Majesty}		{King}{Queen}{Majesty}
 \mfornb{\Heir}		{Prince}{Princess}{Heir}
-\mfornb{\heir}		{Prince}{Princess}{Heir}
+\mfornb{\heir}		{prince}{princess}{heir}
+
+\mfornb{\Monarch}		{King}{Queen}{Monarch}
+\mfornb{\monarch}		{king}{queen}{monarch}
+\mfornb{\Emperor}		{Emperor}{Empress}{Emprex} % it's the best nonbinary term I found
+\mfornb{\emperor}		{emperor}{empress}{emprex}
+
 \mfornb{\cleric}		{Priest}{Priestess}{Cleric}
-\mfornb{\clergy}		{Priest}{Priestess}{Cleric}
 \mfornb{\partner}	{boyfriend}{girlfriend}{partner}
 
 %%%%%
@@ -118,13 +119,8 @@
 %% would give character a Hit Points stat, abbreviated HP, referenced
 %% as the \MYhp field, that defaults to 5.
 \PRESETS{Char}{
-  \FD\MYfirst{}
-	\FD\MYlast{}
+  \FD\MYname{} %% character full name
 	\FD\MYdesc	{} %% badge description
-
-	\newstat\MYcr	{Combat Rating}{CR}{2} %% for DarkWater-style combat
-	\newstat\MYcourt	{Pixie Court}{PC}{} % Courts: Structure, F&F, Elements, M&M
-
   \FD\MYgender	{} %% \hehim, \sheher, \neuter, \ambiguous
   \FD\MYplayergender	{} %% \hehim, \sheher, \neuter, \ambiguous
 	\FD\MYrole	{} %% playerlist role
@@ -164,8 +160,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% don't use \cTest as a copy-and-paste template to populate your
-%% character list.  Use something simpler, like
+%% \cTest demonstrates all the possible options for a character, but
+%% you may not even need all of these for every game, so feel free
+%% to skip any options you don't need.
 %%
 %%   \NEW{PC}{\cBlah}{
 %%     \s\MYname	{}
@@ -174,40 +171,22 @@
 %%
 %\NEW{PC}{\cTest}{
 %  \s\MYname	{Test Character}
-%  \s\MYfile	{README.tex}
-%  \s\MYnumber	{00000}
-%  \s\MYdesc	{a test}
-%  \s\MYplayer	{Test Player}
-%  \s\MYemail	{test@test.test}
-%  \s\MYaddress	{Test, rm 000}
-%  \s\MYphone	{x0-0000}
-%  \s\MYblues	{\bTest{}}
-%  \s\MYgreens	{\gTest{}\nGreenTest{}}
-%  \s\MYabils	{\aTest{}
+%  \s\MYfile	{MyCharSheet.tex}		% a file in the Charsheets directory
+%  \s\MYnumber	{00000}						% badge number
+%  \s\MYdesc	{a test}						% a few words of description that can fit
+%																	% visibly on a badge
+%  \s\MYplayer	{Test Player}			% player name
+%  \s\MYgender{\theythem}					% pronouns
+%  \s\MYblues	{\bTest{}}					% assigned bluesheets
+%  \s\MYgreens	{\gTest{}\nGreenTest{}}			% assigned greensheets
+%  \s\MYabils	{\aTest{}						% assigned abilities -- demonstrates you can split lines in these lists
 %		\aTestCombat{}
 %		}
-%  \s\MYitems	{\iTest{}\nTest{}}
-%  \s\MYwhites	{\wTest{}}
-%  \s\MYcash	{\cash{Dollar}{261}}
+%  \s\MYitems	{\multi{5}{\iTest{}}\nTest{}}	% assigned items, including notebooks
+%  \s\MYwhites	{\wTest{}}				% assigned whitesheets
+%  % \s\MYcr{2}										% if you create stats in your game, this is how you set them for each character
 %  }
 
+%%%%%%%%%%%%% The PCs %%%%%%%%%%%%%%%
 
-%\NEW{PC}{\cTest}{
-  %\s\MYname	{Test Character}
-  %\s\MYfile	{README.tex}
-  %\s\MYnumber	{00000}
-  %\s\MYdesc	{a test}
-  %\MYsex	{\male}
-  %\s\MYplayer	{Test Player}
-  %
-  %\s\MYblues	{\bTest{}}
-  %\s\MYgreens	{\gTest{}\nGreenTest{}}
-  %\s\MYabils	{\aTest{}\aTestCombat{}}
-  %\s\MYitems	{\iTest{}\nTest{}}
-  %\s\MYwhites	{\wTest{}}
-  %\s\MYcash	{\cash{Dollar}{261}}
-  %
-  %\s\MYcr{2}
-%}
-
-%%%%%%%%%%%%% The PCS %%%%%%%%%%%%%%%
+%%%%%%%%%%%%% The NPCs %%%%%%%%%%%%%%%
