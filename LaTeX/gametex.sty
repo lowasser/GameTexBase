@@ -1042,20 +1042,20 @@
 %% \updatemacro{<datatype macro>}{<new updates>}
 %% \updateplayer{<Char macro>}{<new player>}
 %% \updateplayeremail{<Char macro>}{<new player>}{<new email>}
-%% \updatePEG{<Char macro>}{<new player>}{<new email>}{<new gender>}
+%% \updatePNG{<Char macro>}{<new player>}{<new character name, if changed>}{<new gender, e.g. \theythem>}
 \def\updatemacro{\EXTEND}
 \def\updateplayer#1#2{\updatemacro{#1}{\rs\MYplayer{#2}}}
 \def\updateplayeremail#1#2#3{%
   \updatemacro{#1}{\rs\MYplayer{#2}\rs\MYemail{#3}}%
 }
-\def\updatePEG#1#2#3#4{%
+\def\updatePNG#1#2#3#4{%
   \updatemacro{#1}{%
     \rs\MYplayer{#2}%
-    \rs\MYemail{#3}%
-    \def\@test{#4}%
-    \unless\ifx\@test\empty%
-      \rs\MYgender{#4}%
-    \fi%
+		\def\@newname{#3}%
+		\unless\ifx\@newname\empty%
+			\rs\MYname{#3}$
+		\fi
+		#4{reset} % any nonempty argument should reset
   }
 }
 

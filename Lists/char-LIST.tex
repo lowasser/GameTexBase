@@ -53,9 +53,14 @@
 %% and the text used when we introduce that character's pronouns.
 %% This does not cover all combinations, but it's easy to add more.
 \newcommand{\pronounset}[3]{
-	\newcommand{#1}{
-		\s\MYgender{#2}
-		\s\MYcharpronouns{#3}
+	\newcommand{#1}[1][]{
+		\ifx#1\empty
+			\s\MYgender{#2}
+			\s\MYcharpronouns{#3}
+		\else
+			\rs\MYgender{#2}
+			\rs\MYcharpronouns{#3}
+		\fi
 	}
 }
 
@@ -163,10 +168,11 @@
 %% would give character a Hit Points stat, abbreviated HP, referenced
 %% as the \MYhp field, that defaults to 5.
 \PRESETS{Char}{
-  \FD\MYname{} %% character full name
-	\FD\MYdesc	{} %% badge description
+  \FD\MYname{}     %% character full name
+	\FD\MYdesc	{}   %% badge description
   \FD\MYgender	{} %% \hehim, \sheher, \neuter, \ambiguous
-  \FD\MYplayergender	{} %% \hehim, \sheher, \neuter, \ambiguous
+  \FD\MYplayer{}   				 %% 
+	\FD\MYplayerpronouns{}   %% 
 	\FD\MYrole	{} %% playerlist role
   \FD\MYgroupstr{} %% playerlist groupstring
   \FD\MYfile	{} %% character sheet filename (including .tex)
@@ -179,6 +185,11 @@
 \POSTSETS{Char}{
   \resolvestats
   }
+	
+%%%%% Defines pronounful contact and intro mappings.
+
+\intromap{\full \ifx\MYcharpronuns\empty\else\ (\MYcharpronouns)\fi}
+\contactmap{\full \ifx\MYcharpronuns\empty\else\ (\MYcharpronouns)\fi}
 
 %%%%%
 %% PC is a subtype of Char, for regular PCs.
