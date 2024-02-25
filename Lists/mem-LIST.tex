@@ -10,7 +10,8 @@
 
 \DECLARESUBTYPE{Mem}{Element}
 \PRESETS{Mem}{
-  %% \MYname is the trigger
+  %% \MYname is the cross-reference
+	\F\MYtrigger
   \F\MYtext	%%  text
 }
 
@@ -79,17 +80,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \NEW{MemFold}{\mTest}{
-  \s\MYname	{Test Trigger}
+	\s\MYname {Mempacket A}
+  \s\MYtrigger	{Test Trigger}
   \s\MYtext	{This is a Test of a fold-n-staple memory packet}
 }
 
 \NEW{MemEnvelope}{\mEnvTest}{
-  \s\MYname	{Test Trigger}
+	\s\MYname{Mempacket B}
+  \s\MYtrigger	{Test Trigger}
   \s\MYtext	{This is a Test of a stuff-n-seal memory packet}
 }
 
 \NEW{MemEnvelope}{\mAmazing}{
-  \s\MYname	{if you see something amazing}
+	\s\MYname{Mempacket C}
+  \s\MYtrigger	{if you see something amazing}
   \s\MYtext	{Wow!  That was amazing!  Hey, you seem to be able to
 		do amazing things, too.  See the enclosed greensheet
 		and ability.}
@@ -103,13 +107,13 @@
 }
 
 \NEW{MemPage}{\mPageOne}{
-  \s\MYname	{Test Trigger One}
-  \s\MYtext	{This is a Test of a mempacket book}
+  \s\MYtrigger	{Open if trigger 1}
+  \s\MYtext	{This is page 1}
 }
 
 \NEW{MemPage}{\mPageTwo}{
-  \s\MYname	{Test Trigger Two}
-  \s\MYtext	{This is a Test of a mempacket book}
+  \s\MYtrigger	{Open if trigger 2}
+  \s\MYtext	{This is page 2}
 }
 
 

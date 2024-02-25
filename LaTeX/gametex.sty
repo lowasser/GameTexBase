@@ -4550,10 +4550,10 @@
 
 %%%%%
 %% Mem macros mapped to produce the mempacket.
-\@elementmapping{Mem}{\@numopt\FoldingMempacket{\mem@owner}{\MYname}{\MYtext}}
+\@elementmapping{Mem}{\@numopt\FoldingMempacket{\mem@owner}{\MYtrigger}{\MYtext}{\MYname}}
 
 \@elementmapping{MemEnvelope}{%
-  \@numopt\EnvelopeMempacket{\mem@owner}{\MYname}{\MYtext}%
+  \@numopt\EnvelopeMempacket{\mem@owner}{\MYtrigger}{\MYtext}{\MYname}%
 }
 
 \@elementmapping{MemCover}{%
@@ -4561,7 +4561,7 @@
 }
 
 \@elementmapping{MemPage}{%
-  \@numopt\PageMempacket{\MYname}{\MYtext}%
+  \@numopt\PageMempacket{\MYtrigger}{\MYtext}%
 }
 
 \def\@compendium{\EVERY{Mem}{}}
@@ -4575,15 +4575,16 @@
 
 
 %%%%%
-%% \FoldingMempacket{owner}{trigger}{text}
-\newcommand{\FoldingMempacket}[4][]{%
+%% \FoldingMempacket{owner}{trigger}{text}{name}
+\newcommand{\FoldingMempacket}[5][]{%
   \begingroup%
     \packetspace\whitespace%
     \packetwidth\memwidth%
     \FoldingPacket{%
       \centering%
       \scriptsize%
-      \mbox{\gamenameabbrev} / \mbox{\gamedateabbrev}\\%
+      \ifx#5\empty\else\mbox{#5}\\\fi%
+			\mbox{\gamenameabbrev} / \mbox{\gamedateabbrev}\\%
       \bfseries%
       \mbox{}#2%
     }{%
@@ -4615,13 +4616,14 @@
 
 
 %%%%%
-%% \EnvelopeMempacket{owner}{trigger}{text}
-\newcommand{\EnvelopeMempacket}[4][]{%
+%% \EnvelopeMempacket{owner}{trigger}{text}{title}
+\newcommand{\EnvelopeMempacket}[5][]{%
   \begingroup%
     \packetspace\whitespace%
     \packetwidth\memwidth%
     \EnvelopePacket{%
       \scriptsize%
+			\ifx#5\empty\else\mbox{#5: }\fi
       \mbox{\gamenameabbrev} / \mbox{\gamedateabbrev}\\%
       \bfseries\mbox{}#2%
     }{%
