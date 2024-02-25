@@ -32,8 +32,7 @@ Clary's career in LARP authorship technology spans decades; here are the points 
 \item Clary wrote a LARP written for a spring 1998 course ``Structure and Interpretation of Non-Linear and Interactive Narrative'' in bare HTML.  (Clary appears to have graduated MIT with a bachelor's degree in 2000.)
 \item Clary co-wrote the September 2001 game  ``Reality Check III: Dinner at the Schloss Himmelbrand'', which still has publicly visible \LaTeX{}-produced documents.
 \item Philip Tan's 2003 \href{https://drive.google.com/file/d/1RiGc2OWtXIPlebHVrixv2IpAbSGAThtd/view?usp=sharing}{master's thesis} references Tan's use of ``GameTeX beta 2,'' credited to Clary, to write a three-day game ``A New Deal'' that ran in 2002.  (Tan would later become the creative director of the MIT Game Lab and is a research scientist there as of 2024.)
-\item Clary released \gametex{} version 1.0 in December of 2008.
-\item Clary has remained part of the MIT community over the years, being mentioned as a martial arts instructor for a student group in 2020.
+\item Clary remained part of the MIT community and an associate of the Guild for many years: he released \gametex{} version 1.0 in December of 2008, and was mentioned as a \emph{sensei} for an MIT student martial arts group in 2020.
 \item Clary has posted updates to \gametex{} even more recently, as late as December 2023 (three months before I wrote this sentence).
 \end{enumerate}
 More recently, MIT graduates experienced in Assassins' Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society.  As members of the SGS graduated Stanford, 
@@ -251,7 +250,7 @@ Remember that the name of the character isn't inserted into the text – just th
 %If you are really picky, this repository has support for picking the right a/an for an item: you can write \lstinline|\iIdentCard{\MYarticle} \iIdentCard{}|, and set the appropriate article in the item definition.
 %Items do not currently have support for correctly generating a/an, so for example, if you wrote ``you have a \lstinline|\iBirthCertificate{}|'' and that item was later given the name ``identification card,'' you would end up with ``a identification card" instead of ``an identification card." Sorry!  I would fix this, if I knew how...
 \end{subsection}
-\begin{subsection}{Character References}
+\begin{subsection}{Character References and Titles}
 \label{charintro}
 \label{charcontact}
 
@@ -335,7 +334,7 @@ This is not necessarily the best tool for all use cases, however.  \gametex{} ha
 
 \begin{subsubsection}{\gametex{} Lists}
 
-\gametex{} introduces some additional, more compactly formatted versions of various kinds of lists, including optional labels for the lists.  This example includes use of the \lstinline|\contact| tool discussed in \ref{charcontact}.
+\gametex{} introduces some additional, more compactly formatted versions of various kinds of lists, including optional labels for the lists.
 
 \begin{verbatim}
 \begin{itemz} % we could put [Rumors] here to name the list, but we don't have to
@@ -371,7 +370,7 @@ compiles to
 \begin{subsection}{Special Terminology in \gametex{}}
 When you look at your \gametex{} folder, you may see folders named \texttt{Greensheets} and other terms you might not have heard before.  \gametex{} uses certain conventions of the MIT Assassins' Guild for terminology around the various things that go into a game.  Some of these terms are fairly universal and unsurprising, such as \textit{abilities, stats, charsheets}, and more.  Here are some terms that are not universal among LARP communities that are important to how \gametex{} organizes things.
 \begin{itemize}
-    \item A \textit{bluesheet}\footnote{The distinction of bluesheets and greensheets dates quite far back: Philip Tan's thesis cites a reference to this distinction in a 1990 thesis by Leah M. Bateman.  I cannot find this earlier document, unfortunately.} -- traditionally printed on blue paper -- contains in-universe lore.  Some bluesheets might contain lore known by all players, such as a history of global politics, and some might contain lore that only some characters know, such as the secret history of the Assassins' Guild.  Bluesheets are never transferable and are given to players to learn about the world before the game begins.
+    \item A \textit{bluesheet}\footnote{The distinction of bluesheets and greensheets dates quite far back.  I have not seen the original document, but Philip Tan's thesis cites Leah M. Bateman's 1990 thesis on the Assassins' Guild as referencing this distinction as present at the \emph{Harvard} Society for Interactive Literature.} -- traditionally printed on blue paper -- contains in-universe lore.  Some bluesheets might contain lore known by all players, such as a history of global politics, and some might contain lore that only some characters know, such as the secret history of the Assassins' Guild.  Bluesheets are never transferable and are given to players to learn about the world before the game begins.
     \item A \textit{greensheet} -- traditionally printed on green paper -- describes particular mechanics from an out-of-game perspective.  For example, a ritual requiring preparation over the course of all of game likely has an associated greensheet describing the preparation steps.  Greensheets are not transferable between characters, but might be unlocked midgame by finding a place, joining a faction, or gaining a power.
     \item A \textit{whitesheet} is an \emph{in-universe} document.  For example, a whitesheet might be a blank page to write a treaty, with spaces for each faction's representatives to sign.  Alternately, a whitesheet might contain the secrets of a book buried in the library, which a character could steal and hide if they don't want that information public.
     \item A \textit{mempacket} is some secret information, in or out of character, that is only opened under certain conditions.  For example, you might have a mempacket whose outside says: ``Open after speaking to Count Rugen for a minute.'' The inside might reveal: ``He tries to hide it, but he has six fingers on his right hand.''  Mempackets are named for their frequent use as unlockable memories of a character's past.
@@ -407,7 +406,7 @@ This is where your player characters will go.  The file has an example character
 \begin{subsubsection}{Stats}
 Characters can get assigned statistics, which can be numbers or short bits of text.  To create a statistic, read the instructions in \lstinline|Lists/char-LIST.tex| under ``Character stats'', which shows how to introduce a ``hit points'' stat.
 
-One nonobvious use of statistics is to create statistics with obscure names -- usually Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|).  Philip Tan's thesis:
+One nonobvious use of statistics is to create statistics with obscure names -- usually Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|) -- for game design reasons.  Philip Tan's thesis:
 \begin{quote}
 For instance, a player may have a positive $\psi$ stat without realizing that his
 or her character is a latent psychic. Another, better-informed character might be able to
@@ -439,17 +438,27 @@ To reference another character's number, as in ``my father's murderer'', use \ls
 \end{itemize}
 All these are done as ``overlays'' to the character, so references to Spider-Man automatically use Peter's pronouns, for example, without additional work.
 
-This is extensively documented in \lstinline|Extras/README-identity.txt|.  TODO: consider moving that content here.
+We will only mention this as a capability of \gametex{}.  To learn how to actually do it, consult the detailed documentation in \lstinline|Extras/README-identity.txt|.
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Items}
-When to use an item?  When to use which kind of item?
+Items in \gametex{} represent physical objects in the game world which can be moved.  This aspect is important: all items are marked as \textbf{Transferable} on their printouts.
+Printed \gametex{} items can be represented by simple cards, labels attached to props, or even labels on envelopes when items can contain other items or game elements.
+
+\begin{desc}[Types of Items]
+\item[Item] A standard item, with its own standard card size.
+\item[ItemPacket] A small item label to be pasted on the outside of an envelope or the like.
+\item[ItemFold] A ``fold along the dotted lines'' item with a publicly visible outside, that can be torn open to reveal a secret inside.
+\item[ItemLabel] A small item label to be attached to a prop/physrep.
+\end{desc}
+
+Note that the primary difference between, say, an \lstinline|ItemFold| and a mempacket (\ref{mems}) is whether there is a physical, movable object, or an abstract instruction for a player.  An \lstinline|ItemFold| could be used for an apple, which when eaten could either be tasty or poisoned.
 
 \begin{subsubsection}{Moving items}
 To support secrecy and intrigue in the MIT style of LARP, \gametex{} has built-in support for two standardized mechanics that apply to items.  In case those are useful to your game, we will briefly cover them.
 \begin{itemize}
 \item An item can be configured with \lstinline|\unstash| to make it unstashable: unable to be hidden.  This can be a kludge to ensure that people always have a chance to find it, or simply a mechanic indicating the represented item is too big to be meaningfully hidden.
-\item An item can be configured with \texttt{\textbackslash{}bulky\{$N$\}} to make it $N$ hands bulky.  The general rule is that an $N$-hands bulky item takes $N$ individual human hands to move easily, and can be dragged slowly with $N-1$ hands, which may be zero.  For example, a heavy duffel bag is likely one hand bulky because it can be carried easily in one hand or sort of kicked along the floor slowly, but a large urn is likely two hands bulky.  Traditionally, corpses are three hands bulky, meaning they can be dragged slowly by one person or carried easily with one other modest-sized item by two people.  Items at least one hand bulky are usually impossible to conceal.
+\item An item can be configured with \texttt{\textbackslash{}bulky\{$N$\}} to make it $N$ hands bulky.  The general rule is that an $N$-hands bulky item takes $N$ individual human hands to move easily, and can be dragged slowly with $N-1$ hands, which may be zero.  For example, a heavy duffel bag is likely one hand bulky because it can be carried easily in one hand or sort of kicked along the floor slowly, but a large urn is likely two hands bulky.  Traditionally, corpses are three hands bulky, meaning they can be dragged slowly by one person or carried easily with one other modest-sized item by two people.  Items at least one hand bulky are usually impossible to conceal.  Relatedly, items that represent containers may have a \emph{capacity}, usually represented in units of hands-bulky and set with \texttt{\textbackslash{}contains\{$N$\}}.
 \end{itemize}
 \end{subsubsection}
 \begin{subsubsection}{Numbers}
@@ -509,7 +518,6 @@ Here are some example sign definitions:
 		This represents going into the room and digging through 
 		\cPrincess{}'s papers for something useful.
 	}
-  \s\MYitems {}
 }
 \NEW{Sign}{\sPrincessPapers}{
   \s\MYname	{Papers}
@@ -520,15 +528,67 @@ Here are some example sign definitions:
 \end{verbatim}
 
 \end{subsection}
-\begin{subsection}{Bluesheets}
-\end{subsection}
-\begin{subsection}{Greensheets}
+\begin{subsection}{Bluesheets and Greensheets}
+As a reminder, bluesheets are documents used to provide in-universe lore known by more than one character, and greensheets are documents used to define mechanics from an out of character perspective.
+Both are written essentially as freeform text.
+
+A bluesheet consists of two components.  First, a \lstinline|.tex| file in the \lstinline|Bluesheets| folder that looks like this:
+\begin{verbatim}
+\documentclass[blue]{game}
+\begin{document}
+\name{\bThisBlueSheet{}}
+Here is some lore.
+\end{document}
+\end{verbatim}
+Second, an entry in \lstinline|Lists/blue-LIST.tex|, looking like
+\begin{verbatim}
+\NEW{Blue}{\bThisBlueSheet}{
+  \s\MYname	{Bluesheet Title}
+  \s\MYfile	{bluefilename.tex}
+}
+\end{verbatim}
+
+To assign this bluesheet to characters, you would write something like
+\begin{verbatim}
+\s\MYblues	{\bThisBlueSheet{} \bMaybeSomeOtherBluesheet{}}
+\end{verbatim}
+in the character definition.
+
+Greensheets are analogous in the ways you expect: \lstinline|\documentclass[green]|, \lstinline|green-LIST.tex|, \lstinline|\s\MYgreens{...}|, and so on.
+
+Note that bluesheets should always and only be assigned to characters.  Greensheets will almost exclusively go to characters, but may be placed elsewhere in game if characters can unlock new mechanics.
+
+\begin{subsubsection}{When to use greensheets}
+When building mechanics, you have several options for how to present them to your players:
+\begin{itemize}
+\item Directly on character sheets.
+\item Directly on e.g. game signs.
+\item On ability cards.
+\item On greensheets.
+\end{itemize}
+
+In general, mechanics should usually go on greensheets if they are long, require specific tools for players to execute (such as dice or a deck of cards), or if players will likely want access to them before game.
+\end{subsubsection}
 \end{subsection}
 \begin{subsection}{Whitesheets}
 \end{subsection}
-\begin{subsection}{Power features}
+\begin{subsection}{Power user features}
+Not all games will want these features, but LARP authors should at least know that \gametex{} offers these features to be used.
 \begin{subsubsection}{Abilities}
-Abilities print ``cards'' that have a front and a back, with the front expected to contain full documentation about the ability, and the back containing the publicly visible effect of the ability.  This is not necessary for even all games with ``powers'' in the secrets-and-powers style, but is designed to allow metagaming resistance.  For example, when the effect of an ability is ``You believe what I'm saying,'' it can help the target of the ability to avoid metagaming if they cannot see whether the other side of the card says ``Use once per hour'' or ``Use when you are telling the perfect truth.''
+Abilities print ``cards'' that have a front and a back, with the front expected to contain full documentation about the ability, and the back containing the publicly visible effect of the ability.  
+The definition of an ability might look like the following block in \lstinline|Lists/abil-LIST.tex|:
+\begin{verbatim}
+\NEW{Abil}{\aTest}{
+  \s\MYname	{Ability Name} % can be cross-referenced
+  \s\MYtext	{You are a test.} % on one side of the card, for the user to see
+  \s\MYeffect	{This is a Test.} % on the other side of the card, for the target to see
+}
+\end{verbatim}
+
+This is overkill for some games, but can be handy.  Consider an ability with the effect ``You believe what I'm saying.''
+Some players might find it more difficult not to metagame if they knew the ability could be used once per hour on any sentence.
+
+Abilities also print on handy cards, which can help players with many documents to keep track of their abilities more easily.
 \end{subsubsection}
 \begin{subsubsection}{Mempackets and membooks}\label{mems}
 \end{subsubsection}

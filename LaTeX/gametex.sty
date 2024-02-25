@@ -2053,6 +2053,9 @@
 \def\@i#1{\@append\@@declaredplayer{\FD#1{}}}
 \@playerfields
 
+\newcommand{\optionalsep}[4]{#1\ifx#2\empty\else#3#2#4\fi}
+\newcommand{\optionalparen}[2]{\optionalsep{#1}{#2}{ (}{)}}
+
 \PRESETS{Char}{
   \@@declaredplayer
   \let\@myidchar\ME
@@ -2062,7 +2065,7 @@
   \newid\nick{}
   \newid\maiden{}
   \let\@myfile\empty
-  \def\@contact{\contactmapping\ifx\MYplayer\empty\else\ (\MYplayer)\fi}
+  \def\@contact{\contactmapping\ifx\MYplayer\empty\else, played by \optionalparen{\MYplayer}{\MYplayerpronouns}}
   \FS\MYcontact{\@contact}
   \idnormal
   \allmap{\full}
@@ -5002,7 +5005,9 @@
   \EnvelopeItem{\MYname}{\MYnumber}{\MYtext}{\MYcontents}%
 }
 
-\@elementmapping{ItemLabel}{}
+\@elementmapping{ItemLabel}{
+	\LabelItem{\MYname}{\MYnumber}{\MYtext}%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 }
 

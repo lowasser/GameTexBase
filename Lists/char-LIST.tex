@@ -183,9 +183,9 @@
 \PRESETS{Char}{
   \FD\MYname{}     %% character full name
 	\FD\MYdesc	{}   %% badge description
-  \FD\MYgender	{} %% \hehim, \sheher, \neuter, \ambiguous
+  \F\MYgender	{}	 %% must be set by a command like \hehim etc.
   \FD\MYplayer{}   				 %% 
-	\FD\MYplayerpronouns{}   %% 
+	\FD\MYplayerpronouns{}   %% DO NOT use \theythem, write ``they/them'' or whatever
 	\FD\MYrole	{} %% playerlist role
   \FD\MYgroupstr{} %% playerlist groupstring
   \FD\MYfile	{} %% character sheet filename (including .tex)
@@ -200,9 +200,8 @@
   }
 	
 %%%%% Defines pronounful contact and intro mappings.
-
-\intromap{\full \ifx\MYcharpronuns\empty\else\ (\MYcharpronouns)\fi}
-\contactmap{\full \ifx\MYcharpronuns\empty\else\ (\MYcharpronouns)\fi}
+\intromap{\optionalparen{\full}{\MYcharpronouns}}
+\contactmap{\optionalparen{\full}{\MYcharpronouns}}
 
 %%%%%
 %% PC is a subtype of Char, for regular PCs.
