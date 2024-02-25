@@ -20,7 +20,7 @@
 %%
 %% When you change this, make sure the name of this file and the name
 %% of the game's environment variable both match it.  See ../README.
-\def\gameclassname{game}
+\def\gameclassname{GameTexBase}
 
 
 %%%%%
@@ -236,7 +236,7 @@
 %% The other path macros are built on \gamepath, so they can be used
 %% like relative filepaths.  Change them if you change the directory
 %% structure.  This file is at \latex/\gameclassname.cls.
-\edef\gamepath{\string${\gameclassname}} %$
+\IfFileExists{\gameclassname_path.cls}{\input{\gameclassname_path.cls}}{\edef\gamepath{\string${\gameclassname}}} %$
 \def\blues{\gamepath/Bluesheets}
 \def\chars{\gamepath/Charsheets}
 \def\greens{\gamepath/Greensheets}

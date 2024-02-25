@@ -94,9 +94,9 @@
 % define a new command that switches based on gender
 \newcommand{\foreachgender}[9]{\def#1{\gendered{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}}
 % define one version for he/she/ze/it, one version for they/fae/ey
-\newcommand{\singularorplural}{3}{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}{#3}{#2}}
+\newcommand{\singularorplural}[3]{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}{#3}{#2}}
 % define one version for masc, one for femme, one for nonbinary
-\newcommand{\mfornb}{4}{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}{#4}{#4}}
+\newcommand{\mfornb}[4]{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}{#4}{#4}}
 
 %% Words that need a different version for every individual gender.
 \foreachgender{\they}		{he}{she}{they}{ze}{fae}{\informal}{ey}{it}
@@ -122,8 +122,8 @@
 
 \mfornb{\spouse}	{husband}{wife}{spouse}
 \mfornb{\Spouse}	{Husband}{Wife}{Spouse}
-\mfornb{\offspring}	{son}{daughter}{child}
-\mfornb{\Offspring}	{Son}{Daughter}{Child}
+\mfornb{\offspring}	{son}{daughter}{offspring}
+\mfornb{\Offspring}	{Son}{Daughter}{Offspring}
 \mfornb{\child}		{boy}{girl}{child}
 \mfornb{\Child}		{Boy}{Girl}{Child}
 \mfornb{\stray}	{urchin}{waif}{stray}
@@ -132,7 +132,11 @@
 \mfornb{\Pal}		{Guy}{Gal}{Pal}
 \mfornb{\sibling}	{brother}{sister}{sibling}
 \mfornb{\Sibling}	{Brother}{Sister}{Sibling}
+\mfornb{\sib} {bro}{sis}{sib}
+\mfornb{\Sib} {Bro}{Sis}{Sib}
 \mfornb{\parent}	{father}{mother}{parent}
+\def\grandparent{grand\parent}
+\def\Grandparent{Grand\parent}
 \mfornb{\Parent}	{Father}{Mother}{Parent}
 \mfornb{\auncle}	{uncle}{aunt}{auncle}
 \mfornb{\Auncle}	{Uncle}{Aunt}{Auncle}
@@ -143,15 +147,24 @@
 \mfornb{\sex}		{male}{female}{nonbinary}
 \mfornb{\Sex}		{Male}{Female}{Nonbinary}
 \mfornb{\Deity}		{God}{Goddess}{Deity}
-\def\God\Deity
+\def\God{\Deity}
+\mfornb{\partner}	{boyfriend}{girlfriend}{partner}
+\mfornb{\betrothed} {fianc\'e}{fianc\'ee}{betrothed}
+
+%% Noble titles.  Opinions on the best nonbinary versions vary, but this should be a good start.
 \mfornb{\Heir}		{Prince}{Princess}{Heir}
 \mfornb{\heir}		{prince}{princess}{heir}
 \mfornb{\Monarch}		{King}{Queen}{Monarch}
 \mfornb{\monarch}		{king}{queen}{monarch}
 \mfornb{\Emperor}		{Emperor}{Empress}{Emprex}
 \mfornb{\emperor}		{emperor}{empress}{emprex}
-\mfornb{\cleric}		{Priest}{Priestess}{Cleric}
-\mfornb{\partner}	{boyfriend}{girlfriend}{partner}
+\mfornb{\Duke} 		{Duke}{Duchess}{Duke}
+\mfornb{\Count}		{Count}{Countess}{Count}
+\mfornb{\Baron}		{Baron}{Baroness}{Baron}
+
+%% Other titles of respect.
+\mfornb{\Cleric}		{Priest}{Priestess}{Cleric}
+% To do things like Mx. Smith, it's probably better to use name prefixes than gender-sensitive macros; see LaTeX/parsename.sty.
 
 %%%%%
 %% If a field is declared by \F, it must be given a value by \s inside

@@ -1,0 +1,1 @@
+\edef\gamepath{"C:/Users/wasse/Documents/GitHub/GameTexBase/GameTexBase/"} 
