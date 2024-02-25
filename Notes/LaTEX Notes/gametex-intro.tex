@@ -3,13 +3,12 @@
 \usepackage{soul}
 \usepackage{listings}
 \usepackage{hyperref}
-
 %\newcommand{\gametex}{GameTeX}
 \def\gametex{\mbox{Game\kern-.15em\TeX}}
 \newcommand{\pronounfile}{\lstinline|Lists/char-LIST.tex|}
 
 \lstset{basicstyle=\ttfamily}
-\title{Introduction to \gametex{}}
+\title{Guide to \gametex{}}
 \author{Louis Wasserman}
 \begin{document}
 \maketitle{}
@@ -25,17 +24,24 @@ The Stanford computer science professor Donald Knuth, dissatisfied with the tech
 pronounced ``tech'' and sometimes stylized \TeX{}, for generating clean, readable versions of content that can include equations, programs, and more. 
 Leslie Lamport, in 1984, built an additional system atop \TeX{}, now called LaTeX (pronounced ``lah-tech" and sometimes stylized \LaTeX{}), that formalized what amounts to a standard for how these documents are written.  LaTeX has become overwhelmingly the standard for publishing research in many fields, including math, computer science, physics, statistics, engineering, and other fields.
 
-Notably, many students in these fields have studied at the Massachusetts Institute for Technology, where the MIT Assassins' Guild has run LARPs since 1982. 
-MIT-style games are often characterized by a secrets-and-powers model with prewritten character sheets, limited story improvisation, and fairly high mechanics, with occasional use of boffers or Nerf guns.
-At some point, MIT student Ken Cleary took the lead on building a system around \LaTeX{} to make writing LARPs easier, with emphasis on the secrets-and-powers style and the MIT flavor in particular, with \gametex{} version 1.0 released at the end of 2008.
-
-My archaeology reveals some evidence of preceding work going back further: both Ken's website and documentation within \gametex{} make references to a 3-day LARP on the MIT campus run in September 2001, ``Reality Check III: Dinner at the Schloss Himmelbrand,'' and Ken's website includes some documentation for that game clearly written in \LaTeX{}.  \gametex{} is still under some degree of development; as recently as 2023, Ken has made additional updates to \gametex{}.
-
-MIT graduates experienced in Assassin's Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society; graduates of Stanford formed the Luminary Roleplay Society; finally, that tradition reached me, and now you.
-
+Notably, many students in these fields have studied at the Massachusetts Institute for Technology, where the MIT Assassins' Guild has run LARP of various kinds since 1982.
+As you might expect from MIT students, there was great interest in developing technological tools to facilitate LARP production, which Ken Clary developed into \gametex{} over the course of the 2000s.
+MIT-style games of the time would be characterized today as secrets-and-powers games that almost always involved combat, especially with toy guns, though like other associated communities, the Assassins' Guild of today
+has moved in a more narrative-oriented direction.
+Clary's career in LARP authorship technology spans decades; here are the points I've been able to map:
+\begin{enumerate}
+\item Clary wrote a LARP written for a spring 1998 course ``Structure and Interpretation of Non-Linear and Interactive Narrative'' in bare HTML.  (Clary appears to have graduated MIT with a bachelor's degree in 2000.)
+\item Clary co-wrote the September 2001 game  ``Reality Check III: Dinner at the Schloss Himmelbrand'', which still has publicly visible \LaTeX{}-produced documents.
+\item Philip Tan's 2003 \href{https://drive.google.com/file/d/1RiGc2OWtXIPlebHVrixv2IpAbSGAThtd/view?usp=sharing}{master's thesis} references Tan's use of ``GameTeX beta 2,'' credited to Clary, to write a three-day game ``A New Deal'' that ran in 2002.  (Tan would later become the creative director of the MIT Game Lab and is a research scientist there as of 2024.)
+\item Clary released \gametex{} version 1.0 in December of 2008.
+\item Clary has remained part of the MIT community over the years, being mentioned as a martial arts instructor for a student group in 2020.
+\item Clary has posted updates to \gametex{} even more recently, as late as December 2023 (three months before I wrote this sentence).
+\end{enumerate}
+More recently, MIT graduates experienced in Assassins' Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society.  As members of the SGS graduated Stanford, 
+they formed a Bay Area nonprofit: the Luminary Roleplay Society.  I play with the LRS and have co-written and edited several games for them, and now I am writing this for you.  Some of this document will be written in the first person as a result, including discussion of my own contributions.  There are many extant versions of \gametex{} as people have made their own modifications, but I have significantly modified the version in this particular repository, especially by overhauling the gender and pronoun system (see \ref{gender}) to reflect as much of the spectrum of gender as possible.  This guide will mostly apply equally well to other versions of \gametex{}, with some exceptions, such as that area.
 \end{subsection}
 \begin{subsection}{Why use \gametex{}?}
-\gametex{} takes advantage of the fact that \LaTeX is not \textit{simply} for writing technical papers, but is essentially a programming language for text and formatting in ways that are highly useful to LARP authors.  To pick some examples:
+\gametex{} takes advantage of the fact that \LaTeX{} is not \textit{simply} for writing technical papers, but is essentially a programming language for text and formatting in ways that are highly useful to LARP authors.  To pick some examples:
 \begin{itemize}
     \item During the writing process of a game, names of all sorts of things can change – not simply characters, but political entities, artifacts, magical powers, and more.  Keeping these all synchronized can be difficult.  (Covered in \ref{lists}.)
     \item When a game is run for different groups of people, not just character names but pronouns and gendered language can need to be changed.  A simple find/replace is often inadequate, especially when you run into conjugations like ``he was" versus ``they were."  (Covered in \ref{gender}.)
@@ -43,19 +49,28 @@ MIT graduates experienced in Assassin's Guild traditions went to Stanford for gr
     \item Not all text should be immediately visible to the players holding the printed item.  \gametex{} can automatically print dotted lines for folding and stapling shut secrets, with text on the outside describing when to open it, as well as two-sided cards where different players see different sides of the cards.  (Covered in \ref{mems}.)
     \item Cross-references can ensure players have up-to-date indexes of the characters and players they know before game, as well as all the items and documents they should have access to.  GMs can have the same index cross-referenced the other way, with all secrets revealed.  Both of these help everyone make sure that nobody is missing something they need, or in possession of secrets they shouldn't have.  (\gametex{} does this automatically.)
 \end{itemize}
-\gametex{} has been used many times for games that are not especially in the ``MIT style,'' notably as it passed to the SGS and then the LRS to a tradition that reduced the emphasis on mechanics and combat.  While it's not always intuitive to pick up and use, especially for game authors who don't have any experience with programming languages, \gametex{} can offer the above benefits and more.  It is unlikely to be worth it for, say, a small parlor LARP.
+\gametex{}, while providing extensive support for MIT-style games, can be used for a much broader variety of games, and certainly has been by the Assassins' Guild, SGS, and LRS.  
+While it's not the most intuitive system to pick up and use, especially for game authors who don't have any experience with programming languages, \gametex{} can offer the above benefits and more.  It is unlikely to be worth it for, say, a small parlor LARP.
 
-If any of the following describe the LARP you want to write -- especially the first two -- then I recommend strongly considering \gametex{}:
+If any of the following describe the LARP you want to write -- especially the first three -- then I recommend strongly considering \gametex{}:
 \begin{itemize}
 \item Your game will run multiple times, whether concurrently or sequentially.
-\item Your game involves significant mechanics, such as secrets or powers.
+\item Your game's character sheets and/or lore are extensively prewritten by a team 
+\item Your game involves significant mechanics, such as character powers, or secrets revealed to the characters under certain conditions.
 \item Your game has geography within the gameplay space, requiring GMs to put the right items, signs, or the like into specific places in game.
 \item Your game is large or will be written over a long period.
 \end{itemize}
+
+There is one case \gametex{} is specifically, \emph{unusually} bad for: games that want significant elements of graphic design or visual branding.  While \LaTeX{} does allow significant control over fonts and the like,
+and you could engineer that into \gametex{}, you cannot add beautiful scrolling around the edges of your item cards or the like.  Almost all \gametex{}-powered games will bear the aesthetic of the document you're reading right now.
 \end{subsection}
 \end{section}
 \begin{section}{Setting up the technology}
 \begin{subsection}{Setting up \LaTeX{}}
+Unlike Google Docs or Microsoft Word, where you see what the document will look like as you write it, all variants of \TeX{} require you to edit raw text files -- almost all of which are \lstinline{.tex} files -- and \emph{compile} them into PDF files like the one you're reading now.  Most frequently, that process is broken up into two separate programs which you will need to install: the program that takes the \lstinline{.tex} files and turns them into PDFs, and a separate program which is used to edit the files.  You could use Notepad or any other extremely basic text editor for the purpose, but programs like TeXnicCenter for Windows provide nice features like highlighting \LaTeX{} commands, providing buttons to apply format (like bolding) to a particular block of text, and automatically scrolling to whatever place in your \lstinline{.tex} file is generating an error.
+
+Here are the steps to install both of those programs.
+
 \begin{enumerate}
 \item Begin by installing MikTeX.  Think of \LaTeX{} as a file format, and MikTeX as the program for taking files in that format and turning them into PDFs, etc.
 \begin{enumerate}
@@ -94,6 +109,8 @@ In this section, we will discuss an overview of version control as applied to ga
 Version control is a technology that exists in the space between the ``version2\_final\_edited\_definitely\_final.doc'' common when contributors must email versions back and forth, and a technology like Google Docs that keeps documents instantly synchronized even with multiple people typing in the same document at the same time.
 
 It is quite possible to use \gametex{} without using version control.  If you are writing a game on your own, it is almost completely unnecessary.  However, you may be aware that the synchronization technology in Google Docs and related apps only work for the specific kinds of files they're designed for.  You can dump your \gametex{} files in Google Docs and edit them there, and many LARP authors who use \gametex{} do this at some point in the process.  I am writing this sentence right now in a Google Doc, in fact.  However, you, and I, will have to copy them back into a \texttt{.tex} file on our computers, and compile them to first make sure they work, and then to produce a document others can read, all of which can be inconvenient and can run into all the usual problems with managing two versions of something that aren't automatically synchronized.
+
+Another important aspect of version control is that it manages versioning for an entire file folder on your computer.  Emailing versions of one file back and forth is one thing, but emailing back and forth versions of two -- or more -- files that must be kept in sync is truly a nightmare, and \gametex{} will require you to manage that level of synchronization.
 
 We've already discussed that \TeX{} is a programming language, however, and programmers have developed many solutions to synchronizing work between multiple people working on software projects.  Most \gametex{} projects (in my experience) simply use what is by far the most popular version control software, in use by 95\% of programmers according to Wikipedia: Git.
 
@@ -158,8 +175,8 @@ English references gender in many common words, and they/them pronouns often req
 Here are the most important of the simplifying assumptions made by \gametex{}:
 
 \begin{itemize}
-\item Characters select pronouns from a modest list of options.
-\item Characters may have more than one set of pronouns -- he/they, for example.  These pronouns are used when specifically identifying which pronouns a character uses, e.g. ``You are best friends with Sam (he/they).'' However, whenever actually referring to a character with pronouns, only one set of pronouns are used, and it is always the same for a given character.  For ``slashed'' pronouns, it is always the first one: he/they characters are always referred to as ``he,'' and they/he characters are always referred to as ``they.''  For ``arbitrary'' options such as ``any pronouns'' or ``genderfluid,'' it is always ``they.''
+\item Characters select pronouns from a modest list of options (listed below).
+\item Characters may have more than one set of pronouns -- he/they, for example.  These pronouns are used when specifically identifying which pronouns a character uses, e.g. ``You are best friends with Sam (he/they).'' However, whenever actually referring to a character in a sentence, the same pronouns are used for every reference to the given character.  For ``slashed'' pronouns, it is always the first one: he/they characters are always referred to as ``he,'' and they/he characters are always referred to as ``they.''  For ``arbitrary'' options such as ``any pronouns'' or ``genderfluid,'' it is always ``they.''
 \item All gender-sensitive and pronoun-sensitive terms ``match gender.''  For example, a character using she/her pronouns (or she/they pronouns) is always referred to as a ``mother,'' ``woman,'' ``princess,'' ``daughter,'' and so on.
 \item All nonbinary genders use the same nonbinary term: e.g. anything other than a ``he'' or ``she'' (or a he/something, or she/something) is a monarch, not a king or queen or something else.
 \end{itemize}
@@ -207,13 +224,13 @@ to become \cFireGod{\their} \cCharacter{\cleric}.
 This might render as:
 
 \begin{quote}
-Sam is your sister.  She has always wanted to be the Queen of France.  She's also madly in love with her spouse, Chell, the offspring of Maximilian.  She believes in the religion of the Fire God Helio, and hopes to become his priestess.
+Sam is your sister.  She has always wanted to be the Queen of Oz.  She's also madly in love with her spouse, Chell, the offspring of Maximilian.  She believes in the religion of the Fire God Helio, and hopes to become his priestess.
 \end{quote}
 
 Note that you can cheat by putting multiple commands, with spaces etc., in the same set of braces, as long as everything is referring to the same character; this pattern is used in \lstinline|\cCharacter{\They \have}|.
 
 Most actual game text isn't quite this dense with gendered words and conjugated verbs.  \gametex{} has a large number of gendered words common to LARPs built-in, and we won't go through them all.
-To see all the pre-defined nouns, find the section labeled \texttt{Gendered nouns} in \pronounfile{}.  We won't go through all the nouns, but verbs are common and important:
+To see all the pre-defined nouns, find the section labeled \texttt{Gendered nouns} in \pronounfile{}; we won't go through them here.  Common verb conjugations are important to know, however:
 
 \begin{itemize}
 \item he believes, they believe, \lstinline|\cCharacter{\they} believe\cCharacter{\verbs}|.
@@ -222,7 +239,7 @@ To see all the pre-defined nouns, find the section labeled \texttt{Gendered noun
 \item he is, they are, \lstinline|\cCharacter{\they} \cCharacter{\are}|.
 \item he has, they have, \lstinline|\cCharacter{\they} \cCharacter{\have}|.
 \item he was, they were, \lstinline|\cCharacter{\they} \cCharacter{\were}|.
-\item he's rich, they're rich, \lstinline|\cCharacter{\they\re}| rich.
+\item he's happy, they're happy, \lstinline|\cCharacter{\they\re}| happy.
 \end{itemize}
 
 Remember that the name of the character isn't inserted into the text – just the appropriately gendered or conjugated word.  So, for example, if a character's sibling was believed dead but is actually in the game but undercover, you can mention \lstinline|\cCharacter{}'s lost \cUndercover{\sibling}| without risk of spoilers.
@@ -236,7 +253,7 @@ LaTeX arranges its formatting in some specific ways you might not be used to.  S
 \begin{subsubsection}{Paragraphs}
 Paragraphs must be separated by an empty line – not simply one line down and indented.  This does mean you can have every sentence on its own line, if you like.  
 
-Technical note! An important note here is that Git merges files line-by-line, so if you have multiple sentences on the same line of the file, and one game writer changes one sentence, and another writer changes another sentence, they will have to resolve the conflict when they merge.  As a result, it's technically a little easier if you actually put each sentence on its own line of the file, but this can feel so weird as an English author that few GMs, even me, actually do this.
+Technical note! An important note here is that Git merges files line-by-line, so if you have multiple sentences on the same line of the file, and one game writer changes one sentence, and another writer changes a different sentence, they will still have to manually resolve the conflict when they merge.  As a result, it's technically a little easier if you actually put each sentence on its own line of the file.  That said, I don't know any author who actually bothers to do this, myself included; it just feels weird to have sentences on their own lines.
 \end{subsubsection}
 \begin{subsubsection}{Fonts}
 
@@ -290,11 +307,14 @@ Some characters have special meaning in \LaTeX{}, and you need special commands 
 \end{tabular}
 \end{subsubsection}
 \begin{subsubsection}{Comments}
-\% signs, in \LaTeX{}, mark \textit{comments}: whatever comes after a \% on the same line of your \texttt{.tex} file will not output.  This can be handy as a game author to leave notes to yourself:
+\% signs, in \LaTeX{}, mark \textit{comments}: whatever comes after a \% on the same line of your \texttt{.tex} file will not output.  This can be very handy when editing a draft or leaving notes to yourself.
+This can be handy as a game author to leave notes to yourself:
 \begin{verbatim}
 % TODO say why we want the Vizier dead
 \end{verbatim}
 In many built-in files in \gametex{}, you will see documentation and explanations about how to do things in comment lines.  Remember, you can copy and paste example code from these comments, but you will need to delete the \% to make them actually do anything.
+
+This is not necessarily the best tool for all use cases, however.  \gametex{} has a command \lstinline|\TODO{...}| with a special property: when you generate the PDFs of your game in \emph{draft mode}, they will be included, but when you generate in \emph{production mode}, they will be skipped.  Not every GM uses this, as remembering to switch between draft and production modes adds a separate step not everyone bothers with.  However, if I wanted to print out my game in its draft stages to do editing and notes by hand, but wanted to make sure I didn't accidentally leave spoilers for players, I would certainly use this feature.  Learn about how to set draft versus production modes in \ref{draft}.
 \end{subsubsection}
 \end{subsection}
 \end{section}
@@ -302,7 +322,7 @@ In many built-in files in \gametex{}, you will see documentation and explanation
 \begin{subsection}{Special Terminology in \gametex{}}
 When you look at your \gametex{} folder, you may see folders named \texttt{Greensheets} and other terms you might not have heard before.  \gametex{} uses certain conventions of the MIT Assassins' Guild for terminology around the various things that go into a game.  Some of these terms are fairly universal and unsurprising, such as \textit{abilities, stats, charsheets}, and more.  Here are some terms that are not universal among LARP communities that are important to how \gametex{} organizes things.
 \begin{itemize}
-    \item A \textit{bluesheet} -- traditionally printed on blue paper -- contains in-universe lore.  Some bluesheets might contain lore known by all players, such as a history of global politics, and some might contain lore that only some characters know, such as the secret history of the Assassins' Guild.  Bluesheets are never transferable and are given to players to learn about the world before the game begins.
+    \item A \textit{bluesheet}\footnote{The distinction of bluesheets and greensheets dates quite far back: Philip Tan's thesis cites a reference to this distinction in a 1990 thesis by Leah M. Bateman.  I cannot find this earlier document, unfortunately.} -- traditionally printed on blue paper -- contains in-universe lore.  Some bluesheets might contain lore known by all players, such as a history of global politics, and some might contain lore that only some characters know, such as the secret history of the Assassins' Guild.  Bluesheets are never transferable and are given to players to learn about the world before the game begins.
     \item A \textit{greensheet} -- traditionally printed on green paper -- describes particular mechanics from an out-of-game perspective.  For example, a ritual requiring preparation over the course of all of game likely has an associated greensheet describing the preparation steps.  Greensheets are not transferable between characters, but might be unlocked midgame by finding a place, joining a faction, or gaining a power.
     \item A \textit{whitesheet} is an \emph{in-universe} document.  For example, a whitesheet might be a blank page to write a treaty, with spaces for each faction's representatives to sign.  Alternately, a whitesheet might contain the secrets of a book buried in the library, which a character could steal and hide if they don't want that information public.
     \item A \textit{mempacket} is some secret information, in or out of character, that is only opened under certain conditions.  For example, you might have a mempacket whose outside says: ``Open after speaking to Count Rugen for a minute.'' The inside might reveal: ``He tries to hide it, but he has six fingers on his right hand.''  Mempackets are named for their frequent use as unlockable memories of a character's past.
@@ -322,6 +342,8 @@ For elements that don't take a full page, this is all you need -- there is no \t
 
 Each of these files already has examples of what to put in them -- example characters, mempackets, and so on.  These are also easier to copy and paste than anything I could put in this document.
 However, it'll be useful to review them, and to discuss all the options they offer.
+
+Importantly, the information in the \lstinline{xxxx-LIST.tex} files is the only information that is usable for cross-references between files, including references to the names of characters, items, abilities, and so on.
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Characters}
@@ -336,12 +358,12 @@ This is where your player characters will go.  The file has an example character
 \begin{subsubsection}{Stats}
 Characters can get assigned statistics, which can be numbers or short bits of text.  To create a statistic, read the instructions in \lstinline|Lists/char-LIST.tex| under ``Character stats'', which shows how to introduce a ``hit points'' stat.
 
-One nonobvious use of statistics is to create statistics with obscure names -- usually Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|).  Most frequently, this represents some trait of a character
-where either the player, or the user of a mechanic that cares about the stat, should not know what's going on.  Some examples include:
-\begin{itemize}
-\item An $\alpha$ score of 1 may indicate the character has the potential to cast magic, with the right training.  Characters who've never been trained might not know what their $\alpha$ score means, but others detecting magical power might be able to diagnose them.
-\item A $\beta$ score of 0 may indicate that a vampire doesn't derive any sustenance from sucking this character's blood.  The vampire player may know they need to ask the target's $\beta$ score when biting someone, but may not know that characters with a $\beta$ score of 0 are werewolves.
-\end{itemize}
+One nonobvious use of statistics is to create statistics with obscure names -- usually Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|).  Philip Tan's thesis:
+\begin{quote}
+For instance, a player may have a positive $\psi$ stat without realizing that his
+or her character is a latent psychic. Another, better-informed character might be able to
+read someone else’s $\psi$ stat and detect the psychic ability of others.
+\end{quote}
 \end{subsubsection}
 \begin{subsubsection}{Numbers}
 Characters may optionally be assigned numbers, which appear on their badges (see \ref{badges}). Because badge numbers are only readable by getting close enough to a character to read their badge,
@@ -349,7 +371,7 @@ they are most often used for mechanics where some or all characters can learn so
 \begin{itemize}
 \item I recognize character 239's voice as my father's murderer.
 \item As an experienced undead hunter, I recognize characters with a last digit of 4 as vampires.
-\item The first digit of each badge number represents the tens digit of the character's apparent age, so despite character 173 acting suspiciously, they couldn't have murdered the king 25 years ago.
+\item The first digit of each badge number represents the tens digit of the character's apparent age, so despite character 173 acting suspiciously, they couldn't have murdered the king 25 years ago.  (This convention is particularly common.)
 \end{itemize}
 To assign a character's number, use \lstinline|\s\MYnumber{123}| (or whatever number you are giving them) in their character definition in \lstinline|char-LIST.tex|.
 To reference another character's number, as in ``my father's murderer'', use \lstinline|\cCharacter{\MYnumber}|.
@@ -359,22 +381,49 @@ To reference another character's number, as in ``my father's murderer'', use \ls
 \gametex{} has extremely good support for characters with layered identities.  Some examples include:
 \begin{itemize}
 \item Thomas is known to his closest friends as Tommy, and their character sheets all refer to him as such.
-\item Peter Parker gets three badges: one under the name ``Peter Parker,'' one under the name Peter Parker that describes him as a press photographer, and one for the name Spider-Man.
+\item Peter Parker gets three badges: one under the name Peter Parker describing him as a teenager, one under the name Peter Parker that describes him as a press photographer (that might get him access to crime scenes), and one for the name Spider-Man.
 \item Everyone knows Ella as Sandy, and Glinda has magically compelled her not to reveal her true identity.
 \end{itemize}
-All these are done as ``overlays'' to the character, so references to Spider-Man automatically use Peter's pronouns, for example.
+All these are done as ``overlays'' to the character, so references to Spider-Man automatically use Peter's pronouns, for example, without additional work.
 
 This is extensively documented in \lstinline|Extras/README-identity.txt|.  TODO: consider moving that content here.
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Items}
 When to use an item?  When to use which kind of item?
+
+\begin{subsubsection}{Moving items}
+To support secrecy and intrigue in the MIT style of LARP, \gametex{} has built-in support for two standardized mechanics that apply to items.  In case those are useful to your game, we will briefly cover them.
+\begin{itemize}
+\item An item can be configured with \lstinline|\unstash| to make it unstashable: unable to be hidden.  This can be a kludge to ensure that people always have a chance to find it, or simply a mechanic indicating the represented item is too big to be meaningfully hidden.
+\item An item can be configured with \texttt{\textbackslash{}bulky\{$N$\}} to make it $N$ hands bulky.  The general rule is that an $N$-hands bulky item takes $N$ individual human hands to move easily, and can be dragged slowly with $N-1$ hands, which may be zero.  For example, a heavy duffel bag is likely one hand bulky because it can be carried easily in one hand or sort of kicked along the floor slowly, but a large urn is likely two hands bulky.  Traditionally, corpses are three hands bulky, meaning they can be dragged slowly by one person or carried easily with one other modest-sized item by two people.  Items at least one hand bulky are usually impossible to conceal.
+\end{itemize}
+\end{subsubsection}
+\begin{subsubsection}{Numbers}
+As with characters, some games have used item numbers to reveal information that some characters can identify at a glance, though not necessarily at game start.  Philip Tan's thesis:
+\begin{quote}
+For instance, some characters may know that magical items can kill monsters but those
+characters may be unaware that the only magical weapons in games are certain charmed
+daggers. The GMs...must provide some players with the
+ability to distinguish the daggers from all the other, non-magical items...To serve these purposes, item cards often have a series of numerical digits printed along
+with their text descriptions. These numbers reflect traits of items without stating that
+information in readable prose. Some players may know that a magical item will have a
+leftmost digit greater than 5.
+\end{quote}
+\end{subsubsection}
 \end{subsection}
 \begin{subsection}{Places}
+A place in \gametex{} is a namable thing that doesn't get a physical manifestation, though things like
+items, signs, and other physical objects can be assigned to a place.  Common uses of places include:
+
+\begin{itemize}
+\item Places in the wider game world, such as nations or cities.
+\item Places in the game space, such as the garden.  Signs and items would get assigned to this place if they should be put in the area of gamespace that represents the garden.  The signs would be labeled as assigned to the garden; 
+the item cards would be printed on a page that says ``Garden,'' though they wouldn't mention that when cut out.
+\item Abstract things in the game world, such as a year or decade.  (``In \lstinline|\pApocalypseYear{}|, everything changed when the \lstinline|\pFireNation{}| attacked.'')
+\end{itemize}
 \end{subsection}
 \begin{subsection}{Signs}
-\end{subsection}
-\begin{subsection}{Notebooks}
 \end{subsection}
 \begin{subsection}{Bluesheets}
 \end{subsection}
@@ -388,9 +437,10 @@ Abilities print ``cards'' that have a front and a back, with the front expected 
 \end{subsubsection}
 \begin{subsubsection}{Mempackets and membooks}\label{mems}
 \end{subsubsection}
+\begin{subsection}{Notebooks}
+\end{subsection}
 \begin{subsubsection}{GMs}
-\gametex{} generates goodies for GMs, which can be very handy: GMs get their own special badges, and can even be assigned other game entities like abilities or greensheets: for example, the GM assigned to the puzzle room might be
-assigned a greensheet explaining how the puzzles work and what hints to give the players if they get stuck.  You definitely wouldn't want to risk assigning that greensheet to the puzzle room, or a player might come across it by accident!
+\gametex{} generates goodies for GMs, which can be very handy.  GMs get their own special badges, and can even be assigned other game entities like abilities or greensheets.  This is most useful when the GM assigned to the puzzle room might be assigned a greensheet explaining how the puzzles work and what hints to give the players if they get stuck.  This avoids the risk of assigning that greensheet to the puzzle room itself, where it might get left by accident for a player to see.
 \end{subsubsection}
 \begin{subsubsection}{Sub-owners}
 A sub-owner is like a suite of game entities that should all be given to a character together, which can be handy for keeping a group of characters in sync.  For example, you might have an MI6 agent sub-owner which contains a Walther P99 item, a license to kill whitesheet, and a ``call for resources'' greensheet describing the mechanic for getting additional assets from HQ.  You might then assign the MI6 agent sub-owner to both James Bond and Alec Trevelyan.  James and Alec could get additional sheets separately from each other, but if you wanted to modify what all MI6 agents got, you could do it in one place.
@@ -401,6 +451,7 @@ A sub-owner is like a suite of game entities that should all be given to a chara
 Game production, often called \emph{prod}, is the process of taking your game and getting it ready to run: generating character sheets for your players, printing all the documents needed for your game, and so on.
 
 \begin{subsection}{Draft mode}
+\label{draft}
 \end{subsection}
 \begin{subsection}{Runs}
 One of \gametex{}'s key use cases is for games that run more than once, concurrently or sequentially.  You don't need to copy/paste different versions of each file for each run: this is supported natively by \gametex{}.
