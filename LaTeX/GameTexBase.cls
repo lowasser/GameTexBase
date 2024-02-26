@@ -34,8 +34,8 @@
 %%
 %% Basic custom game information; gets used everywhere.  Don't put
 %% linebreaks in these and keep their lengths reasonable.
-\def\gamename{Test Game}
-\def\gamedate{Test Date}
+\def\gamename{Example Game}
+\def\gamedate{February 2024}
 
 
 %%%%%
@@ -95,16 +95,10 @@
 %%%%%
 %% \badgemap
 %%
-%% \badgemap lists the Char fields used to generate namebages.  You
-%% can disable parts with \unskip.  For example, to have badges
-%% without character names, use:
-%%
-%%   \def\badgemap{{\unskip}{\MYnumber}{\MYplayer}{\MYdesc}}
-%%
-%% and for badges without descriptions:
-%%
-%%   \def\badgemap{{\MYname}{\MYnumber}{\MYplayer}{\unskip}}
-\def\badgemap{{\MYname}{\MYnumber}{\MYplayer}{\MYdesc}}
+%% \badgemap lists the Char fields used to generate namebadges, which
+%% by default go in the order {\MYname}{\MYcharpronouns}{\MYnumber}{\MYplayer}{\MYplayerpronouns}{\MYdesc}.
+%% 
+%%\def\badgemap{{\MYname}{\MYcharpronouns}{\MYnumber}{\MYplayer}{\MYplayerpronouns}{\MYdesc}}
 
 
 %%%%%

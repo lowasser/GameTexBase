@@ -181,10 +181,9 @@
 %% would give character a Hit Points stat, abbreviated HP, referenced
 %% as the \MYhp field, that defaults to 5.
 \PRESETS{Char}{
-  \FD\MYname{}     %% character full name
 	\FD\MYdesc	{}   %% badge description
   \F\MYgender	{}	 %% must be set by a command like \hehim etc.
-  \FD\MYplayer{}   				 %% 
+	\FD\MYcharpronouns{}   %% must be set by a command like \hehim etc.
 	\FD\MYplayerpronouns{}   %% DO NOT use \theythem, write ``they/them'' or whatever
 	\FD\MYrole	{} %% playerlist role
   \FD\MYgroupstr{} %% playerlist groupstring
@@ -255,5 +254,14 @@
 %  }
 
 %%%%%%%%%%%%% The PCs %%%%%%%%%%%%%%%
+
+\NEW{PC}{\cTest}{
+  \s\MYname	{John Doe}
+  \s\MYdesc	{a nondescript person}						% a few words of description that can fit on a badge
+  \hethey												% configures pronouns
+	\s\MYplayer {Coolest Roleplayer}
+	\s\MYnumber{1234}
+	\s\MYplayerpronouns{they/them}
+}
 
 %%%%%%%%%%%%% The NPCs %%%%%%%%%%%%%%%

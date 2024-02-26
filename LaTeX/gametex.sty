@@ -267,7 +267,7 @@
   \titlemap{\full}
   \mapnickinformal
 }
-\@makedefault\badgemap{{\MYname}{\MYnumber}{\MYplayer}{\MYdesc}}
+\@makedefault\badgemap{{\MYname}{\MYcharpronouns}{\MYnumber}{\MYplayer}{\MYplayerpronouns}{\MYdesc}}
 \@makedefault\badgedagger{\nobadgedagger}
 \@makedefault\playerlistproduction{\longgameplayers}
 \@makedefault\playerlistcompendium{\longgamechars}
@@ -1048,14 +1048,15 @@
 \def\updateplayeremail#1#2#3{%
   \updatemacro{#1}{\rs\MYplayer{#2}\rs\MYemail{#3}}%
 }
-\def\updatePNG#1#2#3#4{%
+\def\updatePNG#1#2#3#4#5{%
   \updatemacro{#1}{%
     \rs\MYplayer{#2}%
-		\def\@newname{#3}%
+		\rs\MYplayerpronouns{#3}
+		\def\@newname{#4}%
 		\unless\ifx\@newname\empty%
-			\rs\MYname{#3}$
+			\rs\MYname{#4}$
 		\fi
-		#4{reset} % any nonempty argument should reset
+		#5{reset} % any nonempty argument should reset
   }
 }
 
@@ -5946,17 +5947,19 @@
 
 
 %%%%%
-%% \NameBadge{field1}{field2}{field3}{field4}
+%% \NameBadge{field1}{field2}{field3}{field4}{field5}{field6}
+%% Default: {\MYname}{\MYcharpronouns}{\MYnumber}{\MYplayer}{\MYplayerpronouns}{\MYdesc}
 %% \GMbadge{name}
 %% \Observer
-\newcommand{\NameBadge}[4]{%
+\newcommand{\NameBadge}[6]{%
   \begingroup%
     \doublecard{%
       \light@badge{%
-        {\LARGE         #1}\vfil%
-        {\bfseries\Huge #2}\vfil%
-        {\LARGE         #3}\vfil%
-        {\bfseries\Huge #4}\vfil%
+        {\Huge         \textbf{#1}}\vfil%
+				\ifx#2\empty\else{\bfseries\Large (#2)}\vfil\fi%
+        \ifx#3\empty\else{\bfseries\LARGE #3}\vfil\fi%
+        {\large         #4}\ifx#5\empty\else{\normalsize \ (#5)}\fi\vfil%
+        {\bfseries\LARGE #6}\vfil%
       }%
     }{\badge@note}%
   \endgroup%

@@ -20,7 +20,8 @@ The goal of this document is to provide a general guide to \gametex{} for LARP a
 \end{subsection}
 \begin{subsection}{History}
 The Stanford computer science professor Donald Knuth, dissatisfied with the technology of 1977 for typesetting his book series \textit{The Art of Computer Programming}, built a programming language called TeX,
-pronounced ``tech'' and sometimes stylized \TeX{}, for generating clean, readable versions of content that can include equations, programs, and more. 
+pronounced ``tech'' and sometimes stylized \TeX{}, for generating clean, readable versions of content that can include equations, programs, and more.  The special formatting of \TeX{} is 
+meant to show off the sorts of unusual formatting that \TeX{} is capable of.
 Leslie Lamport, in 1984, built an additional system atop \TeX{}, now called LaTeX (pronounced ``lah-tech" and sometimes stylized \LaTeX{}), that formalized what amounts to a standard for how these documents are written.  LaTeX has become overwhelmingly the standard for publishing research in many fields, including math, computer science, physics, statistics, engineering, and other fields.
 
 Notably, many students in these fields have studied at the Massachusetts Institute for Technology, where the MIT Assassins' Guild has run LARP of various kinds since 1982.
@@ -33,7 +34,7 @@ Clary's career in LARP authorship technology spans decades; here are the points 
 \item Clary co-wrote the September 2001 game  ``Reality Check III: Dinner at the Schloss Himmelbrand'', which still has publicly visible \LaTeX{}-produced documents.
 \item Philip Tan's 2003 \href{https://drive.google.com/file/d/1RiGc2OWtXIPlebHVrixv2IpAbSGAThtd/view?usp=sharing}{master's thesis} references Tan's use of ``GameTeX beta 2,'' credited to Clary, to write a three-day game ``A New Deal'' that ran in 2002.  (Tan would later become the creative director of the MIT Game Lab and is a research scientist there as of 2024.)
 \item Clary remained part of the MIT community and an associate of the Guild for many years: he released \gametex{} version 1.0 in December of 2008, and was mentioned as a \emph{sensei} for an MIT student martial arts group in 2020.
-\item Clary has posted updates to \gametex{} even more recently, as late as December 2023 (three months before I wrote this sentence).
+\item Clary has stayed involved in LARP communities, and has posted updates to \gametex{} as recently as December 2023 (three months before I wrote this sentence).
 \end{enumerate}
 More recently, MIT graduates experienced in Assassins' Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society.  As members of the SGS graduated Stanford, 
 they formed a Bay Area nonprofit: the Luminary Roleplay Society.  I play with the LRS and have edited several games for them, and now I am writing this for you.  Some of this document will be written in the first person as a result, including discussion of my own contributions.  There are many extant versions of \gametex{} as people have made their own modifications, but I have significantly modified the version in this particular repository, especially by overhauling the gender and pronoun system (see \ref{gender}) to reflect as much of the spectrum of gender as possible.  This guide will mostly apply equally well to other versions of \gametex{}, with some exceptions, such as that area.
@@ -127,9 +128,27 @@ There are variations on this process -- it's often a good idea to pull frequentl
 It's worth at least mentioning a feature of Git that is very important to software engineers, although it's rarely useful to LARP authors: the ability to track the exact history of something, when it was added and by who, and the ability to return to the earlier version.  In software, going back to the last version that wasn't buggy can be critical; in LARP writing, not so much, with one major exception.  If you deleted something you shouldn't have, even a whole file, Git can recover it as of the last commit.  Commit often!
 \end{subsection}
 \begin{subsection}{Setting up your \gametex{} folder}
-TODO: how to fork this repository into a directory with your game's name
-\begin{subsubsection}{The class and path files}
-\end{subsubsection}
+You will need to do the following steps.  TODO: document this better.
+\begin{enumerate}
+\item Download the contents of this repository to an appropriately named folder.
+\item Set up a Git repository in this folder, and do a first commit.
+\item Rename \lstinline|LaTeX/GameTexBase.cls| to the matching name for your game.
+\item Create \lstinline|LaTeX/MyGame_path.cls|, and write in it:
+\begin{verbatim}
+\edef\gamepath{"C:/Path/To/MyGame/"}
+\end{verbatim}
+substituting the appropriate directory.
+\item As you write or update files, make sure they begin with
+\begin{verbatim}
+\documentclass[something]{MyGame}
+\end{verbatim}
+and not
+\begin{verbatim}
+\documentclass[something]{GameTexBase}
+\end{verbatim}
+\item Commit your game.
+\end{enumerate}
+At this point, you are ready to start writing; you may want to push your repository to GitHub.
 \end{subsection}
 \end{section}
 \begin{section}{Writing Game Content}
@@ -164,6 +183,8 @@ Your father was murdered.
 \end{verbatim}
 
 When is this worth it?  It's certainly worth it if the parent wasn't actually murdered and is a PC.  It may also be worthwhile if you think you might change things around later: which parent was murdered.  Similarly, you might use \lstinline|cold iron|, or you might decide to write \lstinline|\iFaeKryptonite{}| in case you want to name it something else later on, perhaps if you think you might replace the fae with Kryptonians.
+
+%% Put \me somewhere?
 \end{subsection}
 \begin{subsection}{Gender, pronouns, and conjugation}
 \label{gender}
@@ -329,7 +350,7 @@ This can be handy as a game author to leave notes to yourself:
 \end{verbatim}
 In many built-in files in \gametex{}, you will see documentation and explanations about how to do things in comment lines.  Remember, you can copy and paste example code from these comments, but you will need to delete the \% to make them actually do anything.
 
-This is not necessarily the best tool for all use cases, however.  \gametex{} has a command \lstinline|\TODO{...}| with a special property: when you generate the PDFs of your game in \emph{draft mode}, they will be included, but when you generate in \emph{production mode}, they will be skipped.  Not every GM uses this, as remembering to switch between draft and production modes adds a separate step not everyone bothers with.  However, if I wanted to print out my game in its draft stages to do editing and notes by hand, but wanted to make sure I didn't accidentally leave spoilers for players, I would certainly use this feature.  Learn about how to set draft versus production modes in \ref{draft}.
+If you want notes to yourself as game authors to be visible when you do editing work, see \ref{draft}.
 \end{subsubsection}
 
 \begin{subsubsection}{\gametex{} Lists}
@@ -528,9 +549,14 @@ Here are some example sign definitions:
 \end{verbatim}
 
 \end{subsection}
-\begin{subsection}{Bluesheets and Greensheets}
-As a reminder, bluesheets are documents used to provide in-universe lore known by more than one character, and greensheets are documents used to define mechanics from an out of character perspective.
-Both are written essentially as freeform text.
+\begin{subsection}{Bluesheets, Greensheets, Whitesheets}
+As a reminder:
+\begin{itemize} 
+\item Bluesheets are documents used to provide in-universe lore known by more than one character.  (If it is only known by one character, it can be on their character sheet.)
+\item Greensheets are documents used to define mechanics from an out of character perspective.
+\item Whitesheets are in-universe documents which can be picked up and perhaps written on by characters.
+\end{itemize}
+Each of these are written essentially as freeform text.
 
 A bluesheet consists of two components.  First, a \lstinline|.tex| file in the \lstinline|Bluesheets| folder that looks like this:
 \begin{verbatim}
@@ -554,9 +580,9 @@ To assign this bluesheet to characters, you would write something like
 \end{verbatim}
 in the character definition.
 
-Greensheets are analogous in the ways you expect: \lstinline|\documentclass[green]|, \lstinline|green-LIST.tex|, \lstinline|\s\MYgreens{...}|, and so on.
+Greensheets and whitesheets are precisely analogous, with ``blue'' replaced by ``green'' or ``white'' of the appropriate capitalization in each place.
 
-Note that bluesheets should always and only be assigned to characters.  Greensheets will almost exclusively go to characters, but may be placed elsewhere in game if characters can unlock new mechanics.
+Note that bluesheets should always and only be assigned to characters.  Greensheets will almost exclusively go to characters, but may be placed elsewhere in game if characters can unlock new mechanics.  Whitesheets are essentially items, just items representing documents, and can go essentially anywhere.
 
 \begin{subsubsection}{When to use greensheets}
 When building mechanics, you have several options for how to present them to your players:
@@ -569,8 +595,6 @@ When building mechanics, you have several options for how to present them to you
 
 In general, mechanics should usually go on greensheets if they are long, require specific tools for players to execute (such as dice or a deck of cards), or if players will likely want access to them before game.
 \end{subsubsection}
-\end{subsection}
-\begin{subsection}{Whitesheets}
 \end{subsection}
 \begin{subsection}{Power user features}
 Not all games will want these features, but LARP authors should at least know that \gametex{} offers these features to be used.
@@ -591,8 +615,80 @@ Some players might find it more difficult not to metagame if they knew the abili
 Abilities also print on handy cards, which can help players with many documents to keep track of their abilities more easily.
 \end{subsubsection}
 \begin{subsubsection}{Mempackets and membooks}\label{mems}
+Mempackets and membooks are how \gametex{} handles secrets that players manage themselves.  As discussed earlier, an example mempacket might be assigned to the character Inigo Montoya.
+Mempackets have triggers and contents: Inigo's mempacket might have the trigger ``Open after speaking to Count Rugen for one minute,'' and the content ``You notice Count Rugen has six fingers on his right hand.''
+
+Mempackets are named for their use with amnesic characters, who recover memories under specific circumstances, but are applicable in almost any circumstance where characters have specific circumstances under which they unlock information.
+Circumstances where \emph{any} character can satisfy a condition to unlock information should usually be handled with signs.
+For a chain of triggers that form a dependent sequence, such as a set of inquiries and research tasks that unearth a final deadly secret, use notebooks (\ref{notebooks}).
+
+\gametex{} has several formats for mempackets:
+\begin{desc}
+\item[MemFold] A single cut-out piece of paper, which has instructions to cut out the packet, fold along a dotted line, and staple at a specific point.  The outside indicates who the mempacket belongs to, and under what circumstances
+to open it; when torn open, it reveals the secret information.
+\item[MemEnvelope] Two separate strips or sheets of paper, one to be pasted to the outside of a sealed envelope, one to be placed inside.
+\item[MemCover/MemPage] An unordered collection of mem-folds, with a ``cover sheet'' with a title for the collection.  For example, a character who can read fortunes for other characters in game might have a ``Casting the Tarot'' cover for mempages with the fortunes for each character.
+\end{desc}
+
+In addition to their triggers, MemFolds, MemEnvelopes, and MemCovers should be given names.  These are used in cross-references, especially for character sheets to indicate which mempackets a player should be given.  These don't have to be especially meaningful names, and in many cases they shouldn't: just ``Mempacket A'' or the like will suffice.  These names don't even have to be unique, though GMs may find it easier (e.g. when you realize you need to reprint some) to have unique names for mempackets.
+
+Mempacket names cannot cross-reference other names, such as character names, but mempacket triggers can.
+
+\begin{verbatim}
+% Some example mempackets in Lists/mem-LIST.tex
+\NEW{MemFold}{\mTest}{
+	\s\MYname {Mempacket A}
+  \s\MYtrigger	{Open if you see a red handkerchief.}
+  \s\MYtext	{Your brainwashing kicks in, and you are compelled to attack \cKing{}.}
+}
+\NEW{MemEnvelope}{\mEnvTest}{
+	\s\MYname{Mempacket B}
+  \s\MYtrigger	{Open if you see a blue handkerchief.}
+  \s\MYtext	{This is a little text strip that got tucked into a little envelope.}
+}
+\NEW{MemCover}{\mBookTest}{
+  \s\MYname	{Book of Memory Packets}
+  \s\MYmems	{\mPageOne{}\mPageTwo{}} % The pages assigned to this membook.
+}
+
+\NEW{MemPage}{\mPageOne}{
+  \s\MYtrigger	{Open if you speak to \cKing{\full}.}
+  \s\MYtext	{This is the \cKing{\Monarch}.}
+}
+
+\NEW{MemPage}{\mPageTwo}{
+  \s\MYtrigger	{Open if you do not talk to \cKing{\full} in the first hour of game.}
+  \s\MYtext	{You should talk to \cKing{}.}
+}
+\end{verbatim}
 \end{subsubsection}
-\begin{subsubsection}{Notebooks}
+\begin{subsubsection}{Notebooks} \label{notebooks}
+Notebooks are like a chain of dependent mempackets.  Usually, they look like a sequence of pages that can be torn open like a membook, but they have numbers instead of triggers.  Each page will usually say something like ``When you go do X, open page $N$.''
+
+\begin{verbatim}
+\documentclass[notebook]{gamename} %% [notebook] or [greennotebook]
+\begin{document}
+\startnotebook{\nTest{}}
+%% The argument to \begin{page}{...} is a reference string.  You use
+%% \nbref{...} in page text to refer to a given page.  These
+%% references will be typeset as numbers, based on the order of the
+%% pages.
+\begin{page}{first}
+Juggle.  If you can juggle 1 minute or more without dropping a single ball,
+go to step \nbref{1min}.  If you can go for 5 minutes without dropping
+a single ball, go to step \nbref{good}.
+\end{page}
+\begin{page}{1min}
+Learn to juggle better.
+\end{page}
+\begin{page}{good}
+You can now use the title Super Juggler when referring to yourself.
+\end{page}
+\endnotebook
+\end{document}
+\end{verbatim}
+
+Note that, if you compile twice, \gametex{} will automatically generate the correct cross-referenced page numbers.
 \end{subsubsection}
 \begin{subsubsection}{GMs}
 \gametex{} generates goodies for GMs, which can be very handy.  GMs get their own special badges, and can even be assigned other game entities like abilities or greensheets.  This is most useful when the GM assigned to the puzzle room might be assigned a greensheet explaining how the puzzles work and what hints to give the players if they get stuck.  This avoids the risk of assigning that greensheet to the puzzle room itself, where it might get left by accident for a player to see.
@@ -604,22 +700,64 @@ A sub-owner is like a suite of game entities that should all be given to a chara
 \end{section}
 \begin{section}{Game production}
 Game production, often called \emph{prod}, is the process of taking your game and getting it ready to run: generating character sheets for your players, printing all the documents needed for your game, and so on.
-
-\begin{subsection}{Draft mode}
+\begin{subsection}{Configuration options}
+\begin{subsubsection}{Draft mode}
 \label{draft}
-\end{subsection}
-\begin{subsection}{Runs}
+In addition to simple \LaTeX{} comments beginning with \lstinline{\%}, \gametex{} has a command \lstinline|\TODO{...}| with a special property.
+
+In your \lstinline|LaTeX/MyGameName.cls| file is an option where you can set \lstinline|\gamedraft|
+to \lstinline|\Draft| or \lstinline|\Final|.  This only makes one difference: what happens when you include \lstinline|\TODO{...}| in your files, whether the content appears if the game is set to draft mode, and does nothing if the game is set to final mode.
+
+This is mostly useful for writing teams that value the ability to print out and mark up parts of the game in progress.  If you always write and edit your games in an editor like TeXnicCenter, you will always be able to see normal comments, but \lstinline|\TODO| can allow you to see notes left to yourself in the printed version.
+\end{subsubsection}
+\begin{subsubsection}{Runs}
 One of \gametex{}'s key use cases is for games that run more than once, concurrently or sequentially.  You don't need to copy/paste different versions of each file for each run: this is supported natively by \gametex{}.
 
-You will need to do these edits to \lstinline|LaTeX/game.cls| and these edits to \texttt{Lists/run$N$-LIST.tex}.  TODO.
+In \lstinline|LaTeX/game.cls|, there is a definition of \lstinline|\gamerun|, which defaults to 1.
+If you need to manage multiple runs of your game, you should set this option to the appropriate number
+during production, and manage the matching \texttt{Lists/run$N$-LIST.tex}.
+
+Suppose we have a character \lstinline|\cButtercup| for our Princess Bride game, and two game runs we want to generate, with differently-gendered players and characters.  In \lstinline|run1-LIST.tex|, we might have:
+\begin{verbatim}
+\updatePNG{\cButtercup}{John Coolplayer}{he/they}{Kevin McCharacter}{\hehim}
+\end{verbatim}
+and in \lstinline|run2-LIST.tex|, we might have:
+\begin{verbatim}
+\updatePNG{\cButtercup}{Jane Playsgood}{she/her}{Wendy McCharacter}{\sheher}
+\end{verbatim}
+Note that the third parameter to \lstinline|\updatePNG| is the player pronouns, not the character pronouns.
+
+More customization options are available, discussed in the provided example \lstinline|run1-LIST.tex| file.
+\end{subsubsection}
+\end{subsection}
+\begin{subsection}{Printing}
+To print your game, you will need to compile and print the relevant files from the \lstinline|Production| folder of your game.  There are a number of options for how to print your game, depending on who you are printing for at what stage in the development process.
+
+For example, \lstinline|Production/listchar-PRINT.tex| will be used to print out character sheets.  You have several options:
+\begin{itemize}
+\item You can explicitly list character sheets to print:
+\begin{verbatim}
+\cInigo{}
+\cButtercup{}
+\end{verbatim}
+\item For content like bluesheets or items, you can print a \emph{compendium}, which has one copy of everything:
+\begin{verbatim}
+\compendium
+\end{verbatim}
+This is, as you might expect, extremely valuable to producing a ``GM binder'' of your game where you can look up all the content you've provided your players.
+\item You can print \emph{production}, which prints all the relevant copies of each document.  For example, if a greensheet is assigned to three characters, and you are compiling \lstinline|Production/listgreen-PRINT.tex|, you will get three copies of that greensheet, each labeled as assigned to the given character.
+\end{itemize}
 \end{subsection}
 \begin{subsection}{Badges}
 \label{badges}
-Go to \lstinline{LaTeX/gametex.sty} and find the line 
-\begin{verbatim}
-\newcommand{\NameBadge}[4]{%
-\end{verbatim}
-Do stuff there.  TODO: expand, maybe improve the default configuration to do better with pronouns.
+
+By compiling \lstinline|Production/badge-PRINT.tex|, you will generate name badges for both characters and GMs,
+including any special character identities (see \ref{identities}) that opted into having name badges.
+By default, these include the character's name, pronouns, number, player name, player pronouns, and description, skipping any that are absent.  Additionally, the opposite side of the printed name badge reads ``I'M NOT HERE,''
+a handy feature for characters who are in game but invisible or stealthy, distinct from being out of character.
+
+You can also configure badges to have even more information on alternate sides of the card.  For example, some games use an alternate side of the card as a ``death certificate,'' so when a character dies and the player is done playing their corpse, the player can leave their badge to represent the character's corpse and find something more interesting to do (like play an NPC).  To edit the content of this extra side,
+edit \lstinline|LaTeX/gametex.sty| in the section labeled ``parts of namebadges.''
 \end{subsection}
 \end{section}
 \end{document}
