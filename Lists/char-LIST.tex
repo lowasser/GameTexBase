@@ -119,17 +119,15 @@
 \singularorplural{\were}		{was}{were} % he was, they were
 
 %% Nouns that simply care about masculine, feminine, or 'other.'
+%% Depending on your game, you may find that you need to add to this list -- feel free!
 
+% family words
 \mfornb{\spouse}	{husband}{wife}{spouse}
 \mfornb{\Spouse}	{Husband}{Wife}{Spouse}
 \mfornb{\offspring}	{son}{daughter}{offspring}
 \mfornb{\Offspring}	{Son}{Daughter}{Offspring}
 \mfornb{\child}		{boy}{girl}{child}
 \mfornb{\Child}		{Boy}{Girl}{Child}
-\mfornb{\stray}	{urchin}{waif}{stray}
-\mfornb{\Stray}	{Urchin}{Waif}{Stray}
-\mfornb{\pal}		{guy}{gal}{pal}
-\mfornb{\Pal}		{Guy}{Gal}{Pal}
 \mfornb{\sibling}	{brother}{sister}{sibling}
 \mfornb{\Sibling}	{Brother}{Sister}{Sibling}
 \mfornb{\sib} {bro}{sis}{sib}
@@ -142,12 +140,9 @@
 \mfornb{\Auncle}	{Uncle}{Aunt}{Auncle}
 \mfornb{\nibling}	{nephew}{niece}{nibling}
 \mfornb{\Nibling}	{Nephew}{Niece}{Nibling}
-\mfornb{\person}	{man}{woman}{person} % I don't know if fae/faer folks would want to change this, but this seems like most GMs' preferred default.
-\mfornb{\Person}	{Man}{Woman}{Person}
-\mfornb{\sex}		{male}{female}{nonbinary}
-\mfornb{\Sex}		{Male}{Female}{Nonbinary}
-\mfornb{\Deity}		{God}{Goddess}{Deity}
-\def\God{\Deity}
+\mfornb{\grandchild} {grandson}{granddaughter}{grandchild}
+\mfornb{\Grandchild} {Grandson}{Granddaughter}{Grandchild}
+
 \mfornb{\partner}	{boyfriend}{girlfriend}{partner}
 \mfornb{\betrothed} {fianc\'e}{fianc\'ee}{betrothed}
 
@@ -165,6 +160,18 @@
 %% Other titles of respect.
 \mfornb{\Cleric}		{Priest}{Priestess}{Cleric}
 % To do things like Mx. Smith, it's probably better to use name prefixes than gender-sensitive macros; see LaTeX/parsename.sty.
+
+\mfornb{\stray}	{urchin}{waif}{stray}
+\mfornb{\Stray}	{Urchin}{Waif}{Stray}
+\mfornb{\pal}		{guy}{gal}{pal}
+\mfornb{\Pal}		{Guy}{Gal}{Pal}
+\mfornb{\person}	{man}{woman}{person}
+\mfornb{\Person}	{Man}{Woman}{Person}
+\mfornb{\sex}		{male}{female}{nonbinary}
+\mfornb{\Sex}		{Male}{Female}{Nonbinary}
+\mfornb{\Deity}		{God}{Goddess}{Deity}
+\def\God{\Deity}
+
 
 %%%%%
 %% If a field is declared by \F, it must be given a value by \s inside
@@ -191,6 +198,8 @@
   \FS\MYtext	{\ifx\MYfile\empty\else%
 		  \getextractenvs{document}{\chars/\MYfile}%
 		\fi}
+		
+	%\newstat\MYhp	{Hit Points}{HP}{5}
   \badgetrue\statstrue\skillstrue\sheettrue\listtrue\labeltrue
   }
 
@@ -257,11 +266,27 @@
 
 \NEW{PC}{\cTest}{
   \s\MYname	{John Doe}
-  \s\MYdesc	{a nondescript person}						% a few words of description that can fit on a badge
+	\s\MYfile {README.tex} % to fill in with a file name from the Charsheets directory
+  \s\MYdesc	{a nondescript person}  % short description to fit on a badge
   \hethey												% configures pronouns
-	\s\MYplayer {Coolest Roleplayer}
 	\s\MYnumber{1234}
+	\s\MYplayer {Coolest Roleplayer}
 	\s\MYplayerpronouns{they/them}
+	\s\MYblues {\bTest{}}
+	\s\MYgreens {\gTest{}}
+	\s\MYwhites {}
+	\s\MYmems {\mTest{}}
+	\s\MYabils {\aTest{}}
+	\s\MYitems {}
 }
 
 %%%%%%%%%%%%% The NPCs %%%%%%%%%%%%%%%
+
+\NEW{NPC}{\cTestNPC}{
+	\s\MYname {Chef \pre Someone}
+	\theythem
+}
+\NEW{NPC}{\cSomeGuy}{
+	\s\MYname {Mr.\pre Someone Dude}
+	\hehim
+}

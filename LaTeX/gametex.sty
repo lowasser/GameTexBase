@@ -2066,7 +2066,7 @@
   \newid\nick{}
   \newid\maiden{}
   \let\@myfile\empty
-  \def\@contact{\contactmapping\ifx\MYplayer\empty\else, played by \optionalparen{\MYplayer}{\MYplayerpronouns}}
+  \def\@contact{\contactmapping\ifx\MYplayer\empty\else, played by \optionalparen{\MYplayer}{\MYplayerpronouns}\fi}
   \FS\MYcontact{\@contact}
   \idnormal
   \allmap{\full}
@@ -6610,7 +6610,7 @@
       \@cheatid\nick{nickname}
       \@cheatid\maiden{maiden name}
       \@cheatnotempty\MYdesc{desc}
-      \@cheatnotempty\MYwrapup{wrapup}
+      %\@cheatnotempty\MYwrapup{wrapup}
       \BRANCHTYPES{Stat}{%
         \SURFACEMAP{\TYPE}{%
           \emph{\MYabbrev}:~\MYvalue\hspace{1em}%

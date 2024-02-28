@@ -15,14 +15,14 @@
 %%
 %%%%%
 
-\documentclass[char]{game}
+\documentclass[char]{GameTexBase}
 \begin{document}
 
 \name{\cTest{}}
 
 %% This sort of use of \updatemacro is covered in
 %% Extras/README-namemappings.
-\updatemacro{\cNPC}{
+\updatemacro{\cTestNPC}{
   \unknownplayer %% doesn't know what he looks like
 }
 
@@ -47,16 +47,16 @@ song lyrics:\\ It centers.''}{-- The Author}
 %% flow.
 Your friend from out of town, \cSomeGuy{\intro}, called you up one
 morning about a week ago.  \cSomeGuy{} told you to meet up with this
-person named \cNPC{}, whom you've never met.  \cNPC{}, whose full name
-is \cNPC{\intro}, is supposed to be really awesome and have a package
+person named \cTestNPC{}, whom you've never met.  \cTestNPC{}, whose full name
+is \cTestNPC{\intro}, is supposed to be really awesome and have a package
 for you.
 
 %% You can skip the advanced namemapping commands, and instead use
 %% \full, \fullplain (full name without prefixes or suffixes),
 %% \formal, and \informal.  You can also nest these inside identities,
 %% such as \nick{} (see Extras/README-identity).
-That bears repeating: \cNPC{\nick{\informal}}, whose full name is
-\cNPC{\full}, is supposed to be really awesome and have a package for
+That bears repeating: \cTestNPC{\nick{\informal}}, whose full name is
+\cTestNPC{\full}, is supposed to be really awesome and have a package for
 you.
 
 %% For pronouns and other gender-dependent words, you can use the
@@ -99,50 +99,8 @@ sure why; you think it's a fine name.
 %%%%%
 %% List contacts, using \contact{<char macro>}
 \begin{contacts}
-  \contact{\cNPC{}} This person you've never met.
+  \contact{\cTestNPC{}} This person you've never met.
   \contact{\cSomeGuy{}} Your friend from out of town.
 \end{contacts}
-
-
-%%%%%
-%% \starttag{<tag>} <elements> \endtag 
-%% Valid <tag> values are blues, greens, abils, combat, mems, items,
-%% whites, notebooks, cash, signs, ids.  These each correspond to a
-%% type of macro defined in Lists/.
-%%
-%% By using \starttag, you can give this character <elements> of the
-%% type corresponding to <tag>.
-%%
-%% Multiple uses of the same <tag> will simply add together.
-\starttag{mems}
-
-  \mTest{}
-
-  \memfold{``Rosebud''}{Rosebud!  That was the name of\ldots the name
-  of\ldots darn, you forget.}
-
-  \startmembook{Book of Mempackets}
-
-    \mempage{if you see something blue}{Hey, that's blue!  Oh, you
-    remember, blue is your favorite color.  You really like blue
-    things, especially blue tentacles.  You wonder why\ldots}
-
-    \mempage{``Octy''}{Octy!  You remember Octy now!  She was your pet
-    blue octopus when you were a young child living offshore.  Oh, the
-    fun times you had!
-
-    You used to go swimming and diving with Octy all the time.  This
-    was years ago.  What happened?  You still can't remember\ldots but
-    you know you haven't even thought of her since you were small.}
-
-  \endmembook
-
-\endtag
-
-\starttag{abils}
-  \ability{Amazing Powers}{You can do strange and amazing things.}{I
-  do something strange and amazing.}
-\endtag
-
 
 \end{document}
