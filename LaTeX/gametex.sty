@@ -256,6 +256,7 @@
 %% default values overridden by the .cls file
 \def\@makedefault#1#2{\unless\ifdefined#1\def#1{#2}\fi}
 \@makedefault\gamerun{1}
+\@makedefault\larporg{}
 \@makedefault\gamename{Test Game}
 \@makedefault\gamedate{Test Date}
 \@makedefault\gamedraft{\Final}
@@ -311,8 +312,8 @@
     \MYstats
   \end{tlist}
 }
-
-
+\@makedefault\sheetfont{}
+\@makedefault\sheettitlefont{\sheetfont}
 
 
 %%%%%
@@ -2529,6 +2530,8 @@
 %% setspace package, for line spacing.
 \usepackage{fancyhdr,setspace}
 
+\usepackage{\sheetfont}
+
 
 %%%%%
 %% margins, spacing, paragraph settings, etc.
@@ -2597,7 +2600,6 @@
   \gdef\mysubowner{}%
 }
 
-
 %%%%%
 %% \title@display{<text>}
 %%
@@ -2636,16 +2638,18 @@
 %% \template@title@display
 %% \useicon[<width>]{<icon file>}
 %%
-%% \template@title@display produces a title bar similar to the kind
-%% used in Template (~jemorris/Template/) sheets.
+%% \template@title@display produces a title bar with an icon
+%% from an image beside it.
 %%
 %% \useicon specifies the icon graphic that will be used, and
 %% optionally specifies the width at which the graphic will be
 %% displayed.  The file, which you will need to supply, should be a
 %% suitable icon graphic for sheets.
 %%
-%% To use, simply add "\def\title@display{\template@title@display}"
-%% here.
+%% To use, simply uncomment the following line.
+%% Individual documents can override \useicon for their own sheets.
+
+% \def\title@display{\template@title@display}
 
 \newcommand\useicon[2][7em]{%
   \def\icon@width{#1}%
@@ -2677,7 +2681,7 @@
       \endgroup%
       \break\vfil%
       \begingroup%
-        \Large#1%
+        \Large\bfseries#1%
       \endgroup%
       \break\vfil%
       \begingroup%
@@ -2826,7 +2830,6 @@
   \par%
 }
 
-
 %%%%%
 %% \PDFPart
 \@append\PDFPart{\SingleSiding}
@@ -2869,7 +2872,6 @@
 
 \@onlypreamble\EmailPart
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 }
 
@@ -2881,7 +2883,6 @@
 %%
 %%%%%
 \gdef\mytype{Character Sheet}
-
 
 %%%%%
 %% setting up \@namehook, that prints out the present character's
@@ -2935,7 +2936,6 @@
     \typeout{\unexpanded{! don't use \starttag ... \endtag with \tagsfalse}}%
   }
 \fi
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 }
@@ -3614,7 +3614,6 @@
 %% calls \makemultilong, so that "\multi{num}{foobar}" will produce
 %% "foobar" "num" times.
 \makemultilong
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 }
@@ -5588,7 +5587,7 @@
 \def\noremove{%
   Please do not remove this until \takedownby.\break
   \vskip.5\whitespace%
-  --- The MIT Assassins' Guild ---%
+  --- \larporg{} ---%
 }
 
 \long\def\@signfront#1#2#3{%

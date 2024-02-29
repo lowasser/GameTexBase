@@ -14,7 +14,6 @@
 %%
 %%%%%
 
-
 %%%%%
 %% \gameclassname
 %%
@@ -22,11 +21,9 @@
 %% of the game's environment variable both match it.  See ../README.
 \def\gameclassname{GameTexBase}
 
-
 %%%%%
 %% \gamerun
 \def\gamerun{1}
-
 
 %%%%%
 %% \gamename
@@ -37,6 +34,7 @@
 \def\gamename{Example Game}
 \def\gamedate{February 2024}
 
+\def\sheettitlefont{almendra}
 
 %%%%%
 %% \gamedraft
@@ -79,6 +77,7 @@
 %% better.
 \def\takedownby{Testember Nth, 2001}
 \def\signdate{\gamedateabbrev}
+\def\larporg{}
 
 
 %%%%%
@@ -145,7 +144,6 @@
   \mark{GMs}\allgms
   \mark{Players}\allplayers
 }
-
 
 %%%%%
 %% \theboxpref
