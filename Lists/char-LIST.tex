@@ -39,139 +39,278 @@
 %% pronoun and gendered language used to actually refer to a character.
 %% To add a new neopronoun, add a new element to this list
 %% with the appropriate next number.
-\def\mascgender{0}
-\def\femmegender{1}
-\def\theygender{2}
-\def\zegender{3}
-\def\faegender{4}
-\def\avoidpronounsgender{5}
-\def\eygender{6}
-\def\itgender{7}
 
-%% Here, we define 'pronoun sets,' which have two components:
-%% which gender is used to always refer to that character in a sentence,
-%% and the text used when we introduce that character's pronouns.
-%% This does not cover all combinations, but it's easy to add more.
-\newcommand{\pronounset}[3]{
+\newcommand{\defaultgender}{
+	% Non-gender-specific or nonbinary nouns.
+	\def\spouse{spouse}
+	\def\Spouse{Spouse}
+	\def\offspring{offspring}
+	\def\Offspring{Offspring}
+	\def\child{child}
+	\def\Child{Child}
+	\def\sibling{sibling}
+	\def\Sibling{Sibling}
+	\def\sib{sib}
+	\def\Sib{Sib}
+	\def\parent{parent}
+	\def\Parent{Parent}
+	\def\grandparent{grand\parent}
+	\def\Grandparent{Grand\parent}
+	\def\auncle{auncle}
+	\def\Auncle{Auncle}
+	\def\nibling{nibling}
+	\def\Nibling{Nibling}
+	\def\grandchild{grandchild}
+	\def\Grandchild{Grandchild}
+	\def\partner{partner}
+	\def\betrothed{betrothed}
+	\def\Heir{Heir}
+	\def\heir{heir}
+	\def\monarch{monarch}
+	\def\Monarch{Monarch}
+	\def\Emperor{Emperor}
+	\def\emperor{emperor}
+	\def\Duke{Duke}
+	\def\Count{Count}
+	\def\Baron{Baron}
+	\def\cleric{cleric}
+	\def\Cleric{Cleric}
+	\def\stray{stray}
+	\def\Stray{Stray}
+	\def\pal{pal}
+	\def\person{person}
+	\def\deity{deity}
+	\def\Deity{Deity}
+}
+
+\newcommand{\genderpronouns}[3]{
 	\newcommand{#1}[1][]{
+		\defaultgender
 		\ifx#1\empty
-			\s\MYgender{#2}
-			\s\MYcharpronouns{#3}
+			\s\MYcharpronouns{#2}
 		\else
-			\rs\MYgender{#2}
-			\rs\MYcharpronouns{#3}
+			\rs\MYcharpronouns{#2} 
 		\fi
+		#3
 	}
 }
 
-\pronounset{\hehim}{\mascgender}{he/him}
-\pronounset{\hethey}{\mascgender}{he/they}
-\pronounset{\theyhe}{\theygender}{they/he}
-\pronounset{\heshe}{\mascgender}{he/she}
-\pronounset{\shehe}{\femmegender}{she/he}
-\pronounset{\sheher}{\femmegender}{she/her}
-\pronounset{\shethey}{\femmegender}{she/they}
-\pronounset{\theyshe}{\theygender}{they/she}
-\pronounset{\theythem}{\theygender}{they/them}
-\pronounset{\anypronouns}{\theygender}{any pronouns}
-\pronounset{\genderfluid}{\theygender}{any pronouns}
-\pronounset{\zezir}{\zegender}{ze/zir}
-\pronounset{\zethey}{\zegender}{ze/they}
-\pronounset{\theyze}{\theygender}{they/ze}
-\pronounset{\faefaer}{\faegender}{fae/faer}
-\pronounset{\eyem}{\eygender}{ey/em}
-\pronounset{\itits}{\itgender}{it/its}
+%% \genderpronounsmod{\newgendercommand}{new pronouns description}{\oldgendercommand \def\thingToOverride{...}}
+%% example:
+%% \genderpronounsmod{\hethey}{he/they}{\hehim}
+\newcommand{\genderpronounsmod}[3]{
+	\genderpronouns{#1}{#2}{
+		#3
+		\rs\MYcharpronouns{#2}
+	}
+}
 
-\pronounset{\avoidpronouns}{\avoidpronounsgender}{avoid pronouns}
-	% When referring to a character with this gender, we use \informal to e.g. use 'John' instead of 'John Smith'.
+\def\do{do\verbes}
 
-%%%%%
-%% Here, we define words and conjugations that are sensitive to a character's gender.
-%% If you add a new pronoun set, you will need to update all of these accordingly.
+\newcommand{\pluralgenderpronouns}[3]{
+	\genderpronouns{#1}{#2}{
+		\def\verbs{}
+		\def\verby{y}
+		\def\verbes{}
+		\def\are{are}
+		\def\re{'re}
+		\def\were{were}
+		\def\have{have}
+		#3
+	}
+}
 
-% Switch on gender, falling back to they/them if there's an error.
-\newcommand{\gendered}[8]{\ifcase\MYgender#1\or#2\or#3\or#4\or#5\or#6\or#7\or\8\else#3\fi}
-% define a new command that switches based on gender
-\newcommand{\foreachgender}[9]{\def#1{\gendered{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}}
-% define one version for he/she/ze/it, one version for they/fae/ey
-\newcommand{\singularorplural}[3]{\foreachgender{#1}{#2}{#2}{#3}{#2}{#3}{#2}{#3}{#2}}
-% define one version for masc, one for femme, one for nonbinary
-\newcommand{\mfornb}[4]{\foreachgender{#1}{#2}{#3}{#4}{#4}{#4}{#4}{#4}{#4}}
+\newcommand{\singulargenderpronouns}[3]{
+	\genderpronouns{#1}{#2}{
+		\def\verbs{s}
+		\def\verby{ies}
+		\def\verbes{es}
+		\def\are{is}
+		\def\re{'s}
+		\def\were{was}
+		\def\have{has}
+		#3
+	}
+}
 
-%% Words that need a different version for every individual gender.
-\foreachgender{\they}		{he}{she}{they}{ze}{fae}{\informal}{ey}{it}
-\foreachgender{\They}		{He}{She}{They}{Ze}{Fae}{\informal}{Ey}{It}
-\foreachgender{\them}		{him}{her}{them}{zir}{faer}{\informal}{em}{it}
-\foreachgender{\their}	{his}{her}{their}{zir}{faer}{\informal's}{eir}{its}
-\foreachgender{\Their}	{His}{Her}{Their}{Zir}{Faer}{\informal's}{eir}{Its}
-\foreachgender{\theirs}	{his}{hers}{theirs}{zirs}{faers}{\informal's}{eirs}{its}
-\foreachgender{\themself}	{himself}{herself}{themself}{zirself}{faerself}{\informal}{emself}{itself}
-\foreachgender{\Themself}	{Himself}{Herself}{Themself}{Zirself}{Faerself}{\informal}{emself}{Itself}
+%% Base, 'unmixed' pronoun sets.
 
-%% Words that simply care about pluralization or not.
-\singularorplural{\verbs}		{s}{}  		% he believes, they believe
-\singularorplural{\verbes}	{es}{} 		% he does, they do
-\singularorplural{\verby}		{ies}{y} 	% he worries, they worry
-\singularorplural{\are}			{is}{are} % he is, they are
-\singularorplural{\re}			{'s}{'re} % he's, they're
-\def\does{do\verbes}
-\singularorplural{\have}		{has}{have} % he has, they have
-\singularorplural{\were}		{was}{were} % he was, they were
+\singulargenderpronouns{\hehim}{he/him}{
+	\def\they{he}
+	\def\They{He}
+	\def\them{him}
+	\def\Them{Him}
+	\def\their{his}
+	\def\Their{His}
+	\def\theirs{his}
+	\def\themself{himself}
+	\def\Themself{Himself}
+	\def\spouse{husband}
+	\def\Spouse{Husband}
+	\def\offspring{son}
+	\def\Offspring{Son}
+	\def\child{boy}
+	\def\Child{Boy}
+	\def\sibling{brother}
+	\def\Sibling{Brother}
+	\def\sib{bro}
+	\def\Sib{Bro}
+	\def\parent{father}
+	\def\Parent{Father}
+	\def\auncle{uncle}
+	\def\Auncle{Uncle}
+	\def\nibling{nephew}
+	\def\Nibling{Nephew}
+	\def\grandchild{grandson}
+	\def\Grandchild{Grandson}
+	\def\partner{boyfriend}
+	\def\betrothed{fianc\'e}
+	\def\Heir{Prince}
+	\def\heir{prince}
+	\def\monarch{king}
+	\def\Monarch{King}
+	\def\cleric{priest}
+	\def\Cleric{Priest}
+	\def\stray{urchin}
+	\def\Stray{Urchin}
+	\def\pal{guy}
+	\def\person{man}
+	\def\deity{god}
+	\def\Deity{God}
+}
 
-%% Nouns that simply care about masculine, feminine, or 'other.'
-%% Depending on your game, you may find that you need to add to this list -- feel free!
+\singulargenderpronouns{\sheher}{she/her}{
+	\def\they{she}
+	\def\They{She}
+	\def\them{her}
+	\def\Them{Her}
+	\def\their{her}
+	\def\Their{Her}
+	\def\theirs{hers}
+	\def\themself{herself}
+	\def\Themself{Herself}
+	\def\spouse{wife}
+	\def\Spouse{Wife}
+	\def\offspring{daughter}
+	\def\child{girl}
+	\def\Child{Girl}
+	\def\sibling{sister}
+	\def\Sibling{Sister}
+	\def\sib{sis}
+	\def\Sib{Sis}
+	\def\parent{mother}
+	\def\Parent{Mother}
+	\def\auncle{aunt}
+	\def\Auncle{Aunt}
+	\def\nibling{niece}
+	\def\Nibling{Niece}
+	\def\grandchild{granddaughter}
+	\def\Grandchild{Granddaughter}
+	\def\partner{girlfriend}
+	\def\betrothed{fianc\'ee}
+	\def\Heir{Princess}
+	\def\heir{princess}
+	\def\monarch{queen}
+	\def\Monarch{Queen}
+	\def\cleric{priestess}
+	\def\Cleric{Priestess}
+	\def\stray{waif}
+	\def\Stray{Waif}
+	\def\pal{gal}
+	\def\person{woman}
+	\def\deity{goddess}
+	\def\Deity{Goddess}
+}
 
-% family words
-\mfornb{\spouse}	{husband}{wife}{spouse}
-\mfornb{\Spouse}	{Husband}{Wife}{Spouse}
-\mfornb{\offspring}	{son}{daughter}{offspring}
-\mfornb{\Offspring}	{Son}{Daughter}{Offspring}
-\mfornb{\child}		{boy}{girl}{child}
-\mfornb{\Child}		{Boy}{Girl}{Child}
-\mfornb{\sibling}	{brother}{sister}{sibling}
-\mfornb{\Sibling}	{Brother}{Sister}{Sibling}
-\mfornb{\sib} {bro}{sis}{sib}
-\mfornb{\Sib} {Bro}{Sis}{Sib}
-\mfornb{\parent}	{father}{mother}{parent}
-\def\grandparent{grand\parent}
-\def\Grandparent{Grand\parent}
-\mfornb{\Parent}	{Father}{Mother}{Parent}
-\mfornb{\auncle}	{uncle}{aunt}{auncle}
-\mfornb{\Auncle}	{Uncle}{Aunt}{Auncle}
-\mfornb{\nibling}	{nephew}{niece}{nibling}
-\mfornb{\Nibling}	{Nephew}{Niece}{Nibling}
-\mfornb{\grandchild} {grandson}{granddaughter}{grandchild}
-\mfornb{\Grandchild} {Grandson}{Granddaughter}{Grandchild}
+\pluralgenderpronouns{\theythem}{they/them}{
+	\def\they{they}
+	\def\They{They}
+	\def\them{them}
+	\def\Them{Them}
+	\def\their{their}
+	\def\Their{Their}
+	\def\theirs{theirs}
+	\def\themself{themself}
+	\def\Themself{Themself}
+}
 
-\mfornb{\partner}	{boyfriend}{girlfriend}{partner}
-\mfornb{\betrothed} {fianc\'e}{fianc\'ee}{betrothed}
+\singulargenderpronouns{\zezir}{ze/zir}{
+	\def\they{ze}
+	\def\They{Ze}
+	\def\them{zir}
+	\def\Them{Zir}
+	\def\their{zir}
+	\def\Their{Zir}
+	\def\theirs{zirs}
+	\def\themself{zirself}
+	\def\Themself{zirself}
+}
 
-%% Noble titles.  Opinions on the best nonbinary versions vary, but this should be a good start.
-\mfornb{\Heir}		{Prince}{Princess}{Heir}
-\mfornb{\heir}		{prince}{princess}{heir}
-\mfornb{\Monarch}		{King}{Queen}{Monarch}
-\mfornb{\monarch}		{king}{queen}{monarch}
-\mfornb{\Emperor}		{Emperor}{Empress}{Emprex}
-\mfornb{\emperor}		{emperor}{empress}{emprex}
-\mfornb{\Duke} 		{Duke}{Duchess}{Duke}
-\mfornb{\Count}		{Count}{Countess}{Count}
-\mfornb{\Baron}		{Baron}{Baroness}{Baron}
+\singulargenderpronouns{\itits}{it/its}{
+	\def\they{it}
+	\def\They{It}
+	\def\them{it}
+	\def\Them{It}
+	\def\their{its}
+	\def\Their{Its}
+	\def\theirs{its}
+	\def\themself{itself}
+	\def\Themself{itself}
+}
 
-%% Other titles of respect.
-\mfornb{\Cleric}		{Priest}{Priestess}{Cleric}
-% To do things like Mx. Smith, it's probably better to use name prefixes than gender-sensitive macros; see LaTeX/parsename.sty.
+\pluralgenderpronouns{\eyem}{ey/em}{
+	\def\they{ey}
+	\def\They{Ey}
+	\def\them{em}
+	\def\Them{Em}
+	\def\their{eir}
+	\def\Their{Eir}
+	\def\theirs{eirs}
+	\def\themself{emself}
+	\def\Themself{Emself}
+}
 
-\mfornb{\stray}	{urchin}{waif}{stray}
-\mfornb{\Stray}	{Urchin}{Waif}{Stray}
-\mfornb{\pal}		{guy}{gal}{pal}
-\mfornb{\Pal}		{Guy}{Gal}{Pal}
-\mfornb{\person}	{man}{woman}{person}
-\mfornb{\Person}	{Man}{Woman}{Person}
-\mfornb{\sex}		{male}{female}{nonbinary}
-\mfornb{\Sex}		{Male}{Female}{Nonbinary}
-\mfornb{\Deity}		{God}{Goddess}{Deity}
-\def\God{\Deity}
+\singulargenderpronouns{\avoidpronouns}{avoid pronouns}{
+	\def\they{\usual}
+	\def\They{\usual}
+	\def\them{\usual}
+	\def\Them{\usual}
+	\def\their{\usual's}
+	\def\Their{\usual's}
+	\def\theirs{\usual's}
+	\def\themself{themself}
+	\def\Themself{Themself}
+}
 
+\pluralgenderpronouns{\faefaer}{fae/faer}{
+	\def\they{fae}
+	\def\They{Fae}
+	\def\them{fae}
+	\def\Them{Fae}
+	\def\their{faer}
+	\def\Their{Faer}
+	\def\theirs{faers}
+	\def\themself{faeself}
+	\def\Themself{Faeself}
+}
+
+%% Mixed pronoun sets.
+%% We don't try to cover all or even most of the combinations;
+%% it's very easy to add the ones you need.
+
+\genderpronounsmod{\hethey}{he/they}{\hehim}
+\genderpronounsmod{\shethey}{she/they}{\sheher}
+\genderpronounsmod{\theyhe}{they/he}{\theythem}
+\genderpronounsmod{\theyshe}{they/she}{\theythem}
+\genderpronounsmod{\genderfluid}{genderfluid}{\theythem}
+\genderpronounsmod{\anypronouns}{any pronouns}{\theythem}
+
+% Example of a tricksy variant:
+%
+% \genderpronounsmod{\hebutnotaman}{he/him}{
+%   \hehim
+%   \def\person{person}
+% }
 
 %%%%%
 %% If a field is declared by \F, it must be given a value by \s inside
