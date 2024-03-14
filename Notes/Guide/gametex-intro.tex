@@ -36,23 +36,24 @@ Clary's career in LARP authorship technology spans decades; here are the points 
 \begin{enumerate}
 \item Clary wrote a LARP written for a spring 1998 course ``Structure and Interpretation of Non-Linear and Interactive Narrative'' in bare HTML.  (Clary appears to have graduated MIT with a bachelor's degree in 2000.)
 \item Clary co-wrote the September 2001 game  ``Reality Check III: Dinner at the Schloss Himmelbrand'', which still has publicly visible \LaTeX{}-produced documents.
-\item ``GameTeX beta 2'' was used to write at least one game running in 2002, ``A New Deal,'' discussed by one of its authors Philip Tan\footnote{Tan would later become the creative director of the MIT Game Lab and is a research scientist there as of 2024.} in his 2003 \href{https://drive.google.com/file/d/1RiGc2OWtXIPlebHVrixv2IpAbSGAThtd/view?usp=sharing}{master's thesis} on the balance of mechanics in LARP design.
+\item ``GameTeX beta 2'' was used to write at least one game running in 2002, ``A New Deal,'' discussed by one of its authors Philip Tan in his 2003 \href{https://drive.google.com/file/d/1RiGc2OWtXIPlebHVrixv2IpAbSGAThtd/view?usp=sharing}{master's thesis} on the balance of mechanics in LARP design.\footnote{Tan would later become the creative director of the MIT Game Lab and is a research scientist there as of 2024.}
 \item Clary stayed involved in the Assassin's Guild community, releasing \gametex{} version 1.0 in December of 2008.
 \item Clary posted updates to \gametex{} as recently as December 2023, and remains involved in Boston-area LARP.
 \end{enumerate}
-More recently, MIT graduates experienced in Assassins' Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society.  After members of the SGS graduated Stanford, they formed a Bay Area nonprofit: the Luminary Roleplay Society.  I eventually began playing with the LRS and have edited several games for them, and now I am writing this for you.  Some of this document will be written in the first person as a result, including discussion of my own contributions.  There are many extant versions of \gametex{} as people have made their own modifications, but requested in the \gametex{} guidelines, the LRS has published its fork under a separate name, \lrstex{}.  This version includes a variety of modifications, mostly made by me, especially in an overhaul of the gender and pronoun system (see \ref{gender}) to reflect as much of the spectrum of gender as possible.  This guide will mostly apply equally well to other versions of \gametex{}, with some exceptions, such as that area.
+More recently, MIT graduates experienced in Assassins' Guild traditions went to Stanford for grad school, and brought their traditions to the Stanford Gaming Society.  After members of the SGS graduated Stanford, they formed a nonprofit: the Luminary Roleplay Society.  I eventually began playing with the LRS and have edited several games for them, and now I am writing this for you.  Some of this document will be written in the first person as a result, including discussion of my own contributions.  There are many extant versions of \gametex{} as people have made their own modifications, but requested in the \gametex{} guidelines, the LRS has published its fork under a separate name, \lrstex{}.  This version includes a variety of modifications, mostly made by me, especially in an overhaul of the gender and pronoun system (see \ref{gender}) to reflect as much of the spectrum of gender as possible.  This guide will mostly apply equally well to other versions of \gametex{}, with some exceptions, such as that area.
+
+If you take nothing else away from this section: \lrstex{} is some additions built on top of \gametex{}, which is some additions built on top of \LaTeX{}, which is some additions built on top of \TeX{}.
 \end{subsection}
 \begin{subsection}{Why use \gametex{}?}
 \gametex{} takes advantage of the fact that \LaTeX{} is not \textit{simply} for writing technical papers, but is essentially a programming language for text and formatting in ways that are highly useful to LARP authors.
-\gametex{} is primarily meant for the LARP model where most or all game content is written by a team of authors, as opposed to styles like American Freeform, but it'll all depend on what you need for your game.
+\gametex{} is primarily meant for ``litform'' LARPs, where game content is written by a team of authors instead of by players, but it'll all depend on what you need for your game.
 Here are some key examples of things \gametex{} can handle for you:
 \begin{itemize}
     \item During the writing process of a game, names of all sorts of things can change – not simply characters, but political entities, artifacts, magical powers, and more.  Keeping these all synchronized can be difficult.  (Covered in \ref{lists}.)
     \item When a game is run for different groups of people, not just character names but pronouns and gendered language can need to be changed.  A simple find/replace is often inadequate, especially when you run into conjugations like ``he was" versus ``they were."  (Gender in \ref{gender}, multiple runs in \ref{runs}.)
-		\item When characters have secret identities, like Spider-Man's identity as Peter Parker, it's important to make sure the right characters know that individual under the right name.  It's even better if Peter Parker's player 
-		has an easy way to indicate which identity other characters see when they look at him, without necessarily having to wear the sweaty costume mask.  (Covered in \ref{identities}.)
+		\item When characters have secret identities, like Spider-Man's identity as Peter Parker, it's important to make sure the right characters know that individual under the right name.  (Covered in \ref{identities}.)
     \item Not all text should be immediately visible to the players holding the printed item.  \gametex{} can automatically print dotted lines for GMs to fold and staple shut secrets, with text on the outside describing when to open it.  (Covered in \ref{mems}.)
-    \item Cross-references can ensure players have up-to-date indexes of the characters and players they know before game, as well as all the items and documents they should have access to.  GMs can have the same index cross-referenced the other way, with all secrets revealed.  Both of these help everyone make sure that nobody is missing something they need, or in possession of secrets they shouldn't have.  (\gametex{} does this automatically.)
+    \item Cross-references can ensure players have up-to-date indexes of the characters and players they know before game, as well as all the items and documents they should have access to.  GMs can have the same index cross-referenced the other way, with all secrets revealed.  Both of these help everyone make sure that nobody is missing something they need, or is in possession of secrets they shouldn't have.  (\gametex{} does this automatically.)
 \end{itemize}
 \gametex{}, while providing extensive support for MIT-style games, can be used for a much broader variety of games, and certainly has been by the Assassins' Guild, SGS, and LRS.  
 \gametex{} is not the most intuitive system for game authors who don't have any experience with programming languages, but in exchange for learning to use it, \gametex{} can offer a huge number of features.
@@ -60,8 +61,8 @@ Here are some key examples of things \gametex{} can handle for you:
 If any of the following describe the LARP you want to write, then I recommend strongly considering \gametex{}:
 \begin{itemize}
 \item Your game's character sheets and/or lore are prewritten by one or more game authors, with minimal pre-game player-generated content.
-\item Your game will run multiple times, concurrently or sequentially, and different runs will require changes to character names/pronouns.
-\item Your game involves significant mechanics, such as character powers, or secrets revealed to the characters under certain conditions.
+\item Your game will run multiple times, concurrently or sequentially, and different runs may require changes to character names/pronouns.
+\item Your game involves significant mechanics, such as character powers, or secrets revealed to the characters under certain conditions -- out-of-character instructions that players will need to follow in their roleplay.
 \item Your game is large, requiring the GMs to manage many printouts, each of which must go to the right player or place.
 \item Your game will go through many rounds of editing, especially involving renaming things.
 \end{itemize}
@@ -111,7 +112,7 @@ In this section, we will discuss an overview of version control as applied to ga
 
 Version control is a technology that exists in the space between the ``version2\_final\_edited\_definitely\_final.doc'' common when contributors must email versions back and forth, and a technology like Google Docs that keeps documents instantly synchronized even with multiple people typing in the same document at the same time.
 
-It is quite possible to use \gametex{} without using version control.  If you are writing a game on your own, it is almost completely unnecessary.  However, you may be aware that the synchronization technology in Google Docs and related apps only work for the specific kinds of files they're designed for.  You can dump your \gametex{} files in Google Docs and edit them there, and many LARP authors who use \gametex{} do this at some point in the process.  I am writing this sentence right now in a Google Doc, in fact.  However, you, and I, will have to copy them back into a \texttt{.tex} file on our computers, and compile them to first make sure they work, and then to produce a document others can read, all of which can be inconvenient and can run into all the usual problems with managing two versions of something that aren't automatically synchronized.
+It is quite possible to use \gametex{} without using version control.  If you are writing a game on your own, it is almost completely unnecessary.  However, you may be aware that the synchronization technology in Google Docs and related apps only work for the specific kinds of files they're designed for.  You can dump your \lstinline|.tex| files in Google Docs and edit them there, and many LARP authors who use \gametex{} do this at some point in the process, especially with teams where some members are less comfortable with \gametex{}.  I am writing this sentence right now in a Google Doc, in fact.  However, you, and I, will have to copy them back into a \texttt{.tex} file on our computers, and compile them to first make sure they work, and then to produce a document others can read, all of which can be inconvenient and can run into all the usual problems with managing two versions of something that aren't automatically synchronized.
 
 Another important aspect of version control is that it manages versioning for an entire file folder on your computer.  Emailing versions of one file back and forth is one thing, but emailing back and forth versions of two -- or more -- files that must be kept in sync is truly a nightmare, and \gametex{} will require you to manage that level of synchronization.
 
@@ -146,6 +147,7 @@ You will need to do the following steps.  TODO: document this better.
 \item Download the contents of this repository to an appropriately named folder.
 \item Set up a Git repository in this folder, and do a first commit.
 \item Rename \lstinline|LaTeX/GameTexBase.cls| to the matching name for your game.
+\item TODO: set up the path file.
 \item Create \lstinline|LaTeX/MyGame_path.cls|, and write in it:
 \begin{verbatim}
 \edef\gamepath{"C:/Path/To/MyGame/"}
@@ -210,27 +212,45 @@ When is this worth it?  Most likely, it's of use if you think it might get chang
 \end{subsection}
 \begin{subsection}{Gender, pronouns, and conjugation}
 \label{gender}
-English references gender in many common words, and they/them pronouns often require different conjugation.  \gametex{} provides special support for character gender, using commands that substitute different versions of text based on a character's gender.  This is not perfect, and it's easy to get wrong by accident.  It's always a pain to find you've accidentally written ``He believe you're alive" or other grammatical errors.  However, many GMs find it's still preferable to trying to do find/replace shenanigans when a player gets recast or a game gets rerun with players who want to play different genders.  This is especially true when there are references to a character's gender without the character's name, such as the ``six-fingered woman'' above; you would have to manually search for each reference, and remember which character is being referred to by each gendered word or pronoun.  I have found it becomes more natural with practice to use \gametex{}'s features for gender and conjugation.
+English references gender in many common words, and they/them pronouns often require different conjugation for verbs.  \gametex{} provides special support for character gender, using commands that substitute different versions of text based on a character's gender.  This is not perfect, and it's easy to get wrong by accident.  It's always a pain to find you've accidentally written ``He believe you're alive" or other grammatical errors.  However, many GMs find it's still preferable to trying to do find/replace shenanigans when a player gets recast or a game gets rerun with players who want to play different genders.  This is especially true when there are references to a character's gender without the character's name, such as the ``six-fingered woman'' above; you would have to manually search for each reference, and remember which character is being referred to by each gendered word or pronoun.  I have found it becomes more natural with practice to use \gametex{}'s features for gender and conjugation.
 
 Many players, even those with complex experiences of gender, are willing to play characters with a simpler experience of gender.  However, it seemed desirable to give GMs as many options as possible:
 \begin{itemize}
 \item Some players may be uncomfortable being placed into a gender binary.
+\item Conversely, some players are not thrilled about every character being referred to with ``they'' pronouns, which can erase impactful gender experiences.
 \item Roleplay is a well-known tool for players to explore the possibilities of gender.
 \item Some games may involve characters and beings who do not match human binary concepts of gender.\footnote{I have just been involved in co-writing a pixie-themed game where we should not, in retrospect, have been surprised by fae/faer pronoun requests.}
 \end{itemize}
 
-\gametex{} does make a number of simplifying assumptions that don't capture the full spectrum of gender.  I and other \gametex{} editors have attempted to capture as much of that spectrum as possible within the limitations of the software, and what game authors in a rush to recast a character can reasonably check.  If you or your players are dissatisfied by these restrictions, you as a game author can always manually write the appropriate words and pronouns, but we hope that will very rarely be necessary.
+\lrstex{} has a completely overhauled system of gender from \gametex{}, which attempts to capture as much of the spectrum of gender as possible within the limitations of the software, and what game authors in a rush to recast a character can reasonably check.  If you or your players are dissatisfied by these restrictions, you as a game author can always manually write the appropriate words and pronouns, but we hope that will very rarely be necessary.
 
-Here are the most important of the simplifying assumptions made by \gametex{}:
+The most important simplifying assumption made by \lrstex{} is that, other than introducing the character's pronouns directly, the same pronoun set is always used in every reference to the character.  Genderfluid characters, for example, are always referred to as ``they'' regardless of context.  When a character has ``slashed'' pronouns like he/they, these by default only use the pronoun set before the slash.  This seemed like the best compromise for minimizing problems such as ``it is suddenly ambiguous which pronoun refers to who in a sentence'' and ``well, the prophecy references an individual who switches pronouns halfway through, it's not hard to guess that that's the one genderfluid character.''  (\latex{} doesn't give any way to e.g. at least use the same pronouns through one full sentence, or through one full paragraph, or that would be worth trying.)
 
-\begin{itemize}
-\item Characters select pronouns from a modest list of options (listed below).
-\item Characters may have more than one set of pronouns -- he/they, for example.  These pronouns are used when specifically identifying which pronouns a character uses, e.g. ``You are best friends with Sam (he/they).'' However, whenever actually referring to a character in a sentence, the same pronouns are used for every reference to the given character.  For ``slashed'' pronouns, it is always the first one: he/they characters are always referred to as ``he,'' and they/he characters are always referred to as ``they.''  For ``arbitrary'' options such as ``any pronouns'' or ``genderfluid,'' it is always ``they.''
-\item All gender-sensitive and pronoun-sensitive terms ``match gender.''  For example, a character using she/her pronouns is always referred to as a ``mother,'' ``woman,'' ``princess,'' ``daughter,'' and so on.
-\item All nonbinary genders use the same nonbinary term: e.g. anything other than a ``he'' or ``she'' (or a he/something, or she/something) is a monarch, not a king or queen or something else.
-\end{itemize}
+Other gendered assumptions are set up by default, but are overridable, as we'll discuss.  For example, every character that is neither a he/something or a she/something is by default referred to as ``Monarch,'' not ``King'' or ``Queen.''
 
-Here is the complete set of built-in pronouns and pronoun combinations.\footnote{Unfortunately, after some research, I couldn't find a pronoun-avoidant version of ``themself'' for \texttt{\textbackslash{}avoidpronouns} -- e.g. ``Sam walked through the portal and found themself in the Enchanted Forest'' -- that did not require rewriting the sentence.  We fall back to ``themself'' for that case.}   It is very easy to add additional combinations of existing pronouns, and fairly easy to add additional sets of pronouns.
+\begin{subsubsection}{Pronoun system}
+The pronoun system is defined at the beginning of \lstinline|Lists/char-LIST.tex|.  It should be able to handle the overwhelming majority of character gender experiences, but it is specifically designed to be easy to customize.
+In this section, we'll break down the code so you know how to customize it if desired.
+
+\begin{enumerate}
+\item Definitions of commands to configure gender and commands for conjugating verbs for singular or plural pronouns.
+\item Definition of potentially gendered words and their non-gender-specific defaults in \lstinline|\genderednoundefaults|.  For example,
+\begin{verbatim}
+\def\sibling{sibling}
+\end{verbatim}
+defines the command \lstinline|\sibling| and sets it to simply be ``sibling'' by default.  Note that capitalized and uncapitalized nouns need to be declared separately, e.g. both \lstinline|\monarch| and \lstinline|\Monarch|.
+\item Definitions of ``baseline'' pronoun sets, which define the pronouns themselves, and where appropriate, override the definition of gendered words.  For example, in the definition of \lstinline|\hehim| pronouns,
+\begin{verbatim}
+\def\sibling{brother}
+\end{verbatim}
+declares that ``brother'' should be used instead of ``sibling'' for he/him characters.
+\item Declarations of ``mixed'' pronoun sets as aliases of other pronoun sets, except when used in character introductions, e.g.
+\begin{verbatim}
+\genderpronounsmod{\hethey}{he/they}{\hehim}
+\end{verbatim}
+\end{enumerate}
+
+Here is the complete set of built-in pronoun sets.
 
 \begin{center}
 \begin{tabular}{c|c|c}
@@ -245,16 +265,58 @@ Here is the complete set of built-in pronouns and pronoun combinations.\footnote
 \lstinline|\avoidpronouns| & avoid pronouns & character's name\\
 \lstinline|\hethey| & he/they & he \\
 \lstinline|\theyhe| & they/he & they \\
-\lstinline|\heshe| & he/she & he \\
-\lstinline|\shehe| & she/he & she \\
 \lstinline|\shethey| & she/they & she \\
 \lstinline|\theyshe| & they/she & they \\
-\lstinline|\zethey| & ze/they & ze \\
-\lstinline|\theyze| & they/ze & they \\
 \lstinline|\anypronouns| & any pronouns & they \\
 \lstinline|\genderfluid| & genderfluid & they
 \end{tabular}
 \end{center}
+\end{subsubsection}
+\begin{subsubsection}{Adding and modifying pronouns}
+\lrstex{} only defines a few pronoun combinations this way, but it is trivial to add more.  You can do this by following the pattern in other pronoun definitions.  For example, here is the complete definition for they/them pronouns:
+\begin{verbatim}
+\pluralgenderpronouns{\theythem}{they/them}{
+	\def\they{they}
+	\def\They{They}
+	\def\them{them}
+	\def\Them{Them}
+	\def\their{their}
+	\def\Their{Their}
+	\def\theirs{theirs}
+	\def\themself{themself}
+	\def\Themself{Themself}
+}
+\end{verbatim}
+Note that we use \lstinline|\pluralgenderpronouns| or \lstinline|\singulargenderpronouns| to define the conjugation of verbs, and then define capitalized and uncapitalized pronoun forms.
+
+In addition to declaring new ``mixed'' pronoun sets as described above, you can create modified pronoun/gender commands which are like another pronoun set except with some additional customizations.  For example,
+\begin{verbatim}
+\genderpronounsmod{\hebutnotaman}{he/him}{
+  \hehim
+  \def\person{person}
+}
+\end{verbatim}
+defines \lstinline|\hebutnotaman| to be equivalent to he/him except that it uses ``person'' instead of ``man.''
+\end{subsubsection}
+\begin{subsubsection}{Adding new gendered nouns}
+\lrstex{} includes a variety of predefined gendered nouns, e.g. \lstinline|\Monarch|, which becomes ``King'' for he/him characters and ``Queen'' for she/her characters.  We won't list them all in this documentation, but you can easily find the list by finding the definition of \lstinline|\genderednoundefaults| in \lstinline|Lists/char-LIST.tex|.
+
+Of course, we cannot include every gendered noun in the English language, but it is easy to add more if your game requires them.
+
+To add new gendered nouns, first define the default in the definition of \lstinline|\genderednoundefaults|.  Suppose we wanted to add a command for ``bro'' or ``sis,'' and we decided the appropriate gender-neutral version was ``sib.''
+We would add the line
+\begin{verbatim}
+\def\sib{sib}
+\end{verbatim}
+in \lstinline|\genderednoundefaults|.  Then, we would go to the definition of \lstinline|\hehim| and add the line
+\begin{verbatim}
+\def\sib{bro}
+\end{verbatim}
+with all the other gendered terms -- order doesn't matter -- and then do the same for \lstinline|\sheher| and ``sis.''
+
+There is nothing special about \lstinline|\hehim| and \lstinline|\sheher| in this respect.  If, for example, the gender-neutral version of a word is the same as the version for he/him -- common for ``ess'' words like actor/actress -- you wouldn't have to add anything to \lstinline|\hehim|, only \lstinline|\sheher|.
+\end{subsubsection}
+\begin{subsubsection}{Writing gendered text}
 
 We will discuss how to assign these gender settings to characters in section \ref{charlist}.  The ``described pronouns'' are included in special references to the character discussed in \ref{charintro}.
 Titles like Mr. and Mx. run into the awkwardness of the Ms./Mrs. distinction in English.  As a result, those are best handled as titles like Dr., addressed in \ref{charintro}.
@@ -268,8 +330,8 @@ Here is an example of game text using several gender-sensitive commands:
 \cCharacter{\They\re} also madly in love with 
 \cCharacter{\their} \cPartner{\spouse}, \cPartner{}, the 
 \cPartner{\offspring} of \cInLaw{}. \cCharacter{} 
-believe\cCharacter{\verbs} in the religion of the Fire
-\cFireGod{\cDeity} \cFireGod{}, and hope\cCharacter{\verbs}
+\cCharacter{believe\verbs} in the religion of the Fire
+\cFireGod{\cDeity} \cFireGod{}, and \cCharacter{hope\verbs}
 to become \cFireGod{\their} \cCharacter{\cleric}.
 \end{verbatim} 
 
@@ -281,25 +343,24 @@ Sam Solo (she/they) is your sister.  She has always wanted to be the Queen of Oz
 
 (The use of \lstinline|\intro| is new, and we'll discuss it in \ref{charintro}.)
 
-Note that you can cheat by putting multiple commands, with spaces etc., in the same set of braces, as long as everything is referring to the same character; this pattern is used in \lstinline|\cCharacter{\They \have}|.
+Note that you can cheat by putting multiple commands in the same set of braces, as long as everything is referring to the same character; this pattern is used in \lstinline|\cCharacter{\They \have}|.  You could technically put entire sentences in these braces, but this can be awkward when sentences refer to multiple characters.
+\end{subsubsection}
+\begin{subsubsection}{Conjugation}
+We have already discussed the commands for pronouns and gendered nouns, but here are the commands for verb conjugation:
 
-Most actual game text isn't quite this dense with gendered words and conjugated verbs.  \gametex{} has a large number of gendered words common to LARPs built-in, and we won't go through them all.
-To see all the pre-defined nouns, find the section labeled \texttt{Gendered nouns} in \pronounfile{}; we won't go through them here.  Common verb conjugations are important to know, however:
-
-\begin{itemize}
-\item he believes, they believe, \lstinline|\cCharacter{\they} believe\cCharacter{\verbs}|.
-\item he worries, they worry, \lstinline|\cCharacter{\they} worr\cCharacter{\verby}|.
-\item he goes, they go, \lstinline|\cCharacter{\they} go\cCharacter{\verbes}|.
-\item he is, they are, \lstinline|\cCharacter{\they} \cCharacter{\are}|.
-\item he has, they have, \lstinline|\cCharacter{\they} \cCharacter{\have}|.
-\item he was, they were, \lstinline|\cCharacter{\they} \cCharacter{\were}|.
-\item he's happy, they're happy, \lstinline|\cCharacter{\they\re}| happy.
-\end{itemize}
-
-Remember that the name of the character isn't inserted into the text – just the appropriately gendered or conjugated word.  So, for example, if a character's sibling was believed dead but is actually in the game but undercover, you can mention \lstinline|\cCharacter{}'s lost \cUndercover{\sibling}| without risk of spoilers.
-
-%If you are really picky, this repository has support for picking the right a/an for an item: you can write \lstinline|\iIdentCard{\MYarticle} \iIdentCard{}|, and set the appropriate article in the item definition.
-%Items do not currently have support for correctly generating a/an, so for example, if you wrote ``you have a \lstinline|\iBirthCertificate{}|'' and that item was later given the name ``identification card,'' you would end up with ``a identification card" instead of ``an identification card." Sorry!  I would fix this, if I knew how...
+\begin{center}
+\begin{tabular}{c|c|c}
+\textbf{Singular} & \textbf{Plural} & \lrstex{} command\\
+he believes & they believe & \lstinline|\cCharacter{\they believe\verbs}| \\
+he worries & they worry & \lstinline|\cCharacter{\they worr\verby}| \\
+he goes & they go & \lstinline|\cCharacter{\they go\verbes}| \\
+he is & they are & \lstinline|\cCharacter{\they \are}| \\
+he has & they have & \lstinline|\cCharacter{\they \have}| \\
+he was & they were & \lstinline|\cCharacter{\they \were}| \\
+he's happy & they're happy & \lstinline|\cCharacter{\they\re} happy|
+\end{tabular}
+\end{center}
+\end{subsubsection}
 \end{subsection}
 \begin{subsection}{Character References, Titles, and Contacts}
 \label{charintro}
@@ -315,9 +376,9 @@ Dr. Everett Scott (he/him) is quite pretentious, and few character sheets would 
 \end{itemz}
 \end{quote}
 
-\gametex{} goes to a great deal of trouble to support these variations without GMs having to think about the proper version of every reference to every character.  If you want your character to have a title, or a name suffix like ``Jr.'', consult \texttt{Extras/README-namemappings.txt} to learn how to do it.
+\gametex{} goes to a great deal of trouble to support these variations without GMs having to think about the proper version of every reference to every character.  \textbf{The instructions for how to do these things are in \texttt{Extras/README-namemappings.txt}.}
 
-In general, references to \lstinline|\cCharacter{}| are equivalent to \lstinline|\cCharacter{\usual}|, which by default use a character's first name.  References to \lstinline|\cCharacter{\formal}| use a character's full name, including titles.  If you want to refer to a character informally, regardless of how formal they are normally, use \lstinline|\cCharacter{\informal}|.  (For example, this would refer to Dr. Scott as Everett.)
+In general, references to \lstinline|\cCharacter{}| are equivalent to \lstinline|\cCharacter{\usual}|, which by default use a character's first name.  References to \lstinline|\cCharacter{\full}| use a character's full name, including titles; \lstinline|\cCharacter{\formal}| use a short but formal form like ``Dr. Scott.''   If you want to refer to a character informally, regardless of how formal they are normally, use \lstinline|\cCharacter{\informal}|.  (For example, this would refer to Dr. Scott as Everett.)
 The first reference to a character in a character sheet should usually be \lstinline|\cCharacter{\intro}|, which uses a character's full name and includes their full set of pronouns (\ref{gender}).
 
 \gametex{} additionally has a special way to arrange character contacts on a character sheet: a special \lstinline|contacts| block.  The following \gametex{} code would be what you'd write for the above example.
@@ -395,6 +456,7 @@ If you want notes to yourself as game authors to be visible when you do editing 
 \end{desc}
 \end{verbatim}
 compiles to 
+
 \begin{itemz} % we could put [Rumors] here to name the list, but we don't have to
 \item Rumor 1
 \item Rumor 2
@@ -451,7 +513,7 @@ This can be recursive, however: an item can be assigned to a sign which can be a
 \end{subsection}
 \begin{subsection}{Characters}
 \label{charlist}
-The list of characters will go in \lstinline|Lists/char-LIST.tex|.  This file contains TODO at the beginning, but then, eventually, the line
+The list of characters will go in \lstinline|Lists/char-LIST.tex|.  This file begins with the pronoun system, but then, eventually, the line
 \begin{verbatim}
 %%%%%%%%%%%%% The PCs %%%%%%%%%%%%%%%
 \end{verbatim}
@@ -535,7 +597,7 @@ Items in \gametex{} represent physical objects in the game world which can be mo
 Printed \gametex{} items can be represented by simple cards, labels attached to props, or even labels on envelopes when items can contain other items or game elements.
 
 \begin{desc}[Types of Items]
-\item[Item] A standard item, with its own standard card size.
+\item[Item] A standard item, with its own standard card size.\footnote{Oversized cards are allowed but report a warning.}
 \item[ItemPacket] A small item label to be pasted on the outside of an envelope or the like.
 \item[ItemFold] A ``fold along the dotted lines'' item with a publicly visible outside, that can be torn open to reveal a secret inside.
 \item[ItemLabel] A small item label to be attached to a prop/physrep.
@@ -560,7 +622,7 @@ Note that the primary difference between, say, an \lstinline|ItemFold| and a mem
 \end{figure}
 
 \begin{subsubsection}{Common item mechanics}
-\gametex{} has built-in support for two standardized mechanics for items common to the MIT style of LARP.  In case those are useful to your game, we will briefly cover them.
+\gametex{} has built-in support for two standardized mechanics for items common to the MIT style of LARP, though it is easy to add your own special markers for items as well.  In case those are useful to your game, we will briefly cover them.
 \begin{itemize}
 \item An item can be configured with \lstinline|\unstash| to label it as unstashable: unable to be hidden.  This can be a choice for game balance to ensure that people always have a chance to find it, or simply a mechanic indicating the represented item is too big to be meaningfully hidden.
 \item An item can be configured with \texttt{\textbackslash{}bulky\{$N$\}} to make it $N$ hands bulky.  The general rule is that an $N$-hands bulky item takes $N$ individual human hands to move easily, and can be dragged slowly with $N-1$ hands, which may be zero.  For example, a heavy duffel bag is likely one hand bulky because it can be carried easily in one hand or sort of kicked along the floor slowly, but a large urn is likely two hands bulky.  Traditionally, corpses are three hands bulky, meaning they can be dragged slowly by one person or carried easily with one other modest-sized item by two people.  Items at least one hand bulky are usually impossible to conceal.  Relatedly, items that represent containers may have a \emph{capacity}, usually represented in units of hands-bulky and set with \texttt{\textbackslash{}contains\{$N$\}}.
@@ -667,7 +729,7 @@ in the character definition.
 
 Greensheets and whitesheets are precisely analogous, with ``blue'' replaced by ``green'' or ``white'' of the appropriate capitalization in each place.
 
-Note that bluesheets should always and only be assigned to characters.  Greensheets will almost exclusively go to characters, but may be placed elsewhere in game if characters can unlock new mechanics.  Whitesheets are essentially items, just items representing documents, and can go essentially anywhere.
+Note that bluesheets are essentially always assigned to characters.  Bluesheets always reflect character knowledge about the setting; unlocking one would only make sense if e.g. a PC remembers a great deal of suppressed memory.   Greensheets will almost exclusively go to characters, but may be placed elsewhere in game if characters can unlock new mechanics.  Whitesheets are essentially items, just items representing documents, and can go essentially anywhere.
 
 \begin{subsubsection}{When to use greensheets}
 When building mechanics as a game designer, you have several options for how to present them to your players:
@@ -678,7 +740,7 @@ When building mechanics as a game designer, you have several options for how to 
 \item On greensheets.
 \end{itemize}
 
-In general, mechanics should usually go on greensheets if they are long, require specific tools for players to execute (such as dice or a deck of cards), or if players will likely want access to them before game.
+In general, mechanics should usually go on greensheets if they are available to multiple characters and are either long, or players will likely want access to them before game.  (If neither is the case, consider ability cards.)
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Abilities}
@@ -703,7 +765,7 @@ Some players might find it more difficult not to metagame if they knew the abili
 
 Abilities also print on handy cards, which can help players with many documents to keep track of their abilities more easily.  LRS tradition is to print abilities on yellow paper or cardstock, distinguishing them from other cards like mempackets and items.
 
-Using ability cards can also make clear to uncertain players that the user ``has the authority'' to perform the mechanic, and is not simply interpreting their character sheet to mean that their character \emph{ought} to have the used power.  Whether or not this is necessary may vary based on your players' RP background and experience level.  It is also often easier for GMs to help players clarify mechanics by consulting the ability card.
+Using ability cards can also make clear to uncertain players that the user ``has the authority'' to perform the mechanic, and is not simply interpreting their character sheet to mean that their character \emph{ought} to have the used power.  Whether or not this is necessary may vary based on your players' RP background and experience level.  Competitive players may find it easier to accept adverse effects on their character when they are ``authorized,'' while inexperienced players may be hesitant to decide that their character should be able to do a surprising thing.  It is also often easier for GMs to help players clarify mechanics by consulting the ability card.
 \end{subsection}
 \begin{subsection}{Mempackets and membooks}\label{mems}
 Mempackets and membooks are how \gametex{} handles secrets \emph{from} your players that are revealed to them during the game as part of a mechanic rather than through roleplay.  As discussed earlier, an example mempacket might be assigned to the character Inigo Montoya.
@@ -728,7 +790,7 @@ to open it; when torn open, it reveals the secret information.
 
 In addition to their triggers, MemFolds, MemEnvelopes, and MemCovers should be given names.  These are used in cross-references, especially for character sheets to indicate which mempackets a player should be given.  These don't have to be especially meaningful names, and in many cases they shouldn't: just ``Mempacket A'' or the like will suffice.  These names don't even have to be unique, though GMs may find it easier (e.g. when you realize you need to reprint some) to have unique names for mempackets.
 
-Mempacket names cannot cross-reference other names, such as character names, but mempacket triggers can.
+In \lrstex{}, mempackets have distinct \emph{name} and \emph{trigger} sections, which allows triggers to cross-reference variables like character names and numbers.  Mempacket names cannot make these cross-references.  (This is a change from \gametex{}, which combines names and triggers and disallows cross-references.)
 
 \begin{verbatim}
 % Some example mempackets in Lists/mem-LIST.tex

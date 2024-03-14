@@ -37,11 +37,66 @@
 %%
 %% The term 'gender' specifically in GameTeX is used to refer to the
 %% pronoun and gendered language used to actually refer to a character.
-%% To add a new neopronoun, add a new element to this list
-%% with the appropriate next number.
 
-\newcommand{\defaultgender}{
-	% Non-gender-specific or nonbinary nouns.
+
+%%%%%% Definitions of gender configuration commands.
+
+\newcommand{\genderpronouns}[3]{
+	\newcommand{#1}[1][]{
+		\genderednoundefaults
+		\ifx#1\empty
+			\s\MYcharpronouns{#2}
+		\else
+			\rs\MYcharpronouns{#2} 
+		\fi
+		#3
+	}
+}
+
+%% \genderpronounsmod{\newgendercommand}{new pronouns description}{\oldgendercommand \def\thingToOverride{...}}
+%% example:
+%% \genderpronounsmod{\hethey}{he/they}{\hehim}
+\newcommand{\genderpronounsmod}[3]{
+	\genderpronouns{#1}{#2}{
+		#3
+		\rs\MYcharpronouns{#2}
+	}
+}
+
+% general English conjugation
+
+\newcommand{\pluralconjugation}{
+	\def\verbs{}
+	\def\verby{y}
+	\def\verbes{}
+	\def\are{are}
+	\def\re{'re}
+	\def\were{were}
+	\def\have{have}
+}
+
+\newcommand{\singularconjugation}{
+	\def\verbs{s}
+	\def\verby{ies}
+	\def\verbes{es}
+	\def\are{is}
+	\def\re{'s}
+	\def\were{was}
+	\def\have{has}
+}
+
+% helpers for pronoun set creation
+\newcommand{\pluralgenderpronouns}[3]{
+	\genderpronouns{#1}{#2}{\pluralconjugation{}#3}
+}
+
+\newcommand{\singulargenderpronouns}[3]{
+	\genderpronouns{#1}{#2}{\singularconjugation{}#3}
+}
+
+%%%%%% Defaults for potentially gendered nouns.
+
+\newcommand{\genderednoundefaults}{
 	\def\spouse{spouse}
 	\def\Spouse{Spouse}
 	\def\offspring{offspring}
@@ -50,8 +105,6 @@
 	\def\Child{Child}
 	\def\sibling{sibling}
 	\def\Sibling{Sibling}
-	\def\sib{sib}
-	\def\Sib{Sib}
 	\def\parent{parent}
 	\def\Parent{Parent}
 	\def\grandparent{grand\parent}
@@ -83,57 +136,7 @@
 	\def\Deity{Deity}
 }
 
-\newcommand{\genderpronouns}[3]{
-	\newcommand{#1}[1][]{
-		\defaultgender
-		\ifx#1\empty
-			\s\MYcharpronouns{#2}
-		\else
-			\rs\MYcharpronouns{#2} 
-		\fi
-		#3
-	}
-}
-
-%% \genderpronounsmod{\newgendercommand}{new pronouns description}{\oldgendercommand \def\thingToOverride{...}}
-%% example:
-%% \genderpronounsmod{\hethey}{he/they}{\hehim}
-\newcommand{\genderpronounsmod}[3]{
-	\genderpronouns{#1}{#2}{
-		#3
-		\rs\MYcharpronouns{#2}
-	}
-}
-
-\def\do{do\verbes}
-
-\newcommand{\pluralgenderpronouns}[3]{
-	\genderpronouns{#1}{#2}{
-		\def\verbs{}
-		\def\verby{y}
-		\def\verbes{}
-		\def\are{are}
-		\def\re{'re}
-		\def\were{were}
-		\def\have{have}
-		#3
-	}
-}
-
-\newcommand{\singulargenderpronouns}[3]{
-	\genderpronouns{#1}{#2}{
-		\def\verbs{s}
-		\def\verby{ies}
-		\def\verbes{es}
-		\def\are{is}
-		\def\re{'s}
-		\def\were{was}
-		\def\have{has}
-		#3
-	}
-}
-
-%% Base, 'unmixed' pronoun sets.
+%%%%% Built-in gender/pronoun sets.
 
 \singulargenderpronouns{\hehim}{he/him}{
 	\def\they{he}
@@ -153,8 +156,6 @@
 	\def\Child{Boy}
 	\def\sibling{brother}
 	\def\Sibling{Brother}
-	\def\sib{bro}
-	\def\Sib{Bro}
 	\def\parent{father}
 	\def\Parent{Father}
 	\def\auncle{uncle}
@@ -196,8 +197,6 @@
 	\def\Child{Girl}
 	\def\sibling{sister}
 	\def\Sibling{Sister}
-	\def\sib{sis}
-	\def\Sib{Sis}
 	\def\parent{mother}
 	\def\Parent{Mother}
 	\def\auncle{aunt}
@@ -278,6 +277,11 @@
 	\def\their{\usual's}
 	\def\Their{\usual's}
 	\def\theirs{\usual's}
+	
+	% I don't have a better alternative here, unfortunately!
+	% 'Sam walked through the portal and found themself in the forest' does
+	% not seem to have a great pronoun-avoidant version that doesn't
+	% require rewriting the sentence.
 	\def\themself{themself}
 	\def\Themself{Themself}
 }
