@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{epstopdf}
 %\newcommand{\gametex}{GameTeX}
-\newcommand{\pronounfile}{\lstinline|Lists/char-LIST.tex|}
+\newcommand{\pronounfile}{\lstinline|LaTeX/gender.sty|}
 
 \lstset{basicstyle=\ttfamily}
 \title{Guide to \gametex{}}
@@ -146,13 +146,12 @@ You will need to do the following steps.  TODO: document this better.
 \begin{enumerate}
 \item Download the contents of this repository to an appropriately named folder.
 \item Set up a Git repository in this folder, and do a first commit.
-\item Rename \lstinline|LaTeX/GameTexBase.cls| to the matching name for your game.
-\item TODO: set up the path file.
+\item Rename \lstinline|LaTeX/GameTexBase.cls| to the matching name for your game.  In this document, we'll use \lstinline|MyGame| as the name of your game; this should be a short phrase without spaces.
 \item Create \lstinline|LaTeX/MyGame_path.cls|, and write in it:
 \begin{verbatim}
 \edef\gamepath{"C:/Path/To/MyGame/"}
 \end{verbatim}
-substituting the appropriate directory.
+substituting the appropriate directory, whether you are on Windows or Mac or whatever.
 \item As you write or update files, make sure they begin with
 \begin{verbatim}
 \documentclass[something]{MyGame}
@@ -161,7 +160,7 @@ and not
 \begin{verbatim}
 \documentclass[something]{GameTexBase}
 \end{verbatim}
-\item Update the gamewide settings (e.g. game name and date) in \lstinline|LaTeX/MyGame.cls|.
+\item Update the gamewide settings (e.g. game name and date) in \lstinline|LaTeX/MyGame.cls|.  It is generally self-documenting, but includes the full name of your game and its date -- which get printed on every document in your game -- as well as details such as whether your character sheets will include stats, abilities, or the like.
 \item Commit your game.
 \end{enumerate}
 At this point, you are ready to start writing; you may want to push your repository to GitHub.
@@ -229,7 +228,7 @@ The most important simplifying assumption made by \lrstex{} is that, other than 
 Other gendered assumptions are set up by default, but are overridable, as we'll discuss.  For example, every character that is neither a he/something or a she/something is by default referred to as ``Monarch,'' not ``King'' or ``Queen.''
 
 \begin{subsubsection}{Pronoun system}
-The pronoun system is defined at the beginning of \lstinline|Lists/char-LIST.tex|.  It should be able to handle the overwhelming majority of character gender experiences, but it is specifically designed to be easy to customize.
+The pronoun system is defined in \pronounfile{}.  It should be able to handle the overwhelming majority of character gender experiences, but it is specifically designed to be easy to customize.
 In this section, we'll break down the code so you know how to customize it if desired.
 
 \begin{enumerate}
@@ -274,17 +273,14 @@ Here is the complete set of built-in pronoun sets.
 \end{subsubsection}
 \begin{subsubsection}{Adding and modifying pronouns}
 \lrstex{} only defines a few pronoun combinations this way, but it is trivial to add more.  You can do this by following the pattern in other pronoun definitions.  For example, here is the complete definition for they/them pronouns:
+
 \begin{verbatim}
 \pluralgenderpronouns{\theythem}{they/them}{
 	\def\they{they}
-	\def\They{They}
 	\def\them{them}
-	\def\Them{Them}
 	\def\their{their}
-	\def\Their{Their}
 	\def\theirs{theirs}
 	\def\themself{themself}
-	\def\Themself{Themself}
 }
 \end{verbatim}
 Note that we use \lstinline|\pluralgenderpronouns| or \lstinline|\singulargenderpronouns| to define the conjugation of verbs, and then define capitalized and uncapitalized pronoun forms.
@@ -299,7 +295,7 @@ In addition to declaring new ``mixed'' pronoun sets as described above, you can 
 defines \lstinline|\hebutnotaman| to be equivalent to he/him except that it uses ``person'' instead of ``man.''
 \end{subsubsection}
 \begin{subsubsection}{Adding new gendered nouns}
-\lrstex{} includes a variety of predefined gendered nouns, e.g. \lstinline|\Monarch|, which becomes ``King'' for he/him characters and ``Queen'' for she/her characters.  We won't list them all in this documentation, but you can easily find the list by finding the definition of \lstinline|\genderednoundefaults| in \lstinline|Lists/char-LIST.tex|.
+\lrstex{} includes a variety of predefined gendered nouns, e.g. \lstinline|\Monarch|, which becomes ``King'' for he/him characters and ``Queen'' for she/her characters.  We won't list them all in this documentation, but you can easily find the list by finding the definition of \lstinline|\genderednoundefaults| in \pronounfile{}.
 
 Of course, we cannot include every gendered noun in the English language, but it is easy to add more if your game requires them.
 
@@ -513,7 +509,8 @@ This can be recursive, however: an item can be assigned to a sign which can be a
 \end{subsection}
 \begin{subsection}{Characters}
 \label{charlist}
-The list of characters will go in \lstinline|Lists/char-LIST.tex|.  This file begins with the pronoun system, but then, eventually, the line
+The list of characters will go in \lstinline|Lists/char-LIST.tex|.  This file begins with a number of definitions for \gametex{}, notably including defining variables that apply to all characters, such as any stats (\ref{charstats}),
+but then goes on to have a list where you define PCs and any relevant NPCs.  Look for the line
 \begin{verbatim}
 %%%%%%%%%%%%% The PCs %%%%%%%%%%%%%%%
 \end{verbatim}
@@ -522,7 +519,7 @@ This is where your player characters will go.  The file has an example character
 \begin{verbatim}
 \NEW{PC}{\cTest}{
   \s\MYname	{John Doe} % character name
-  \s\MYfile {MyCharSheet.tex} % a file name from the Charsheets directory
+  \s\MYfile {README.tex} % a file name from the Charsheets directory
   \s\MYdesc	{a nondescript person}  % short description to fit on a badge
   \hethey												% configures pronouns
   \s\MYnumber{1234}						% badge number, if used
@@ -549,6 +546,7 @@ Here are some guidelines to remember when writing character sheets:
 \item Use the contacts code demonstrated in \ref{charcontacts} to list out other important characters.  This includes not only the character's full name and pronouns, but the corresponding player's full name and pronouns.
 \end{itemize}
 \begin{subsubsection}{Stats}
+\label{charstats}
 Characters can get assigned statistics, which can be numbers or short bits of text.  Statistics are private information, printed on character sheets (and sometimes hidden on badges).  To create a statistic for your characters, read the instructions in \lstinline|Lists/char-LIST.tex| under ``Character stats'', which shows how to introduce a ``hit points'' stat.
 
 One nonobvious use of statistics is to create statistics with obscure names -- traditionally Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|) -- for game design reasons.  Philip Tan's thesis:
@@ -557,7 +555,7 @@ For instance, a player may have a positive $\psi$ stat without realizing that hi
 or her character is a latent psychic. Another, better-informed character might be able to
 read someone else’s $\psi$ stat and detect the psychic ability of others.
 \end{quote}
-Not all games may expect their players to confidently identify Greek letters, so English letters may be preferable for some games.
+Not all games may expect their players to confidently identify Greek letters, so some games may prefer English letters or to spell out the Greek.
 
 If you introduce any stats into your game, they will be shown on the character sheet.  
 
@@ -570,7 +568,7 @@ they are most often used for mechanics where some or all characters can learn so
 \begin{itemize}
 \item I recognize character 239's voice as my father's murderer.
 \item As an experienced undead hunter, I recognize characters with a last digit of 4 as vampires.
-\item The first digit of each badge number represents the tens digit of the character's apparent age, so despite character 173 acting suspiciously, they couldn't have murdered the king 25 years ago.  (This convention definitely dates back decades and is cited directly in Tan's 2003 thesis.)
+\item The first digit of each badge number represents the tens digit of the character's apparent age, so despite character 173 acting suspiciously, they couldn't have murdered the king 25 years ago.\footnote{This convention definitely dates back decades and is cited directly in Tan's 2003 thesis.}
 \end{itemize}
 
 At a game design level, using this sort of mechanic makes players spend time searching for the character or characters they seek without knowing exactly who to talk to in advance.  For example, imagine Inigo Montoya was given a
@@ -643,14 +641,25 @@ leftmost digit greater than 5.
 \end{subsection}
 \begin{subsection}{Places}
 A place in \gametex{} is a namable thing that doesn't get a physical manifestation, though things like
-items, signs, and other physical objects can be assigned to a place.  Common uses of places include:
+items, signs, and other physical objects can be assigned to a place.  Places are defined in \lstinline|Lists/place-LIST.tex|.  Common uses of places include:
 
 \begin{itemize}
 \item Places in the wider game world, such as nations or cities.
-\item Abstract things in the game world, such as a year or decade.  (``In \lstinline|\pApocalypseYear{}|, everything changed when the \lstinline|\pFireNation{}| attacked.'')
-\item Places in the game space, such as the garden.  Signs and items would get assigned to this place if they should be put in the area of gamespace that represents the garden.  The signs would be labeled as assigned to the garden; 
-the item cards would be printed on a page that says ``Garden,'' though they wouldn't mention that when cut out.  See Figure \ref{itemcardfig} for an example.
+\item Intangible concepts in the game world, such as a year or decade.  (``In \lstinline|\pApocalypseYear{}|, everything changed when the \lstinline|\pFireNation{}| attacked.'')
+\item Places in the game space, such as a garden.  
 \end{itemize}
+
+Places are unsurprisingly defined in \lstinline|Lists/place-LIST.tex|, and look like:
+\begin{verbatim}
+\NEW{Place}{\pTreasury}{
+  \s\MYname	{Treasury}
+  \s\MYsigns	{\sTest{}}
+  \s\MYitems	{\iTest{}\iWhatzit{}}
+}
+\end{verbatim}
+
+Signs, items, and other documents assigned to a place will be printed out on pages saying the name of the place, e.g. \lstinline|\sTest{}| would be printed out on a page labeled ``Treasury.'' 
+Item cards assigned to a place will have this label on the page, but it won't be on the individual item cards when they are cut out; for transferable things like items, this is important to avoid revealing secrets like where an item came from.  See Figure \ref{itemcardfig} for an example.
 \end{subsection}
 \begin{subsection}{Signs}
 Signs are precisely what they sound like.  \gametex{} supports signs in a variety of sizes, ranging from a full printed page to a tiny, deliberately hard-to-find size for players to search for.

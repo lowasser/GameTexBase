@@ -34,8 +34,6 @@
 \def\gamename{Example Game}
 \def\gamedate{February 2024}
 
-\def\sheettitlefont{almendra}
-
 %%%%%
 %% \gamedraft
 %%
@@ -75,9 +73,9 @@
 %% Define \signdate as either \gamedate or \gamedateabbrev.  If you
 %% plan to leave signs up between different runs, \gamedate may be
 %% better.
-\def\takedownby{Testember Nth, 2001}
+% \def\takedownby{Testember Nth, 2001}
 \def\signdate{\gamedateabbrev}
-\def\larporg{}
+\def\larporg{Luminary Roleplay Society}
 
 
 %%%%%

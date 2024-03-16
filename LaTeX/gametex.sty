@@ -263,7 +263,7 @@
 \@makedefault\gamenameabbrev{\gamename}
 \@makedefault\gamedateabbrev{\gamedate}
 \@makedefault\signdate{\gamedateabbrev}
-\@makedefault\takedownby{Testember Nth, 2001}
+\@makedefault\takedownby{}
 \@makedefault\defaultnamemappings{
   \titlemap{\full}
   \mapnickinformal
@@ -5586,7 +5586,7 @@
 %%
 
 \def\noremove{%
-  Please do not remove this until \takedownby.\break
+  \unless\ifx\takedownby\empty{Please do not remove this until \takedownby.}\fi\break
   \vskip.5\whitespace%
   --- \larporg{} ---%
 }
@@ -5635,7 +5635,7 @@
           \rightskip.1\whitespace plus1fil%
           \vskip.1\whitespace%
           \mbox{\gamenameabbrev}\hfill\mbox{\signdate}\break\vfill
-          This is a sign being used by the MIT Assassins' Guild.\break\vfill
+          This is a sign being used for the LARP \gamename{}.\break\vfill
           Please do not throw this away.\break
           \vskip.1\whitespace%
         }%
@@ -5956,8 +5956,8 @@
     \doublecard{%
       \light@badge{%
         {\Huge         \textbf{#1}}\vfil%
-				\ifx#2\empty\else{\bfseries\Large (#2)}\vfil\fi%
-        \ifx#3\empty\else{\bfseries\LARGE #3}\vfil\fi%
+				\ifx#2\empty\else{\bfseries\LARGE #2}\fi \hspace{1cm}%
+        \ifx#3\empty\else{\bfseries\LARGE \##3}\fi\vfil%
         {\large         #4}\ifx#5\empty\else{\normalsize \ (#5)}\fi\vfil%
         {\bfseries\LARGE #6}\vfil%
       }%
