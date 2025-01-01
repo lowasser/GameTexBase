@@ -142,7 +142,7 @@ GitHub's documentation on both itself and Git are superb, and can be found at \u
 \end{subsubsection}
 \end{subsection}
 \begin{subsection}{Setting up your \gametex{} folder}
-You will need to do the following steps.  TODO: document this better.
+You will need to do the following steps.  TODO: document this better and include \lstinline|.gitignore| instructions.
 \begin{enumerate}
 \item Download the contents of this repository to an appropriately named folder.
 \item Set up a Git repository in this folder, and do a first commit.
@@ -522,9 +522,9 @@ This is where your player characters will go.  The file has an example character
   \s\MYfile {README.tex} % a file name from the Charsheets directory
   \s\MYdesc	{a nondescript person}  % short description to fit on a badge
   \hethey												% configures pronouns
+  \s\MYplayerpronouns{they/them} % player pronouns
   \s\MYnumber{1234}						% badge number, if used
   \s\MYplayer {Coolest Roleplayer} % player name
-  \s\MYplayerpronouns{they/them} % player pronouns
   \s\MYblues {}								% assigned bluesheets
   \s\MYgreens {}							% assigned greensheets
   \s\MYwhites {}							% assigned whitesheets
@@ -533,7 +533,7 @@ This is where your player characters will go.  The file has an example character
   \s\MYitems {}								% assigned items
 }
 \end{verbatim}
-If one or more of these is not relevant to your game, you can simply leave it out -- you don't have to leave the blank version there.
+If one or more of these is not relevant to your game, you can simply leave it out -- you don't have to leave the blank version there.  Remember that if one of these sections isn't used in your game, you may also want to modify \lstinline|\charsheetlists|, defined in \lstinline|LaTeX/MyGame.cls| (or whatever your game is named), to make sure that empty list doesn't show up on all character sheets.
 
 Note that character pronouns and player pronouns are handled differently: character pronouns must use a specific pronoun command, but player pronouns can (and must) be freeform text.
 
@@ -547,7 +547,12 @@ Here are some guidelines to remember when writing character sheets:
 \end{itemize}
 \begin{subsubsection}{Stats}
 \label{charstats}
-Characters can get assigned statistics, which can be numbers or short bits of text.  Statistics are private information, printed on character sheets (and sometimes hidden on badges).  To create a statistic for your characters, read the instructions in \lstinline|Lists/char-LIST.tex| under ``Character stats'', which shows how to introduce a ``hit points'' stat.
+Characters can get assigned statistics, which can be numbers or short bits of text.  Statistics are private information, printed on character sheets (and sometimes hidden on badges).  To create a statistic for your characters, read the instructions in \lstinline|Lists/char-LIST.tex| under ``Character stats'', which shows how to introduce a ``hit points'' stat.  Briefly:
+
+\begin{enumerate}
+\item In \lstinline|\PRESETS{Char}| in \lstinline|Lists/char-LIST.tex|, add a line like \lstinline|\newstat\MYhp	{Hit Points}{HP}{5}|, which associates a command to the stat, gives it a full and abbreviated name, and a default value.
+\item In each character, set that stat like other properties: \lstinline|\s\MYhp{10}| for a character with 10 hit points.
+\end{enumerate}
 
 One nonobvious use of statistics is to create statistics with obscure names -- traditionally Greek letters like $\alpha$ (which is written \lstinline|$\alpha$|) -- for game design reasons.  Philip Tan's thesis:
 \begin{quote}
@@ -559,7 +564,9 @@ Not all games may expect their players to confidently identify Greek letters, so
 
 If you introduce any stats into your game, they will be shown on the character sheet.  
 
-Additionally, in production (\ref{prod}), you can, if you desire, print out \emph{stat cards} for each character.  This will produce extra cards for each character, which usually get tucked inside their badge.  As many games with combat mechanics include stats, the back of this card includes a Death Report section for players to fill out and give to GMs on their character's death.  This is mostly useful if you have a game with many stats and lots of combat: many players in games with just one or two stats prefer to look them up on their character sheets, and it can be difficult in practice to get players to fill out death reports.
+Additionally, in production (\ref{prod}), you can, if you desire, print out \emph{stat cards} for each character (by compiling \lstinline|Production/statcard-PRINT.tex|).  This will produce extra cards for each character, which usually get tucked inside their badge.  As many games with combat mechanics include stats, the back of this card includes a Death Report section for players to fill out and give to GMs on their character's death.  This is mostly useful if you have a game with many stats and lots of combat: many players in games with just one or two stats prefer to look them up on their character sheets, and it can be difficult in practice to get players to fill out death reports.
+
+I recommend not doing this except for especially stat-heavy games.  Stats will also print on character sheets, which players already need ready access to.  Additionally, players may interpret getting ``Death Report'' cards as meaning character death is more likely than it actually is, and often don't remember to fill them out unless there is a preexisting culture of high-death games.
 \end{subsubsection}
 \begin{subsubsection}{Numbers}
 \label{charnumber}
@@ -571,7 +578,7 @@ they are most often used for mechanics where some or all characters can learn so
 \item The first digit of each badge number represents the tens digit of the character's apparent age, so despite character 173 acting suspiciously, they couldn't have murdered the king 25 years ago.\footnote{This convention definitely dates back decades and is cited directly in Tan's 2003 thesis.}
 \end{itemize}
 
-At a game design level, using this sort of mechanic makes players spend time searching for the character or characters they seek without knowing exactly who to talk to in advance.  For example, imagine Inigo Montoya was given a
+At a game design level, this means characters can learn things about other characters, but only by getting close enough for a conversation, requiring them to be social and talk to people.  For example, imagine Inigo Montoya was given a
 mempacket (\ref{mems}) whose outside said, ``Open if you speak to Count Rugen for one minute.''  Inigo's player might find it hard to resist seeking out the Count Rugen character as the first thing they did in game, and might learn that Rugen has six fingers in the first few minutes.  If instead Inigo's mempacket specified character 239, Inigo would have to spend time walking around and getting to know people, and might feel like they get to discover Rugen more organically.
 
 To assign a character's number, use \lstinline|\s\MYnumber{123}| (or whatever number you are giving them) in their character definition in \lstinline|char-LIST.tex|.
@@ -595,10 +602,10 @@ Items in \gametex{} represent physical objects in the game world which can be mo
 Printed \gametex{} items can be represented by simple cards, labels attached to props, or even labels on envelopes when items can contain other items or game elements.
 
 \begin{desc}[Types of Items]
-\item[Item] A standard item, with its own standard card size.\footnote{Oversized cards are allowed but report a warning.}
+\item[Item] A standard item, with its own standard card size.\footnote{Oversized cards are allowed but report a warning.} (Example: Figure \ref{itemcardfig}.)
 \item[ItemPacket] A small item label to be pasted on the outside of an envelope or the like.
-\item[ItemFold] A ``fold along the dotted lines'' item with a publicly visible outside, that can be torn open to reveal a secret inside.
-\item[ItemLabel] A small item label to be attached to a prop/physrep.
+\item[ItemFold] A ``fold along the dotted lines'' item with a publicly visible outside, that can be torn open to reveal a secret inside. (Example: Figure \ref{itemfoldfig}.)
+\item[ItemLabel] A small item label to be attached to a prop/physrep. (Example: Figure \ref{itemlabelfig}.)
 \end{desc}
 
 Note that the primary difference between, say, an \lstinline|ItemFold| and a mempacket (\ref{mems}) is whether there is a physical, movable object (which should be an item), or an abstract instruction or piece of information for a player (a mempacket).  An \lstinline|ItemFold| could be used for an apple, which when eaten could either be tasty or poisoned.
@@ -612,11 +619,13 @@ Note that the primary difference between, say, an \lstinline|ItemFold| and a mem
 \centering
 \includegraphics[width=3in]{item-label}
 \caption{An \lstinline|ItemLabel| suitable for taping to a prop.}
+\label{itemlabelfig}
 \end{figure}
 \begin{figure}
 \centering
 \includegraphics[width=3in]{item-fold-front} \includegraphics[width=2in]{item-fold-back}
 \caption{The front and back of an example \lstinline|ItemFold|.}
+\label{itemfoldfig}
 \end{figure}
 
 \begin{subsubsection}{Common item mechanics}
@@ -927,7 +936,7 @@ This is, as you might expect, extremely valuable to producing a ``GM binder'' of
 By compiling \lstinline|Production/badge-PRINT.tex|, you will generate name badges for both characters and GMs,
 including any special character identities (see \ref{identities}) that opted into having name badges.
 By default, these include the character's name, pronouns, number, player name, player pronouns, and description, skipping any that are absent.  Additionally, the opposite side of the printed name badge reads ``I'M NOT HERE,''
-a handy feature for characters who are in game but invisible or stealthy, distinct from being out of character.
+a handy feature for players out of character \emph{or} characters who are in game but undetectable.
 
 You can also configure badges to have even more information on alternate sides of the card.  For example, some games use an alternate side of the card as a ``death certificate,'' so when a character dies and the player is done playing their corpse, the player can leave their badge to represent the character's corpse and find something more interesting to do (like play an NPC).  To edit the content of this extra side,
 edit \texttt{LaTeX/gametex.sty} in the section labeled ``parts of namebadges.''
@@ -962,7 +971,7 @@ Essentially all of \gametex{}'s programming -- the formatting and content of its
 \begin{subsection}{Printed information}
 Some changes involve changing what text content \gametex{} generates.  A common example is what information is shown on the badge: for example, public faction affiliations.
 
-The first thing to do will be to examine the core file where most of \gametex{} is written: \lstinline|gametex.sty|.  This defines \gametex{}'s default behavior, though in some places it also defines tools to configure that behavior.  A common example is the definition of ``maps,'' like \lstinline|\badgemap| and \lstinline|\contactmap|.  These commands can be used to rearrange or reselect which elements of characters go into which location on the badges, or what is displayed when a character is listed as a contact on another character sheet.
+The first thing to do will be to examine the core file where most of \gametex{} is written: \lstinline|LaTeX/gametex.sty|.  This defines \gametex{}'s default behavior, though in some places it also defines tools to configure that behavior.  A common example is the definition of ``maps,'' like \lstinline|\badgemap| and \lstinline|\contactmap|.  These commands can be used to rearrange or reselect which elements of characters go into which location on the badges, or what is displayed when a character is listed as a contact on another character sheet.
 
 For example, I modified it to correctly include characters' and players' pronoun information after overhauling the gender system.
 \end{subsection}
@@ -974,7 +983,7 @@ The same system provides support for more graphic design, such as embedding an i
 
 Significant changes are possible, but will require commensurate engineering effort.  \LaTeX{}, as a programmable document formatting and typesetting system, has a great range of capabilities.  Consider, for example, the instantly recognizable style of Wizards of the Coast D\&D 5e source material, and then an open source \LaTeX{} system for producing output in that style: \url{https://github.com/rpgtex/DND-5e-LaTeX-Template}.
 
-To make a distinct aesthetic for your game, you will likely need to research the corresponding concepts in \LaTeX{}, and then hack |gametex.sty| to apply the appropriate instructions in your game.  
+To make a distinct aesthetic for your game, you will likely need to research the corresponding concepts in \LaTeX{}, and then hack \lstinline|gametex.sty| to apply the appropriate instructions in your game.  
 \end{subsection}
 \end{section}
 \end{document}

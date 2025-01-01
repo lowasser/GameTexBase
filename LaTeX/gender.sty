@@ -100,13 +100,89 @@
 
 %%%%% Capitalized pronouns and commands.
 % Other gendered pronouns and nouns could go here, but they only need to be here if they're used both uncapitalized and capitalized,
-% usually at the beginnings of sentences.
+% usually at the beginnings of sentences.  As a result, this leaves out some nouns: I don't know why you would ever start a
+% sentence with, ``Person...''
 
+% Pronouns
 \newcommand{\They}{\titlecap{\they}}
 \newcommand{\Them}{\titlecap{\them}}
 \newcommand{\Their}{\titlecap{\their}}
 \newcommand{\Themself}{\titlecap{\themself}}
 
+% verb conjugations and composites
+
+\newcommand{\do}{do\verbes{}}
+
+%% capitalized
+\newcommand{\Do}{\titlecap{\do}}
+\newcommand{\Were}{\titlecap{\were}}
+\newcommand{\Are}{\titlecap{\are}}
+\newcommand{\Have}{\titlecap{\have}}
+
+%% Negatives
+\newcommand{\arent}{\are{}n't}
+\newcommand{\Arent}{\Are{}n't}
+
+\newcommand{\dont}{\do{}n't}
+\newcommand{\Dont}{\Do{}n't}
+
+\newcommand{\werent}{\were{}n't}
+\newcommand{\Werent}{\Were{}n't}
+
+\newcommand{\havent}{\have{}n't}
+\newcommand{\Havent}{\Have{}n't}
+
+%% \theyverb
+\newcommand{\theywere}{\they{} \were{}}
+\newcommand{\Theywere}{\They{} \were{}}
+
+\newcommand{\theywerent}{\they{} \werent{}}
+\newcommand{\Theywerent}{\They{} \werent{}}
+
+\newcommand{\theyhave}{\they{} \have{}}
+\newcommand{\Theyhave}{\They{} \have{}}
+
+\newcommand{\theyhavent}{\they{} \havent{}}
+\newcommand{\Theyhavent}{\They{} \havent{}}
+
+\newcommand{\theydo}{\they{} \do{}}
+\newcommand{\Theydo}{\They{} \do{}}
+
+\newcommand{\theydont}{\they{} \dont{}}
+\newcommand{\Theydont}{\They{} \dont{}}
+
+\newcommand{\theyare}{\they{} \are{}}
+\newcommand{\Theyare}{\They{} \are{}}
+
+\newcommand{\theyarent}{\they{} \arent{}}
+\newcommand{\Theyarent}{\They{} \arent{}}
+
+%% \verbthey
+
+\newcommand{\werethey}{\were{} \they{}}
+\newcommand{\Werethey}{\Were{} \they{}}
+
+\newcommand{\werentthey}{\werent{} \they{}}
+\newcommand{\Werentthey}{\Werent{} \they{}}
+
+\newcommand{\havethey}{\have{} \they{}}
+\newcommand{\Havethey}{\Have{} \they{}}
+
+\newcommand{\haventthey}{\havent{} \they{}}
+\newcommand{\Haventthey}{\Havent{} \they{}}
+
+\newcommand{\dothey}{\do{} \they{}}
+\newcommand{\Dothey}{\Do{} \they{}}
+
+\newcommand{\dontthey}{\dont{} \they{}}
+\newcommand{\Dontthey}{\Dont{} \they{}}
+
+\newcommand{\arethey}{\are{} \they{}}
+\newcommand{\Arethey}{\Are{} \they{}}
+
+\newcommand{\arentthey}{\arent{} \they{}}
+\newcommand{\Arentthey}{\Arent{} \they{}}
+% Familial connections
 \newcommand{\Spouse}{\titlecap{\spouse}}
 \newcommand{\Offspring}{\titlecap{\offspring}}
 \newcommand{\Child}{\titlecap{\child}}
@@ -115,6 +191,8 @@
 \newcommand{\Auncle}{\titlecap{\auncle}}
 \newcommand{\Nibling}{\titlecap{\nibling}}
 \newcommand{\Grandchild}{\titlecap{\grandchild}}
+
+% Titles
 \newcommand{\Heir}{\titlecap{\heir}}
 \newcommand{\Monarch}{\titlecap{\monarch}}
 \newcommand{\Emperor}{\titlecap{\emperor}}
